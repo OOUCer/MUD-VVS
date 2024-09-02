@@ -199,6 +199,12 @@ void Battle::playerTurn(Character* player, vector<Character*>* enemies)
 			}
 			case 2: // 招式  
 			{
+				if (player->getSkills()->empty())
+				{
+					validChoice = false;
+					cout << player->getName() << "不会使用招式" << endl;
+					break;
+				}
 				cout << "选择招式:" << endl;
 				int skillIndex;
 				showSkillInformationInBattle(player);
@@ -433,10 +439,9 @@ void Battle::effectPerform(Character* user, Character* enemy, Skill* theSkill)
 	case selfHitRateBoost:
 	case selfAttackBoost:
 	{
-		if (checkAndOffset(user, theSkill))
+		if (!checkAndOffset(user, theSkill))
 		{
 			user->addEffect(theSkill->getEffect(), theSkill->getEffectIntensity(), theSkill->getDuration());
-
 			describeEffect(user, enemy, theSkill);
 		}
 		else
@@ -476,7 +481,7 @@ void Battle::effectPerform(Character* user, Character* enemy, Skill* theSkill)
 	case giveDefenseWeaken:
 	case giveEvationWeaken:
 	{
-		if (checkAndOffset(enemy, theSkill))
+		if (!checkAndOffset(enemy, theSkill))
 		{
 			enemy->addEffect(theSkill->getEffect(), theSkill->getEffectIntensity(), theSkill->getDuration());
 			describeEffect(user, enemy, theSkill);
@@ -503,9 +508,12 @@ void Battle::effectPerform(Character* user, Character* enemy, Skill* theSkill)
 
 bool Battle::checkAndOffset(Character* character, Skill* theSkill)//抵消相反效果
 {
-	bool offsetOccurred=false;
+	bool offsetOccurred=false;//默认未抵消
+
 	skillEffectType theType=theSkill->getEffect();
 	map<skillEffectType, pair<float, int>>* effectStatus=character->getEffectStatus();
+	if (effectStatus->empty())
+		return false;
 	switch (theType)
 	{
 	case giveAttackWeaken:
@@ -516,7 +524,7 @@ bool Battle::checkAndOffset(Character* character, Skill* theSkill)//抵消相反效果
 				if (((theSkill->getEffectIntensity()-1) * (it->second.first - 1)) < 0) //如果相悖
 				{
 					effectStatus->erase(it++);  
-					offsetOccurred = true;
+					offsetOccurred = true;//抵消出现
 					break;   
 				}
 				++it; // 如果不删除，则移动到下一个元素  
@@ -525,7 +533,7 @@ bool Battle::checkAndOffset(Character* character, Skill* theSkill)//抵消相反效果
 				++it; // 如果键不匹配，也移动到下一个元素  
 			}
 		}
-		offsetOccurred = true;
+		offsetOccurred = true;//抵消出现
 		break;
 	case giveDefenseWeaken:
 	case selfDefenseBoost:
@@ -730,15 +738,18 @@ void Battle::showSkillInformationInBattle(Character* user)
 		{
 			cout << "招式序号:" << i << endl << "招式名称:" << it->getName() << endl;
 			cout << "攻击类型:" << it->getAttackType() ;
+			
 			if (it->getAttackType() == theWeapon->getAttackType())
 				cout << "（与武器匹配）" << endl;
 			else
 				cout << "（与武器不匹配）" << endl;
+			cout << "技能描述:" << it->getDescription()<<endl;
 
 		}
 		else
 		{
 			cout << "招式序号:" << i << endl << "招式名称:" << it->getName() << endl;
+			cout << "技能描述:" << it->getDescription() << endl;;
 			
 		}
 		i++;
@@ -773,70 +784,81 @@ void Battle::showStartInformation(Linchong* player, vector<Character*>* enemies)
 void Battle::showAllStatus(Character* character)
 {
 	map<skillEffectType, pair<float, int>>* theStatus=character->getEffectStatus();
-	cout << character->getName() << "状态：";
-	if (character->getChargeStatus()) cout << "已蓄力 ";
-	if (character->getComatoseStatus()) cout << "昏迷不醒 ";
-	if (character->getAnticipateStatus()) cout << "看破 ";
+	bool haveStatus = false;
+	cout << character->getName() << "特殊状态：";
+	if (character->getChargeStatus()) {
+		cout << "已蓄力 ";
+		haveStatus = true;
+	}
+	if (character->getComatoseStatus()) {
+		cout << "昏迷不醒 ";
+		haveStatus = true; 
+	}
+	if (character->getAnticipateStatus()) {
+		cout << "看破 ";
+		haveStatus = true;
+	}
 	if (theStatus->empty())
 	{
+		if (!haveStatus) cout << "无";
 		cout << endl;
 		return;
 	}
-		
+	else {
+		for (auto& it : *theStatus)
+		{
+			switch (it.first)
+			{
+			case selfDefenseBoost:
+			{
+				if ((it.second.first) >= 1)
+					cout << "防御力上升(" << it.second.second << ") " ;
+				else
+					cout << "防御力下降(" << it.second.second << ") " ;
+				break;
+			}
+			case selfEvationBoost:
+			{
+				cout << "闪避率上升(" << it.second.second << ") " ;
+				break;
+			}
+			case selfHitRateBoost:
+			{
+				cout << "命中率上升了(" << it.second.second << ") " ;
+				break;
+			}
+			case selfAttackBoost:
+			{
+				if (it.second.first >= 1)
+					cout << "攻击力上升(" << it.second.second << ") " ;
+				else
+					cout << "攻击力下降(" << it.second.second << ") " ;
+				break;
+			}
 
-	for (auto& it : *theStatus)
-	{
-		switch (it.first)
-		{
-		case selfDefenseBoost:
-		{
-			if ((it.second.first) >= 1)
-				cout << "防御力上升(" << it.second.second << ") " << endl;
-			else
+			case giveAttackWeaken:
+			{
+				cout << "攻击力下降(" << it.second.second << ") ";
+				break;
+			}
+			case giveHitRateWeaken:
+			{
+				cout << "命中率下降(" << it.second.second << ") " ;
+				break;
+			}
+			case giveDefenseWeaken:
+			{
 				cout << "防御力下降(" << it.second.second << ") " << endl;
-			break;
+				break;
+			}
+			case giveEvationWeaken:
+			{
+				cout << "回避率下降(" << it.second.second << ") " << endl;
+				break;
+			}
+			default: break;
+			}		
 		}
-		case selfEvationBoost:
-		{
-			cout  << "闪避率上升(" << it.second.second << ") " << endl;
-			break;
-		}
-		case selfHitRateBoost:
-		{
-			cout  << "命中率上升了(" << it.second.second << ") " << endl;
-			break;
-		}
-		case selfAttackBoost:
-		{
-			if (it.second.first >= 1)
-				cout  << "攻击力上升(" << it.second.second << ") " << endl;
-			else
-				cout  << "攻击力下降(" << it.second.second << ") " << endl;
-			break;
-		}
-
-		case giveAttackWeaken:
-		{
-			cout  << "攻击力下降(" << it.second.second << ") ";
-			break;
-		}
-		case giveHitRateWeaken:
-		{
-			cout  << "命中率下降(" << it.second.second << ") " << endl;
-			break;
-		}
-		case giveDefenseWeaken:
-		{
-			cout  << "防御力下降(" << it.second.second << ") " << endl;
-			break;
-		}
-		case giveEvationWeaken:
-		{
-			cout  << "回避率下降(" << it.second.second << ") " << endl;
-			break;
-		}
-		default: break;
-		}
+		cout << endl;
 	}
-	cout << endl;
 }
