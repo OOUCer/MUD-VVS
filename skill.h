@@ -1,38 +1,55 @@
 //#ifndef SKILL_H
 //#define SKILL_H
+
 #include <iostream>
 #include <vector>
 #include "skillEffectType.h"
+
 using namespace std;
+
+
 class Skill
 {
 protected:
-    string name;      // æ‹›å¼åç§°
-    bool isAOE;       // æ˜¯å¦æ˜¯èŒƒå›´æ•ˆæœ
-    bool isOffensive; // æ˜¯å¦æ˜¯è¿›æ”»ç±»æ‹›å¼
+    string name;      // ÕĞÊ½Ãû³Æ
+    bool isAOE;       // ÊÇ·ñÊÇ·¶Î§Ğ§¹û
+    bool isOffensive; // ÊÇ·ñÊÇ½ø¹¥ÀàÕĞÊ½
 public:
     Skill(string name, bool isAOE, bool isOffensive);
+
     bool getIsAOE() const;
+
     string getName() const;
+
     bool getIsOffensive() const;
+
     virtual bool getIsSelf() const = 0;
+
     virtual float getDamageMultiplier() const = 0;
+
     virtual string getAttackType() const = 0;
+
     virtual int getAttackFrequency() const = 0;
+
     virtual skillEffectType getEffect() const = 0;
+
     virtual float getEffectIntensity() const = 0;
+
     virtual int getDuration() const = 0;
+
     
 };
+
 class offensiveSkill : public Skill
 {
 protected:
-    float damageMultiplier;      // ä¼¤å®³å€ç‡
-    string attackType;             // ç”¨äºç¡®å®šå½“å‰è£…å¤‡æ­¦å™¨æ˜¯å¦å¯ä»¥ä½¿ç”¨è¯¥æ‹›å¼
-    int attackFrequency;         // è¿å‡»æ¬¡æ•°
-    skillEffectType extraEffect; // é™„åŠ æ•ˆæœ
-    float extraEffectIntensity;  // å®ä¾‹ï¼šæ”»å‡»x1.5 æ˜ç¡æ¦‚ç‡0.5
+    float damageMultiplier;      // ÉËº¦±¶ÂÊ
+    string attackType;             // ÓÃÓÚÈ·¶¨µ±Ç°×°±¸ÎäÆ÷ÊÇ·ñ¿ÉÒÔÊ¹ÓÃ¸ÃÕĞÊ½
+    int attackFrequency;         // Á¬»÷´ÎÊı
+    skillEffectType extraEffect; // ¸½¼ÓĞ§¹û
+    float extraEffectIntensity;  // ÊµÀı£º¹¥»÷x1.5 »èË¯¸ÅÂÊ0.5
     int extraEffectDuration;
+
 public:
     offensiveSkill(
         string name,
@@ -44,14 +61,22 @@ public:
         skillEffectType extraEffect,
         float extraEffectIntensity,
         int extraEffectDuration);
+
     float getDamageMultiplier() const;
+
     string getAttackType() const;
+
     int getAttackFrequency() const;
+
     skillEffectType getEffect() const;
+
     float getEffectIntensity() const;
+
     int getDuration() const;
+
     virtual bool getIsSelf() const;
 };
+
 class supportSkill : public Skill
 {
 protected:
@@ -59,6 +84,7 @@ protected:
     float effectIntensity;
     int duration;
     bool isSelf;
+
 public:
     supportSkill(
         string name,
@@ -69,12 +95,20 @@ public:
         float effectIntensity,
         int duration);
         
+
     skillEffectType getEffect() const;
+
     float getEffectIntensity() const;
+
     int getDuration() const;
+
     bool getIsSelf() const;
+
     virtual float getDamageMultiplier() const;
+
     virtual string getAttackType() const;
+
     virtual int getAttackFrequency() const;
 };
+
 //#endif

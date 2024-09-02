@@ -1,9 +1,14 @@
 #include "battle.h"
+
+
 using namespace std;
+
 Battle::Battle() : gen(rd()), dis(0.0, 1.0) {}
+
 Battle::~Battle()
 {
 }
+
 void Battle::startBattle(Linchong* player, vector<Character*>* enemies)
 {
 	showStartInformation(player, enemies);
@@ -14,32 +19,38 @@ void Battle::startBattle(Linchong* player, vector<Character*>* enemies)
 	int turn = 1;
 	while (true)
 	{
-		cout << "å›åˆ" << turn << "å¼€å§‹ï¼" << endl;
-
-		// æ¸…é™¤ä¸Šä¸€å›åˆçš„å¼±ç‚¹å‘½ä¸­çŠ¶æ€,ç®¡ç†åŸºç¡€å±æ€§buffçŠ¶æ€
+		cout << "»ØºÏ" << turn << "¿ªÊ¼£¡" << endl;
+		
+		// Çå³ıÉÏÒ»»ØºÏµÄÈõµãÃüÖĞ×´Ì¬,¹ÜÀí»ù´¡ÊôĞÔbuff×´Ì¬
 		for (auto& it : sortedCharacters)
 		{
 			Character* theCharacter = it.second;
 			manageWeaknessAndBuff(theCharacter);
 		}
+
 		for (auto& it : sortedCharacters)
 		{
 			Character* theCharacter = it.second;
 			showAllStatus(theCharacter);
 		}
-		for (auto& it : sortedCharacters) // æˆ˜æ–—å›åˆ
+
+		for (auto& it : sortedCharacters) // Õ½¶·»ØºÏ
 		{
-			cout << "ç°åœ¨è½®åˆ°" << it.second->getName() << "è¡ŒåŠ¨" << endl;
+			cout << "ÏÖÔÚÂÖµ½" << it.second->getName() << "ĞĞ¶¯" << endl;
 			bool chargeFlag = false;
 			it.second->setActionAvailability(true);
+
 			manageComatoseStatus(it.second);
+
 			if (it.second->getChargeStatus())
 				chargeFlag = true;
+
 			if (it.second->getAnticipateStatus())
 			{
 				it.second->setAnticipateStatus(false);
-				cout << it.second->getName() << "åœæ­¢äº†çœ‹ç ´ï¼" << endl;
+				cout << it.second->getName() << "Í£Ö¹ÁË¿´ÆÆ£¡" << endl;
 			}
+
 			if (!it.second->isPlayerControlled())
 			{
 				int actionCount = 0;
@@ -47,7 +58,7 @@ void Battle::startBattle(Linchong* player, vector<Character*>* enemies)
 				{
 					actionCount++;
 					if (actionCount > 1)
-						cout << it.second->getName() << "å‘åŠ¨äº†æœ¬å›åˆç¬¬" << actionCount << "æ¬¡è¡ŒåŠ¨ï¼" << endl;
+						cout << it.second->getName() << "·¢¶¯ÁË±¾»ØºÏµÚ" << actionCount << "´ÎĞĞ¶¯£¡" << endl;
 					enemyTurn(it.second, player);
 					if (evaluateBattleStatus(sortedCharacters))
 						return;
@@ -60,19 +71,13 @@ void Battle::startBattle(Linchong* player, vector<Character*>* enemies)
 				{
 					actionCount++;
 					if (actionCount > 1)
-						cout << it.second->getName() << "å‘åŠ¨äº†æœ¬å›åˆç¬¬" << actionCount << "æ¬¡è¡ŒåŠ¨ï¼" << endl;
-					cout << it.second->getName() << "å‘åŠ¨äº†æœ¬å›åˆç¬¬" << actionCount << "æ¬¡è¡ŒåŠ¨ï¼" << endl;
-					cout << it.second->getName() << "å‘åŠ¨äº†æœ¬å›åˆç¬¬" << actionCount << "æ¬¡è¡ŒåŠ¨ï¼" << endl;
-					cout << it.second->getName() << "å‘åŠ¨äº†æœ¬å›åˆç¬¬" << actionCount << "æ¬¡è¡ŒåŠ¨ï¼" << endl;
-					cout << it.second->getName() << "å‘åŠ¨äº†æœ¬å›åˆç¬¬" << actionCount << "æ¬¡è¡ŒåŠ¨ï¼" << endl;
-					cout << it.second->getName() << "å‘åŠ¨äº†æœ¬å›åˆç¬¬" << actionCount << "æ¬¡è¡ŒåŠ¨ï¼" << endl;
-					cout << it.second->getName() << "å‘åŠ¨äº†æœ¬å›åˆç¬¬" << actionCount << "æ¬¡è¡ŒåŠ¨ï¼" << endl;
-					cout << it.second->getName() << "å‘åŠ¨äº†æœ¬å›åˆç¬¬" << actionCount << "æ¬¡è¡ŒåŠ¨ï¼" << endl;
+						cout << it.second->getName() << "·¢¶¯ÁË±¾»ØºÏµÚ" << actionCount << "´ÎĞĞ¶¯£¡" << endl;
 					playerTurn(player, enemies);
 					if (evaluateBattleStatus(sortedCharacters))
 						return;
 				}
 			}
+
 			if (chargeFlag)
 				it.second->setChargeStatus(false);
 		}
@@ -80,6 +85,7 @@ void Battle::startBattle(Linchong* player, vector<Character*>* enemies)
 		cout << "--------------------------------------------------------" << endl;
 	}
 }
+
 void Battle::sortBySpeed(vector<pair<int, Character*>>* sorted, Linchong* player, vector<Character*>* enemies)
 {
 	sorted->push_back(make_pair(player->getSpeed(), player));
@@ -87,10 +93,12 @@ void Battle::sortBySpeed(vector<pair<int, Character*>>* sorted, Linchong* player
 	{
 		sorted->push_back(make_pair(enemy->getSpeed(), enemy));
 	}
+
 	sort(sorted->begin(), sorted->end(),
 		[](const pair<int, Character*>& a, const pair<int, Character*>& b)
 		{ return a.first > b.first; });
 }
+
 bool Battle::evaluateBattleStatus(vector<pair<int, Character*>>& theCharacters)
 {
 	for (auto it = theCharacters.begin(); it != theCharacters.end();)
@@ -99,26 +107,29 @@ bool Battle::evaluateBattleStatus(vector<pair<int, Character*>>& theCharacters)
 		{
 			if (it->second->isPlayerControlled())
 			{
-				cout << "æ—å†²è¢«å‡»è´¥ï¼Œæˆ˜æ–—ç»“æŸï¼" << endl;
-				return true; // ç©å®¶é˜µäº¡ï¼Œé€€å‡ºæˆ˜æ–—
+				cout << "ÁÖ³å±»»÷°Ü£¬Õ½¶·½áÊø£¡" << endl;
+				return true; // Íæ¼ÒÕóÍö£¬ÍË³öÕ½¶·
 			}
 			else
 			{
-				cout << it->second->getName() << " è¢«å‡»è´¥äº†ï¼" << endl;
-				it = theCharacters.erase(it); // ç§»é™¤é˜µäº¡çš„æ•Œäºº
+				cout << it->second->getName() << " ±»»÷°ÜÁË£¡" << endl;
+				it = theCharacters.erase(it); // ÒÆ³ıÕóÍöµÄµĞÈË
 			}
 		}
 		else
 			it++;
 	}
+
 	if (theCharacters.size() == 1 && theCharacters[0].second->isPlayerControlled())
 	{
-		// æ‰€æœ‰æ•Œäººå·²è¢«å‡»è´¥ï¼Œç©å®¶è·èƒœ
-		cout << "æ—å†²èµ¢å¾—äº†æˆ˜æ–—èƒœåˆ©ï¼" << endl;
+		// ËùÓĞµĞÈËÒÑ±»»÷°Ü£¬Íæ¼Ò»ñÊ¤
+		cout << "ÁÖ³åÓ®µÃÁËÕ½¶·Ê¤Àû£¡" << endl;
 		return true;
 	}
-	return false; // ç»§ç»­æˆ˜æ–—
+
+	return false; // ¼ÌĞøÕ½¶·
 }
+
 void Battle::manageWeaknessAndBuff(Character* theCharacter)
 {
 	theCharacter->setWeaknessReceivedStatus(false);
@@ -126,51 +137,55 @@ void Battle::manageWeaknessAndBuff(Character* theCharacter)
 	{
 		for (auto itEffect = theCharacter->getEffectStatus()->begin(); itEffect != theCharacter->getEffectStatus()->end();)
 		{
-			itEffect->second.second--; // å‡å°‘æ•ˆæœæŒç»­æ—¶é—´
+			itEffect->second.second--; // ¼õÉÙĞ§¹û³ÖĞøÊ±¼ä
 			if (itEffect->second.second == 0)
 			{
-				string effectName = "æ— ";
+				string effectName = "ÎŞ";
 				switch (itEffect->first)
 				{
 				case giveDefenseWeaken:
-				case selfDefenseBoost:effectName = "é˜²å¾¡åŠ›"; break;
+				case selfDefenseBoost:effectName = "·ÀÓùÁ¦";break;
 				case giveEvationWeaken:
-				case selfEvationBoost:effectName = "é—ªé¿ç‡"; break;
+				case selfEvationBoost:effectName = "ÉÁ±ÜÂÊ";break;
 				case giveHitRateWeaken:
-				case selfHitRateBoost:effectName = "å‘½ä¸­ç‡"; break;
+				case selfHitRateBoost:effectName = "ÃüÖĞÂÊ";break;
 				case giveAttackWeaken:
-				case selfAttackBoost:effectName = "æ”»å‡»åŠ›"; break;
+				case selfAttackBoost:effectName = "¹¥»÷Á¦";break;
 				default: break;
 				}
-				itEffect = theCharacter->getEffectStatus()->erase(itEffect); // ç§»é™¤æ•ˆæœ
-				cout << theCharacter->getName() << "çš„" << effectName << "æ¢å¤åŸçŠ¶äº†ï¼" << endl;
+				itEffect = theCharacter->getEffectStatus()->erase(itEffect); // ÒÆ³ıĞ§¹û
+				cout << theCharacter->getName() << "µÄ" << effectName << "»Ö¸´Ô­×´ÁË£¡" << endl;
+
 			}
 			else
 			{
-				++itEffect; // å¦‚æœæ•ˆæœæ²¡æœ‰ç»“æŸï¼Œåˆ™ç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªå…ƒç´ 
+				++itEffect; // Èç¹ûĞ§¹ûÃ»ÓĞ½áÊø£¬ÔòÒÆ¶¯µ½ÏÂÒ»¸öÔªËØ
 			}
 		}
 	}
 }
+
 void Battle::enemyTurn(Character* enemy, Character* player)
 {
 	normalAttack(player, enemy);
 }
+
 void Battle::playerTurn(Character* player, vector<Character*>* enemies)
 {
 	int choice;
 	bool validChoice = false;
-	//ç¡®ä¿ç”¨æˆ·è¾“å…¥æœ‰æ•ˆçš„é€‰æ‹©  
+
+	//È·±£ÓÃ»§ÊäÈëÓĞĞ§µÄÑ¡Ôñ  
 	while (!validChoice) {
-		cout << "é€‰æ‹©è¡ŒåŠ¨ï¼š1.æ™®é€šæ”»å‡» 2.æ‹›å¼ 3.åˆ‡æ¢æ­¦å™¨ 4.è§‚å¯Ÿå¯¹æ‰‹" << endl;
-		cin >> choice;
+		cout << "Ñ¡ÔñĞĞ¶¯£º1.ÆÕÍ¨¹¥»÷ 2.ÕĞÊ½ 3.ÇĞ»»ÎäÆ÷ 4.¹Û²ì¶ÔÊÖ" << endl;
+		cin >> choice; 
 		if (choice >= 1 && choice <= 4) {
-			validChoice = true;
+			validChoice = true;   
 			switch (choice)
 			{
-			case 1: // æ™®é€šæ”»å‡»  
+			case 1: // ÆÕÍ¨¹¥»÷  
 			{
-				cout << "é€‰æ‹©æ”»å‡»å¯¹è±¡:" << endl;
+				cout << "Ñ¡Ôñ¹¥»÷¶ÔÏó:" << endl;
 				showEnemiesInformation(enemies);
 				int targetIndex;
 				cin >> targetIndex;
@@ -178,31 +193,32 @@ void Battle::playerTurn(Character* player, vector<Character*>* enemies)
 					normalAttack((*enemies)[targetIndex - 1], player);
 				}
 				else {
-					cout << "æ— æ•ˆçš„æ•Œäººç´¢å¼•ï¼Œè¯·é‡æ–°è¾“å…¥ã€‚" << endl;
+					cout << "ÎŞĞ§µÄµĞÈËË÷Òı£¬ÇëÖØĞÂÊäÈë¡£" << endl;
 				}
 				break;
 			}
-			case 2: // æ‹›å¼  
+			case 2: // ÕĞÊ½  
 			{
-				cout << "é€‰æ‹©æ‹›å¼:" << endl;
+				cout << "Ñ¡ÔñÕĞÊ½:" << endl;
 				int skillIndex;
 				showSkillInformationInBattle(player);
 				cin >> skillIndex;
 				if ((*player->getSkills())[skillIndex - 1]->getIsOffensive()
 					&& (*player->getSkills())[skillIndex - 1]->getAttackType() != player->getFirstWeapon()->getAttackType())
 				{
-					cout << "æ­¦å™¨ä¸åŒ¹é…ï¼Œæ— æ³•ä½¿ç”¨è¯¥æ‹›å¼" << endl;
+					cout << "ÎäÆ÷²»Æ¥Åä£¬ÎŞ·¨Ê¹ÓÃ¸ÃÕĞÊ½" << endl;
 					validChoice = false;
 					break;
 				}
+
 				useSkill(player, enemies, skillIndex - 1);
 				break;
 			}
-			case 3: // åˆ‡æ¢æ­¦å™¨  
+			case 3: // ÇĞ»»ÎäÆ÷  
 			{
 				if (player->getWeapons()->size() == 1)
 				{
-					cout << player->getName() << "æƒ³åˆ‡æ¢æ­¦å™¨ï¼Œä½†åªæœ‰ä¸€æŠŠæ­¦å™¨ã€‚" << endl;
+					cout << player->getName() << "ÏëÇĞ»»ÎäÆ÷£¬µ«Ö»ÓĞÒ»°ÑÎäÆ÷¡£" << endl;
 					validChoice = false;
 					break;
 				}
@@ -210,52 +226,56 @@ void Battle::playerTurn(Character* player, vector<Character*>* enemies)
 				player->setActionAvailability(true);
 				break;
 			}
-			case 4: // è§‚å¯Ÿå¯¹æ‰‹  
+			case 4: // ¹Û²ì¶ÔÊÖ  
 			{
-				// å®ç°è§‚å¯Ÿå¯¹æ‰‹çš„é€»è¾‘ï¼ˆå¦‚æœæœ‰çš„è¯ï¼‰  
+				// ÊµÏÖ¹Û²ì¶ÔÊÖµÄÂß¼­£¨Èç¹ûÓĞµÄ»°£©  
 				break;
 			}
 			}
 		}
 		else {
-			cout << "æ— æ•ˆçš„è¾“å…¥ï¼Œè¯·é‡æ–°è¾“å…¥ã€‚" << endl;
+			cout << "ÎŞĞ§µÄÊäÈë£¬ÇëÖØĞÂÊäÈë¡£" << endl;
 		}
 	}
 }
+
 int Battle::takeDamage(Character* target, int damage)
 {
 	if (damage < 0)
 	{
-		cout << target->getName() << "æ¯«å‘æ— æŸï¼ï¼" << endl << endl;
+		cout << target->getName() << "ºÁ·¢ÎŞËğ£¡£¡" << endl<<endl;
 		return 0;
 	}
 	if (target->getAnticipateStatus())
 	{
 		damage *= 0.25;
 		target->modifyHP(-damage);
-		cout << target->getName() << "è¯†ç ´äº†ï¼æŠµå¾¡äº†å¤§éƒ¨åˆ†ä¼¤å®³!";
-		cout << target->getName() << "å—åˆ°" << damage << "ç‚¹ä¼¤å®³!" << endl << endl;
+		cout << target->getName() << "Ê¶ÆÆÁË£¡µÖÓùÁË´ó²¿·ÖÉËº¦!" ;
+		cout << target->getName() << "ÊÜµ½" << damage << "µãÉËº¦!" << endl<<endl;
 		return damage;
 	}
 	else
 	{
 		target->modifyHP(-damage);
-		cout << target->getName() << "å—åˆ°" << damage << "ç‚¹ä¼¤å®³ï¼" << endl << endl;
+		cout << target->getName() << "ÊÜµ½" << damage << "µãÉËº¦£¡" << endl<<endl;
 		return damage;
 	}
 }
+
 void Battle::normalAttack(Character* target, Character* attacker)
 {
-	cout << attacker->getName() << "å¯¹" << target->getName() << "ä½¿ç”¨äº†æ™®é€šæ”»å‡»" << endl;
+	cout << attacker->getName() << "¶Ô" << target->getName() << "Ê¹ÓÃÁËÆÕÍ¨¹¥»÷" << endl;
 	attacker->setActionAvailability(false);
 	int damage = getDamage(attacker, target, 1.0);
-	singleDamagePerform(attacker, target, damage); // å•æ¬¡ä¼¤å®³è¯„ä¼°
+	singleDamagePerform(attacker, target, damage); // µ¥´ÎÉËº¦ÆÀ¹À
 }
+
 bool Battle::isHittingWeakness(string theWeakness, string attackType)
 {
-
+	
 	return (theWeakness == attackType);
 }
+
 bool Battle::checkHit(float evasionRate, float hitRate)
 {
 	random_device rd;
@@ -264,39 +284,41 @@ bool Battle::checkHit(float evasionRate, float hitRate)
 	float randomValue = dis(gen);
 	return randomValue <= hitRate * (1 - evasionRate);
 }
+
 void Battle::weaponSwitch(Character* character)
 {
 	bool validChoice = false;
 	vector<Weapon*>* weapons = character->getWeapons();
 	string originalType = character->getFirstWeapon()->getAttackType();
 	showWeaponInformationInBattle(character);
-	while (!validChoice)
+	while (!validChoice) 
 	{
-		cout << "é€‰æ‹©è¦æ›¿æ¢çš„æ­¦å™¨çš„åºå·:" << endl;
+		cout << "Ñ¡ÔñÒªÌæ»»µÄÎäÆ÷µÄĞòºÅ:" << endl;
 		int index;
 		cin >> index;
 		if (index <= 0 || index > weapons->size() - 1) {
-			cout << "æ— æ•ˆçš„ç´¢å¼•ï¼" << endl;
+			cout << "ÎŞĞ§µÄË÷Òı£¡" << endl;
 			continue;
 		}
 		swap(*character->getFirstWeapon(), *((*weapons)[index]));
-		cout << "åˆ‡æ¢æˆåŠŸï¼" << endl;
+		cout << "ÇĞ»»³É¹¦£¡" << endl;
 		validChoice = true;
 		string currentType = character->getFirstWeapon()->getAttackType();
 		if (currentType != originalType)
-			cout << "ç”±äºæ­¦å™¨å˜æ›´ï¼Œæ”»å‡»ç±»å‹ç”±" << originalType << "å˜ä¸º" << currentType << endl;
+			cout << "ÓÉÓÚÎäÆ÷±ä¸ü£¬¹¥»÷ÀàĞÍÓÉ"<<originalType<<"±äÎª" << currentType << endl;
 	}
-
+	
 }
+
 void Battle::useSkill(Character* user, vector<Character*>* enemies, int skillIndex)
 {
 	user->setActionAvailability(false);
 	Skill* theSkill = (*user->getSkills())[skillIndex];
-	if (theSkill->getIsOffensive()) // å¦‚æœæ˜¯è¿›æ”»æ€§æŠ€èƒ½
+	if (theSkill->getIsOffensive()) // Èç¹ûÊÇ½ø¹¥ĞÔ¼¼ÄÜ
 	{
-		if (theSkill->getIsAOE()) // å¦‚æœæ˜¯aoeä¼¤å®³
+		if (theSkill->getIsAOE()) // Èç¹ûÊÇaoeÉËº¦
 		{
-			cout << user->getName() << "ä½¿ç”¨äº†æ‹›å¼:" << theSkill->getName() << endl;
+			cout << user->getName() << "Ê¹ÓÃÁËÕĞÊ½:" << theSkill->getName() << endl;
 			for (Character* enemy : *enemies)
 			{
 				int damage = getDamage(user, enemy, theSkill->getDamageMultiplier());
@@ -307,63 +329,64 @@ void Battle::useSkill(Character* user, vector<Character*>* enemies, int skillInd
 					int totalDamage = 0;
 					for (int i = 0; i < theSkill->getAttackFrequency(); i++)
 					{
-						cout << "å¯¹" << enemy->getName() << "ç¬¬" << i << "æ¬¡æ”»å‡»:";
-						totalDamage += singleDamagePerform(user, enemy, damage); // å•æ¬¡ä¼¤å®³è¯„ä¼°
+						cout << "¶Ô" << enemy->getName() << "µÚ" << i << "´Î¹¥»÷:" ;
+						totalDamage+=singleDamagePerform(user, enemy, damage); // µ¥´ÎÉËº¦ÆÀ¹À
 					}
-					cout << "æ€»è®¡é€ æˆ" << totalDamage << "ç‚¹ä¼¤å®³ï¼" << endl;
+					cout << "×Ü¼ÆÔì³É" << totalDamage << "µãÉËº¦£¡" << endl;
 				}
 				effectPerform(user, enemy, theSkill);
 			}
 		}
 		else
-		{ // å¦‚æœæ˜¯å•ä½“ä¼¤å®³
-			cout << "é€‰æ‹©æ”»å‡»ç›®æ ‡:" << endl;
+		{ // Èç¹ûÊÇµ¥ÌåÉËº¦
+			cout << "Ñ¡Ôñ¹¥»÷Ä¿±ê:" << endl;
 			showEnemiesInformation(enemies);
 			int targetIndex;
 			cin >> targetIndex;
-			cout << user->getName() << "å¯¹" << (*enemies)[targetIndex - 1]->getName() << "ä½¿ç”¨äº†æ‹›å¼:" << theSkill->getName() << endl;
-			int damage = getDamage(user, (*enemies)[targetIndex - 1], theSkill->getDamageMultiplier());
+			cout << user->getName() << "¶Ô" << (*enemies)[targetIndex-1]->getName() << "Ê¹ÓÃÁËÕĞÊ½:" << theSkill->getName() << endl;
+			int damage = getDamage(user, (*enemies)[targetIndex-1], theSkill->getDamageMultiplier());
 			if (theSkill->getAttackFrequency() == 1)
-				singleDamagePerform(user, (*enemies)[targetIndex - 1], damage);
+				singleDamagePerform(user, (*enemies)[targetIndex-1], damage);
 			else
 			{
 				int totalDamage = 0;
 				for (int i = 0; i < theSkill->getAttackFrequency(); i++)
 				{
-					cout << "å¯¹" << (*enemies)[targetIndex - 1]->getName() << "ç¬¬" << i + 1 << "æ¬¡æ”»å‡»:" << endl;
-					totalDamage += singleDamagePerform(user, (*enemies)[targetIndex - 1], damage); // å•æ¬¡ä¼¤å®³è¯„ä¼°
+					cout << "¶Ô" << (*enemies)[targetIndex-1]->getName() << "µÚ" << i+1 << "´Î¹¥»÷:" << endl;
+					totalDamage+=singleDamagePerform(user, (*enemies)[targetIndex-1], damage); // µ¥´ÎÉËº¦ÆÀ¹À
 				}
-				cout << "æ€»è®¡é€ æˆ" << totalDamage << "ç‚¹ä¼¤å®³ï¼ï¼ï¼" << endl;
+				cout << "×Ü¼ÆÔì³É" << totalDamage << "µãÉËº¦£¡£¡£¡" << endl;
 			}
-			effectPerform(user, (*enemies)[targetIndex - 1], theSkill);
+			effectPerform(user, (*enemies)[targetIndex-1], theSkill);
 		}
 	}
-	else // å¦‚æœæ˜¯è¾…åŠ©æŠ€èƒ½
+	else // Èç¹ûÊÇ¸¨Öú¼¼ÄÜ
 	{
 		if (theSkill->getIsSelf())
 		{
 			effectPerform(user, 0, theSkill);
 		}
-		else
+		else 
 		{
 			if (theSkill->getIsAOE())
 			{
-				cout << user->getName() << "ä½¿ç”¨äº†æ‹›å¼:" << theSkill->getName() << endl;
+				cout << user->getName() << "Ê¹ÓÃÁËÕĞÊ½:" << theSkill->getName() << endl;
 				for (Character* enemy : *enemies)
 					effectPerform(user, enemy, theSkill);
 			}
 			else
 			{
-				cout << "é€‰æ‹©ç›®æ ‡:" << endl;
+				cout << "Ñ¡ÔñÄ¿±ê:" << endl;
 				int targetIndex;
 				cin >> targetIndex;
-				cout << user->getName() << "å¯¹" << (*enemies)[targetIndex - 1]->getName() << "ä½¿ç”¨äº†æ‹›å¼:" << theSkill->getName() << endl;
+				cout << user->getName() << "¶Ô" << (*enemies)[targetIndex - 1]->getName() << "Ê¹ÓÃÁËÕĞÊ½:" << theSkill->getName() << endl;
 				effectPerform(user, (*enemies)[targetIndex - 1], theSkill);
 			}
 		}
-
+		
 	}
 }
+
 int Battle::getDamage(Character* attacker, Character* target, float damageMultiplier)
 {
 	int damage = attacker->getAttack() - target->getDefense();
@@ -374,45 +397,50 @@ int Battle::getDamage(Character* attacker, Character* target, float damageMultip
 	}
 	return damage;
 }
+
 int Battle::singleDamagePerform(Character* user, Character* enemy, int damage)
 {
 	if (checkHit(enemy->getEvasionRate(), user->getHitRate()))
 	{
 		if (isHittingWeakness(enemy->getFirstArmor()->getWeakness(), user->getFirstWeapon()->getAttackType()) && !enemy->getAnticipateStatus())
 		{
-			cout << "å‡»ä¸­äº†å¼±ç‚¹ï¼";
+			cout << "»÷ÖĞÁËÈõµã£¡";
 			damage *= 1.5;
 			if (!enemy->getWeaknessReceivedStatus())
 			{
-				cout << user->getName() << "è·å¾—é¢å¤–è¡ŒåŠ¨çš„æœºä¼šï¼";
+				cout << user->getName() << "»ñµÃ¶îÍâĞĞ¶¯µÄ»ú»á£¡";
 				user->setActionAvailability(true);
 				enemy->setWeaknessReceivedStatus(true);
 			}
 		}
-		int returnDamage = takeDamage(enemy, damage);//è¿”å›å€¼ï¼Œç”¨äºè®¡ç®—æ€»ä¼¤å®³
+		int returnDamage=takeDamage(enemy, damage);//·µ»ØÖµ£¬ÓÃÓÚ¼ÆËã×ÜÉËº¦
 		return returnDamage;
 	}
 	else
 	{
-		cout << "æœªå‘½ä¸­ï¼" << endl;
+		cout << "Î´ÃüÖĞ£¡" << endl;
 		return 0;
 	}
 }
+
 void Battle::effectPerform(Character* user, Character* enemy, Skill* theSkill)
 {
 	switch (theSkill->getEffect())
 	{
+
 	case selfDefenseBoost:
 	case selfEvationBoost:
 	case selfHitRateBoost:
 	case selfAttackBoost:
 	{
-		if (!checkAndOffset(user, theSkill))
+		if (checkAndOffset(user, theSkill))
 		{
-			user->removeEffect(theSkill->getEffect());
 			user->addEffect(theSkill->getEffect(), theSkill->getEffectIntensity(), theSkill->getDuration());
+
 			describeEffect(user, enemy, theSkill);
 		}
+		else
+			describeEffect(user, enemy, theSkill);
 		break;
 	}
 	case selfComatose:
@@ -423,11 +451,11 @@ void Battle::effectPerform(Character* user, Character* enemy, Skill* theSkill)
 			int gainHP = user->getMaxHP() * 0.75;
 			user->modifyHP(gainHP);
 			describeEffect(user, enemy, theSkill);
-
+			
 		}
 		else
 		{
-			cout << "ä½†æ˜¯å¤±è´¥äº†ï¼" << endl;
+			cout << "µ«ÊÇÊ§°ÜÁË£¡" << endl;
 		}
 		break;
 	}
@@ -448,9 +476,13 @@ void Battle::effectPerform(Character* user, Character* enemy, Skill* theSkill)
 	case giveDefenseWeaken:
 	case giveEvationWeaken:
 	{
-		enemy->removeEffect(theSkill->getEffect());
-		enemy->addEffect(theSkill->getEffect(), theSkill->getEffectIntensity(), theSkill->getDuration());
-		describeEffect(user, enemy, theSkill);
+		if (checkAndOffset(enemy, theSkill))
+		{
+			enemy->addEffect(theSkill->getEffect(), theSkill->getEffectIntensity(), theSkill->getDuration());
+			describeEffect(user, enemy, theSkill);
+		}
+		else
+			describeEffect(user, enemy, theSkill);
 		break;
 	}
 	case giveComatose:
@@ -463,32 +495,34 @@ void Battle::effectPerform(Character* user, Character* enemy, Skill* theSkill)
 			describeEffect(user, enemy, theSkill);
 		}
 	}
+
 	default:
 		break;
 	}
 }
-bool Battle::checkAndOffset(Character* character, Skill* theSkill)//æŠµæ¶ˆç›¸åæ•ˆæœ
+
+bool Battle::checkAndOffset(Character* character, Skill* theSkill)//µÖÏûÏà·´Ğ§¹û
 {
-	bool offsetOccurred = false;
-	skillEffectType theType = theSkill->getEffect();
-	map<skillEffectType, pair<float, int>>* effectStatus = character->getEffectStatus();
+	bool offsetOccurred=false;
+	skillEffectType theType=theSkill->getEffect();
+	map<skillEffectType, pair<float, int>>* effectStatus=character->getEffectStatus();
 	switch (theType)
 	{
 	case giveAttackWeaken:
 	case selfAttackBoost:
-		for (auto it = effectStatus->begin(); it != effectStatus->end(); )
+		for (auto it = effectStatus->begin(); it != effectStatus->end(); ) 
 		{
-			if (it->first == selfAttackBoost || it->first == giveAttackWeaken) {
-				if (((theSkill->getEffectIntensity() - 1) * (it->second.first - 1)) < 0)
+			if (it->first == selfAttackBoost || it->first == giveAttackWeaken) { 
+				if (((theSkill->getEffectIntensity()-1) * (it->second.first - 1)) < 0) //Èç¹ûÏàã£
 				{
-					effectStatus->erase(it++);
+					effectStatus->erase(it++);  
 					offsetOccurred = true;
-					break;
+					break;   
 				}
-				++it; // å¦‚æœä¸åˆ é™¤ï¼Œåˆ™ç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªå…ƒç´   
+				++it; // Èç¹û²»É¾³ı£¬ÔòÒÆ¶¯µ½ÏÂÒ»¸öÔªËØ  
 			}
 			else {
-				++it; // å¦‚æœé”®ä¸åŒ¹é…ï¼Œä¹Ÿç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªå…ƒç´   
+				++it; // Èç¹û¼ü²»Æ¥Åä£¬Ò²ÒÆ¶¯µ½ÏÂÒ»¸öÔªËØ  
 			}
 		}
 		offsetOccurred = true;
@@ -505,10 +539,10 @@ bool Battle::checkAndOffset(Character* character, Skill* theSkill)//æŠµæ¶ˆç›¸å
 					offsetOccurred = true;
 					break;
 				}
-				++it; // å¦‚æœä¸åˆ é™¤ï¼Œåˆ™ç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªå…ƒç´   
+				++it; // Èç¹û²»É¾³ı£¬ÔòÒÆ¶¯µ½ÏÂÒ»¸öÔªËØ  
 			}
 			else {
-				++it; // å¦‚æœé”®ä¸åŒ¹é…ï¼Œä¹Ÿç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªå…ƒç´   
+				++it; // Èç¹û¼ü²»Æ¥Åä£¬Ò²ÒÆ¶¯µ½ÏÂÒ»¸öÔªËØ  
 			}
 		}
 		offsetOccurred = true;
@@ -526,10 +560,10 @@ bool Battle::checkAndOffset(Character* character, Skill* theSkill)//æŠµæ¶ˆç›¸å
 					offsetOccurred = true;
 					break;
 				}
-				++it; // å¦‚æœä¸åˆ é™¤ï¼Œåˆ™ç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªå…ƒç´   
+				++it; // Èç¹û²»É¾³ı£¬ÔòÒÆ¶¯µ½ÏÂÒ»¸öÔªËØ  
 			}
 			else {
-				++it; // å¦‚æœé”®ä¸åŒ¹é…ï¼Œä¹Ÿç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªå…ƒç´   
+				++it; // Èç¹û¼ü²»Æ¥Åä£¬Ò²ÒÆ¶¯µ½ÏÂÒ»¸öÔªËØ  
 			}
 		}
 		offsetOccurred = true;
@@ -547,10 +581,10 @@ bool Battle::checkAndOffset(Character* character, Skill* theSkill)//æŠµæ¶ˆç›¸å
 					offsetOccurred = true;
 					break;
 				}
-				++it; // å¦‚æœä¸åˆ é™¤ï¼Œåˆ™ç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªå…ƒç´   
+				++it; // Èç¹û²»É¾³ı£¬ÔòÒÆ¶¯µ½ÏÂÒ»¸öÔªËØ  
 			}
 			else {
-				++it; // å¦‚æœé”®ä¸åŒ¹é…ï¼Œä¹Ÿç§»åŠ¨åˆ°ä¸‹ä¸€ä¸ªå…ƒç´   
+				++it; // Èç¹û¼ü²»Æ¥Åä£¬Ò²ÒÆ¶¯µ½ÏÂÒ»¸öÔªËØ  
 			}
 		}
 		offsetOccurred = true;
@@ -560,8 +594,11 @@ bool Battle::checkAndOffset(Character* character, Skill* theSkill)//æŠµæ¶ˆç›¸å
 	}
 	return offsetOccurred;
 }
+
 void Battle::manageComatoseStatus(Character* theCharacter)
 {
+
+
 	if (theCharacter->getComatoseStatus())
 	{
 		int currentDuration = theCharacter->getComatoseDuration();
@@ -569,89 +606,95 @@ void Battle::manageComatoseStatus(Character* theCharacter)
 		if (theCharacter->getComatoseDuration() == 0)
 		{
 			theCharacter->setComatoseStatus(false, 0);
-			cout << theCharacter->getName() << "ä»æ˜è¿·ä¸­è‹é†’è¿‡æ¥ï¼Œå¯ä»¥è¡ŒåŠ¨äº†ï¼" << endl;
+			cout << theCharacter->getName() << "´Ó»èÃÔÖĞËÕĞÑ¹ıÀ´£¬¿ÉÒÔĞĞ¶¯ÁË£¡" << endl;
 		}
 		else {
-			cout << theCharacter->getName() << "æ˜è¿·ä¸­ï¼Œæ— æ³•è¡ŒåŠ¨ï¼" << endl;
+			cout << theCharacter->getName() << "»èÃÔÖĞ£¬ÎŞ·¨ĞĞ¶¯£¡" << endl;
+
 			theCharacter->setActionAvailability(false);
 		}
 	}
 
+	
 }
+
 void Battle::describeEffect(Character* user, Character* enemy, Skill* theSkill)
 {
 	switch (theSkill->getEffect())
 	{
-	case selfDefenseBoost:
-	{
-		if (theSkill->getEffectIntensity() >= 1)
-			cout << user->getName() << "é˜²å¾¡åŠ›å¤§å¹…ä¸Šå‡äº†ï¼ŒæŒç»­" << theSkill->getDuration() << "å›åˆï¼" << endl;
-		else
-			cout << user->getName() << "é˜²å¾¡åŠ›å¤§å¹…ä¸‹é™äº†ï¼ŒæŒç»­" << theSkill->getDuration() << "å›åˆï¼" << endl;
-		break;
-	}
-	case selfEvationBoost:
-	{
-		cout << user->getName() << "é—ªé¿ç‡å¤§å¹…ä¸Šå‡äº†ï¼ŒæŒç»­" << theSkill->getDuration() << "å›åˆï¼" << endl;
-		break;
-	}
-	case selfHitRateBoost:
-	{
-		cout << user->getName() << "å‘½ä¸­ç‡å¤§å¹…ä¸Šå‡äº†ï¼ŒæŒç»­" << theSkill->getDuration() << "å›åˆï¼" << endl;
-		break;
-	}
-	case selfAttackBoost:
-	{
-		if (theSkill->getEffectIntensity() >= 1)
-			cout << user->getName() << "æ”»å‡»åŠ›å¤§å¹…ä¸Šå‡äº†ï¼ŒæŒç»­" << theSkill->getDuration() << "å›åˆï¼" << endl;
-		else
-			cout << user->getName() << "æ”»å‡»åŠ›å¤§å¹…ä¸‹é™äº†ï¼ŒæŒç»­" << theSkill->getDuration() << "å›åˆï¼" << endl;
-		break;
-	}
-	case selfComatose:
-	{
-		cout << user->getName() << "å¼€å§‹ç¡è§‰,HPå¤§é‡æ¢å¤äº†!" << endl;
-		break;
-	}
-	case selfCharge:
-	{
-		cout << user->getName() << "æ­£åœ¨è“„åŠ›ï¼Œä¸‹å›åˆä¼¤å®³çŒ›å¢ï¼" << endl;
-		break;
-	}
-	case selfAnticipate:
-	{
-		cout << user->getName() << "æ­£çœ‹ç ´æ•Œæ–¹æ”»åŠ¿ï¼" << endl;
-		break;
-	}
-	case giveAttackWeaken:
-	{
-		cout << enemy->getName() << "æ”»å‡»åŠ›å¤§å¹…ä¸‹é™äº†ï¼ŒæŒç»­" << theSkill->getDuration() << "å›åˆï¼" << endl;
-		break;
-	}
-	case giveHitRateWeaken:
-	{
-		cout << enemy->getName() << "å‘½ä¸­ç‡å¤§å¹…ä¸‹é™äº†ï¼ŒæŒç»­" << theSkill->getDuration() << "å›åˆï¼" << endl;
-		break;
-	}
-	case giveDefenseWeaken:
-	{
-		cout << enemy->getName() << "é˜²å¾¡åŠ›å¤§å¹…ä¸Šå‡äº†ï¼ŒæŒç»­" << theSkill->getDuration() << "å›åˆï¼" << endl;
-		break;
-	}
-	case giveEvationWeaken:
-	{
-		cout << enemy->getName() << "å›é¿ç‡å¤§å¹…ä¸Šå‡äº†ï¼ŒæŒç»­" << theSkill->getDuration() << "å›åˆï¼" << endl;
-		break;
-	}
-	case giveComatose:
-	{
-		cout << enemy->getName() << "æ˜è¿·äº†ï¼æŒç»­" << theSkill->getDuration() << "å›åˆï¼" << endl;
-		break;
-	}
-	default:
-		break;
-	}
+
+		case selfDefenseBoost: 
+		{
+			if (theSkill->getEffectIntensity() >= 1)
+				cout << user->getName() << "·ÀÓùÁ¦´ó·ùÉÏÉıÁË£¬³ÖĞø" << theSkill->getDuration() << "»ØºÏ£¡" << endl;
+			else
+				cout << user->getName() << "·ÀÓùÁ¦´ó·ùÏÂ½µÁË£¬³ÖĞø" << theSkill->getDuration() << "»ØºÏ£¡" << endl;
+			break;
+		}
+		case selfEvationBoost:
+		{
+			cout << user->getName() << "ÉÁ±ÜÂÊ´ó·ùÉÏÉıÁË£¬³ÖĞø" << theSkill->getDuration() << "»ØºÏ£¡" << endl;
+			break;
+		}
+		case selfHitRateBoost:
+		{
+			cout << user->getName() << "ÃüÖĞÂÊ´ó·ùÉÏÉıÁË£¬³ÖĞø" << theSkill->getDuration() << "»ØºÏ£¡" << endl;
+			break;
+		}
+		case selfAttackBoost:
+		{
+			if(theSkill->getEffectIntensity()>=1)
+				cout << user->getName() << "¹¥»÷Á¦´ó·ùÉÏÉıÁË£¬³ÖĞø" << theSkill->getDuration() << "»ØºÏ£¡" << endl;
+			else
+				cout << user->getName() << "¹¥»÷Á¦´ó·ùÏÂ½µÁË£¬³ÖĞø" << theSkill->getDuration() << "»ØºÏ£¡" << endl;
+			break;
+		}
+		case selfComatose:
+		{
+			cout << user->getName() << "¿ªÊ¼Ë¯¾õ,HP´óÁ¿»Ö¸´ÁË!" << endl;
+			break;
+		}
+		case selfCharge:
+		{
+			cout << user->getName() << "ÕıÔÚĞîÁ¦£¬ÏÂ»ØºÏÉËº¦ÃÍÔö£¡" << endl;
+			break;
+		}
+		case selfAnticipate:
+		{
+			cout << user->getName() << "Õı¿´ÆÆµĞ·½¹¥ÊÆ£¡" << endl;
+			break;
+		}
+		case giveAttackWeaken:
+		{
+			cout << enemy->getName() << "¹¥»÷Á¦´ó·ùÏÂ½µÁË£¬³ÖĞø" << theSkill->getDuration() << "»ØºÏ£¡" << endl;
+			break;
+		}
+		case giveHitRateWeaken:
+		{
+			cout << enemy->getName() << "ÃüÖĞÂÊ´ó·ùÏÂ½µÁË£¬³ÖĞø" << theSkill->getDuration() << "»ØºÏ£¡" << endl;
+			break;
+		}
+		case giveDefenseWeaken:
+		{
+			cout << enemy->getName() << "·ÀÓùÁ¦´ó·ùÉÏÉıÁË£¬³ÖĞø" << theSkill->getDuration() << "»ØºÏ£¡" << endl;
+			break;
+		}
+		case giveEvationWeaken:
+		{	
+			cout << enemy->getName() << "»Ø±ÜÂÊ´ó·ùÉÏÉıÁË£¬³ÖĞø" << theSkill->getDuration() << "»ØºÏ£¡" << endl;
+			break;
+		}
+		case giveComatose:
+		{
+			cout << enemy->getName() << "»èÃÔÁË£¡³ÖĞø" << theSkill->getDuration()<<"»ØºÏ£¡"<<endl;
+			break;
+		}
+
+		default:
+			break;
+		}
 }
+
 void Battle::showEnemiesInformation(vector<Character*>* enemies) {
 	int i = 1;
 	for (auto& it : *enemies)
@@ -661,19 +704,21 @@ void Battle::showEnemiesInformation(vector<Character*>* enemies) {
 	}
 	cout << endl;
 }
+
 void Battle::showWeaponInformationInBattle(Character* user)
 {
 	vector<Weapon*>* weapons = user->getWeapons();
-	if (weapons && !weapons->empty()) {
-		for (size_t i = 1; i < weapons->size(); ++i) { // ä»ç¬¬äºŒä¸ªå…ƒç´ å¼€å§‹éå†  
-			cout << "åºå·:" << i << endl << "åç§°:" << (*weapons)[i]->getName() << endl;
-			cout << "æ”»å‡»åŠ›:" << (*weapons)[i]->getAttack() << endl;
-			cout << "å‘½ä¸­ç‡åŠ æˆ:" << (*weapons)[i]->getHitRate() << endl;
-			cout << "é€Ÿåº¦:" << (*weapons)[i]->getSpeed() << endl;
-			cout << "æ”»å‡»ç±»å‹:" << (*weapons)[i]->getAttackType() << endl << endl;
+	if (weapons && !weapons->empty()) {   
+		for (size_t i = 1; i < weapons->size(); ++i) { // ´ÓµÚ¶ş¸öÔªËØ¿ªÊ¼±éÀú  
+			cout <<"ĞòºÅ:" << i  << endl << "Ãû³Æ:" <<(*weapons)[i]->getName() << endl;
+			cout << "¹¥»÷Á¦:" << (*weapons)[i]->getAttack() << endl;
+			cout << "ÃüÖĞÂÊ¼Ó³É:" << (*weapons)[i]->getHitRate() << endl;
+			cout << "ËÙ¶È:" << (*weapons)[i]->getSpeed() << endl;
+			cout << "¹¥»÷ÀàĞÍ:" << (*weapons)[i]->getAttackType() << endl<<endl;  
 		}
 	}
 }
+
 void Battle::showSkillInformationInBattle(Character* user)
 {
 	vector<Skill*>* skills = user->getSkills();
@@ -683,22 +728,24 @@ void Battle::showSkillInformationInBattle(Character* user)
 	{
 		if (it->getIsOffensive())
 		{
-			cout << "æ‹›å¼åºå·:" << i << endl << "æ‹›å¼åç§°:" << it->getName() << endl;
-			cout << "æ”»å‡»ç±»å‹:" << it->getAttackType();
+			cout << "ÕĞÊ½ĞòºÅ:" << i << endl << "ÕĞÊ½Ãû³Æ:" << it->getName() << endl;
+			cout << "¹¥»÷ÀàĞÍ:" << it->getAttackType() ;
 			if (it->getAttackType() == theWeapon->getAttackType())
-				cout << "ï¼ˆä¸æ­¦å™¨åŒ¹é…ï¼‰" << endl;
+				cout << "£¨ÓëÎäÆ÷Æ¥Åä£©" << endl;
 			else
-				cout << "ï¼ˆä¸æ­¦å™¨ä¸åŒ¹é…ï¼‰" << endl;
+				cout << "£¨ÓëÎäÆ÷²»Æ¥Åä£©" << endl;
+
 		}
 		else
 		{
-			cout << "æ‹›å¼åºå·:" << i << endl << "æ‹›å¼åç§°:" << it->getName() << endl;
-
+			cout << "ÕĞÊ½ĞòºÅ:" << i << endl << "ÕĞÊ½Ãû³Æ:" << it->getName() << endl;
+			
 		}
 		i++;
 		cout << endl;
 	}
 }
+
 void Battle::showSpeedLine(vector<pair<int, Character*>> sortedCharacters)
 {
 	int i = 1;
@@ -706,30 +753,90 @@ void Battle::showSpeedLine(vector<pair<int, Character*>> sortedCharacters)
 	for (auto& it : sortedCharacters)
 	{
 		if (i == 1)
-			cout << "æœ€å¿«å‡ºæ‰‹è€…:" << it.second->getName() << endl;
+			cout << "×î¿ì³öÊÖÕß:" << it.second->getName() << endl;
 		else if (i == max)
-			cout << "æœ€æ…¢å‡ºæ‰‹è€…:" << it.second->getName() << endl;
+			cout << "×îÂı³öÊÖÕß:" << it.second->getName() << endl;
 		else
-			cout << "ç¬¬" << i << "å‡ºæ‰‹è€…:" << it.second->getName() << endl;
+			cout << "µÚ" << i << "³öÊÖÕß:" << it.second->getName() << endl;
 		i++;
 	}
 	cout << endl;
 }
+
 void Battle::showStartInformation(Linchong* player, vector<Character*>* enemies)
 {
-	cout << "æˆ˜æ–—å¼€å§‹äº†ï¼" << endl << endl;
-	cout << "æ•Œäººå…±" << enemies->size() << "äºº:" << endl;
+	cout << "Õ½¶·¿ªÊ¼ÁË£¡" << endl<<endl;
+	cout << "µĞÈË¹²" << enemies->size() << "ÈË:" << endl;
 	showEnemiesInformation(enemies);
 }
+
 void Battle::showAllStatus(Character* character)
 {
-	map<skillEffectType, pair<float, int>>* theStatus = character->getEffectStatus();
-	cout << character->getName() << "çŠ¶æ€ï¼š";
-	if (character->getChargeStatus()) cout << "å·²è“„åŠ› ";
-	if (character->getComatoseStatus()) cout << "æ˜è¿·ä¸é†’ ";
-	if (character->getAnticipateStatus()) cout << "çœ‹ç ´ ";
+	map<skillEffectType, pair<float, int>>* theStatus=character->getEffectStatus();
+	cout << character->getName() << "×´Ì¬£º";
+	if (character->getChargeStatus()) cout << "ÒÑĞîÁ¦ ";
+	if (character->getComatoseStatus()) cout << "»èÃÔ²»ĞÑ ";
+	if (character->getAnticipateStatus()) cout << "¿´ÆÆ ";
+	if (theStatus->empty())
+	{
+		cout << endl;
+		return;
+	}
+		
+
 	for (auto& it : *theStatus)
 	{
+		switch (it.first)
+		{
+		case selfDefenseBoost:
+		{
+			if ((it.second.first) >= 1)
+				cout << "·ÀÓùÁ¦ÉÏÉı(" << it.second.second << ") " << endl;
+			else
+				cout << "·ÀÓùÁ¦ÏÂ½µ(" << it.second.second << ") " << endl;
+			break;
+		}
+		case selfEvationBoost:
+		{
+			cout  << "ÉÁ±ÜÂÊÉÏÉı(" << it.second.second << ") " << endl;
+			break;
+		}
+		case selfHitRateBoost:
+		{
+			cout  << "ÃüÖĞÂÊÉÏÉıÁË(" << it.second.second << ") " << endl;
+			break;
+		}
+		case selfAttackBoost:
+		{
+			if (it.second.first >= 1)
+				cout  << "¹¥»÷Á¦ÉÏÉı(" << it.second.second << ") " << endl;
+			else
+				cout  << "¹¥»÷Á¦ÏÂ½µ(" << it.second.second << ") " << endl;
+			break;
+		}
+
+		case giveAttackWeaken:
+		{
+			cout  << "¹¥»÷Á¦ÏÂ½µ(" << it.second.second << ") ";
+			break;
+		}
+		case giveHitRateWeaken:
+		{
+			cout  << "ÃüÖĞÂÊÏÂ½µ(" << it.second.second << ") " << endl;
+			break;
+		}
+		case giveDefenseWeaken:
+		{
+			cout  << "·ÀÓùÁ¦ÏÂ½µ(" << it.second.second << ") " << endl;
+			break;
+		}
+		case giveEvationWeaken:
+		{
+			cout  << "»Ø±ÜÂÊÏÂ½µ(" << it.second.second << ") " << endl;
+			break;
+		}
+		default: break;
+		}
 	}
 	cout << endl;
 }
