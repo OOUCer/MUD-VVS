@@ -18,6 +18,6 @@ public:
     void PrintPrompt();
     void PrintPrologue();
     
-    void PrintScene(const int& scene);
+    void PrintScene(int& scene);
 };
 #endif // PLOT_H

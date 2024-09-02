@@ -36,13 +36,13 @@
     <ClCompile Include="plot.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="shoptest.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="skill.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="shopset.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

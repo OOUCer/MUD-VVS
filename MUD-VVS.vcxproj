@@ -134,7 +134,7 @@
     <ClCompile Include="map1.cpp" />
     <ClCompile Include="MUD-VVS.cpp" />
     <ClCompile Include="plot.cpp" />
-    <ClCompile Include="shoptest.cpp" />
+    <ClCompile Include="shopset.cpp" />
     <ClCompile Include="skill.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>

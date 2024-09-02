@@ -8,5 +8,6 @@ private:
 	bool SetSize(int width, int height);
 	void ClearConsoleLines(HANDLE hConsole, SHORT s, SHORT e);
 public:
-	void show();
+	int showstart();//开始展示
+	int showmenu();//展示菜单
 };

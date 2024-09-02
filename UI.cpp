@@ -1,10 +1,13 @@
 
 #include<Windows.h>
+#include<windows.h>
+#include <mmsystem.h>
 #include<iostream>
 #include<vector>
 #include"plot.h"
 #include"UI.h"
 #pragma comment(lib, "winmm.lib") // 链接到WinMM库 
+
 using namespace std;
 void SetConsoleColor(int);
 bool UI::SetSize(int width, int height)
@@ -48,7 +51,7 @@ void UI::ClearConsoleLines(HANDLE hConsole, SHORT s, SHORT e) {
     // （可选）移动光标到屏幕底部或其他位置  
      //SetConsoleCursorPosition(hConsole, {0, csbi.dwSize.Y + e-s});  
 }
-void UI::show() {
+int UI::showstart() {
     Plot plot;
     SetSize(100, 40);
     SetConsoleColor(4);
@@ -58,6 +61,8 @@ void UI::show() {
     cout << "游戏过程中，请勿改变窗口大小，避免影响体验。" << endl;
     cout << "输入“ENTER”继续游戏" << endl;
     cin.get();
+
+
     // 清除第二行和第三行  
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     if (hConsole == INVALID_HANDLE_VALUE) {
@@ -69,45 +74,52 @@ void UI::show() {
     plot.PrintWithDelay("林教头风雪山神庙", 40);
     //cout << "林教头风雪山神庙" << endl;
     cout << endl;
-    //PlaySound(TEXT("C:\\Users\\smtur\\Downloads\\2301442833.MP3"), NULL, SND_FILENAME | SND_ASYNC);
+    //PlaySound(TEXT("C:\\FFOutput\\2301442833.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    
+    
     for (int i = 0; i < 29; i++)
         cout << " ";
     cout << "--------------------------------------------" << endl;;
     for (int i = 0; i < 36; i++)
         cout << " ";
-    plot.PrintWithDelay("天理昭昭不可诬，莫将奸恶作良图。", 1000);
+    plot.PrintWithDelay("天理昭昭不可诬，莫将奸恶作良图。", 500);
     //cout << "天理昭昭不可诬，莫将奸恶作良图。";
     for (int i = 0; i < 36; i++)
         cout << " ";
     cout << endl;
-    Sleep(1000);
+
     for (int i = 0; i < 36; i++)
         cout << " ";
-    plot.PrintWithDelay("若非风雪沽村酒，定被焚烧化朽枯。", 1000);
+    plot.PrintWithDelay("若非风雪沽村酒，定被焚烧化朽枯。", 500);
     //cout << "若非风雪沽村酒，定被焚烧化朽枯。";
     for (int i = 0; i < 36; i++)
         cout << " ";
     cout << endl;
-    Sleep(1000);
+ 
     for (int i = 0; i < 36; i++)
         cout << " ";
-    plot.PrintWithDelay("自谓冥中施计毒，谁知暗里有神扶。", 1000);
+    plot.PrintWithDelay("自谓冥中施计毒，谁知暗里有神扶。", 500);
     //cout << "自谓冥中施计毒，谁知暗里有神扶。";
     for (int i = 0; i < 36; i++)
         cout << " ";
     cout << endl;
-    Sleep(1000);
+
     for (int i = 0; i < 36; i++)
         cout << " ";
-    plot.PrintWithDelay("最怜万死逃生地，真是瑰奇伟丈夫。", 1000);
+    plot.PrintWithDelay("最怜万死逃生地，真是瑰奇伟丈夫。", 500);
     //cout << "最怜万死逃生地，真是瑰奇伟丈夫。";
     for (int i = 0; i < 36; i++)
         cout << " ";
     cout << endl;
-    cout << endl;
-    Sleep(1000);
     cout << "1.开始征程     2.读取存档     3.退出" << endl;
     cout << "请注意，如果未保存游戏就退出，会导致游戏进度丢失" << endl;
     int flag;
     cin >> flag;
+    return flag;
+}
+
+int UI::showmenu()
+{
+    cout << "1.显示属性          2.显示背包";
+    return 0;
 }

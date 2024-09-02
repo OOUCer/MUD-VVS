@@ -6,7 +6,7 @@ using namespace std;
 void SetConsoleColor(int color) {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole, color);
-}
+}//改变输出文字颜色
 void Plot::PrintWithDelay(const std::string& text, int delayMs) {
     for (char ch : text) {
         cout << ch;
@@ -57,7 +57,7 @@ void Plot::PrintPrologue() {
 }
 int placeflag;
 //placeflag= 1 茶酒店    2 武馆  3 营房  4 草料场  5 市井  6 码头  7 古庙
-void Plot::PrintScene(const int& scene) {
+void Plot::PrintScene(int& scene) {
     int now_day = 1;
     switch (scene) {
     case 1:

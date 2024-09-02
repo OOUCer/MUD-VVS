@@ -4,10 +4,23 @@
 #include"battle.h"
 #include"map11.h"
 #include"plot.h"
+#include"UI.h"
+struct Time
+{
+    int plottime=1;
+};
 int main()
 {
+    UI ui;
     Map map;
-    map.showmap(1);
+    Plot plot;
+    Time t;
+    ui.showstart();
+    plot.PrintPrompt();
+    plot.PrintPrologue();
+    plot.PrintScene(t.plottime);
+    ++t.plottime;
+    plot.PrintScene(t.plottime);
 }
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单
