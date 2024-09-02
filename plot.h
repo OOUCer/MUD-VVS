@@ -17,7 +17,7 @@ public:
     void PrintWithDelay(const std::string& text, int delayMs);
     void PrintPrompt();
     void PrintPrologue();
-    void PrintWithDelay(const std::string& text, int delayMs);
+    
     void PrintScene(const int& scene);
 };
 #endif // PLOT_H
