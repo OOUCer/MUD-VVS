@@ -1,70 +1,50 @@
-#ifndef SHOP_H
-#define SHOP_H
-#include <iostream>
-#include <vector>
-#include <memory>
-#include <sstream>
-#include "character.h"
-#include "equipment.h"
+#ifndef SHOP_H  
+#define SHOP_H  
+
+#include <iostream>  
+#include <vector>  
+#include <memory>  
+#include <sstream>  
+#include "battle.h" 
+
 using namespace std;
-//武器商店类
+
+void shopset();
+
+// 武器商店类  
 class Shop1 {
 private:
-	vector<unique_ptr<Weapon>> inventory; // 使用unique_ptr管理内存  
+    vector<unique_ptr<Weapon>> inventory; // 使用unique_ptr智能指针管理Weapon对象的内存，确保资源自动释放  
+
 public:
-	void addItem(unique_ptr<Weapon> equipment) {
-		inventory.push_back(move(equipment));
-	}
-	void listItems() const {
-		for (const auto& equipment : inventory) {
-			cout << equipment->getName() << ": " << equipment->getDescription() << " Price: " << equipment->getPrice() << endl;
-		}
-	}
-	// 尝试从商店购买物品  
-	bool buyItem(Linchong& character, size_t index) {
-		if (index >= inventory.size()) {
-			cout << "输入有误" << endl;
-			return false;
-		}
-		auto it = inventory.begin() + index; // 获取迭代器  
-		auto& equipment = *it; // 解引用迭代器以获取对 unique_ptr 的引用  
-		if (character.buyItem1(equipment.get())) { // 传递裸指针给 Character 的 buyItem 方法  
-			// 如果购买成功，从商店中移除该物品  
-			inventory.erase(it); // 使用迭代器来安全地移除元素  
-			return true;
-		}
-		return false;
-	}
-	// 注意：移除物品后，如果玩家想要再次购买，索引可能会改变  
+    // 向商店添加武器  
+    void addItem(unique_ptr<Weapon> equipment);
+
+    // 列出商店中的所有武器  
+    void listItems() const;
+
+    // 尝试从商店购买指定索引的武器  
+    // 返回true表示购买成功，false表示失败（如索引无效或角色无法装备）  
+    bool buyItem(Linchong& character, size_t index);
+    // 注意：购买后，该武器会从商店的库存中移除，因此索引可能会改变  
 };
-//防具商店类
+
+// 防具商店类  
 class Shop2 {
 private:
-	vector<unique_ptr<Armor>> inventory; // 使用unique_ptr管理内存  
+    vector<unique_ptr<Armor>> inventory; // 使用unique_ptr智能指针管理Armor对象的内存，确保资源自动释放  
+
 public:
-	void addItem(unique_ptr<Armor> equipment) {
-		inventory.push_back(move(equipment));
-	}
-	void listItems() const {
-		for (const auto& equipment : inventory) {
-			cout << equipment->getName() << ": " << equipment->getDescription() << " Price: " << equipment->getPrice() << endl;
-		}
-	}
-	// 尝试从商店购买物品  
-	bool buyItem(Linchong& character, size_t index) {
-		if (index >= inventory.size()) {
-			cout << "输入有误" << endl;
-			return false;
-		}
-		auto it = inventory.begin() + index; // 获取迭代器  
-		auto& equipment = *it; // 解引用迭代器以获取对 unique_ptr 的引用  
-		if (character.buyItem2(equipment.get())) { // 传递裸指针给 Character 的 buyItem 方法  
-			// 如果购买成功，从商店中移除该物品  
-			inventory.erase(it); // 使用迭代器来安全地移除元素  
-			return true;
-		}
-		return false;
-	}
-	// 注意：移除物品后，如果玩家想要再次购买，索引可能会改变  
+    // 向商店添加防具  
+    void addItem(unique_ptr<Armor> equipment);
+
+    // 列出商店中的所有防具  
+    void listItems() const;
+
+    // 尝试从商店购买指定索引的防具  
+    // 返回true表示购买成功，false表示失败（如索引无效或角色无法装备）  
+    bool buyItem(Linchong& character, size_t index);
+    // 注意：购买后，该防具会从商店的库存中移除，因此索引可能会改变  
 };
-#endif
+
+#endif // SHOP_H  
