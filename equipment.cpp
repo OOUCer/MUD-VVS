@@ -1,36 +1,59 @@
 #include "equipment.h"
+
 using namespace std;
+
 Equipment::Equipment(string name, int price) : name(name), price(price) {}
+
 string Equipment::getName() const { return name; }
+
 int Equipment::getPrice() const { return price; }
+
 //void Equipment::describe() const
 //{
 //	cout << "Name: " << name << ", Price: " << price << endl;
 //}
+
 Weapon::Weapon(string name, int price, int attack, int speed, float hitRate, string attackType)
 	: Equipment(name, price), attack(attack), speed(speed), hitRate(hitRate), attackType(attackType) {}
+
 int Weapon::getAttack() const { return attack; }
+
 int Weapon::getSpeed() const { return speed; }
+
 float Weapon::getHitRate() const { return hitRate; }
+
 string Weapon::getAttackType() const { return attackType; }
+
 string Weapon::getDescription() const
 {
-	return "è¯¥æ­¦å™¨æ”»å‡»åŠ æˆ: " + to_string(attack) + " å‘½ä¸­åŠ æˆ: " + to_string(hitRate) + " é€Ÿåº¦åŠ æˆ: " + to_string(speed) + " æ”»å‡»æ–¹å¼ï¼š" + attackType;
+	return "¸ÃÎäÆ÷¹¥»÷¼Ó³É: " + to_string(attack) + " ÃüÖÐ¼Ó³É: " + to_string(hitRate) + " ËÙ¶È¼Ó³É: " + to_string(speed) + " ¹¥»÷·½Ê½£º" + attackType;
 }
+
 void Weapon::describe() const
 {
 	cout << "Weapon: " << name << ", Attack: " << attack << ", Speed: " << speed << ", Hit Rate: " << hitRate << ", Attack string: " << attackType << endl;
 }
+
 Armor::Armor(string name, int price, int defense, int HP, string weakness)
 	: Equipment(name, price), defense(defense), HP(HP), weakness(weakness) {}
+
 int Armor::getDefense() const { return defense; }
+
 int Armor::getHP() const { return HP; }
+
 string Armor::getWeakness() const { return weakness; }
+
 string Armor::getDescription() const
 {
-	return "è¯¥é˜²å…·é˜²å¾¡åŠ æˆ: " + to_string(defense) + " æœ€å¤§ç”Ÿå‘½åŠ æˆ: " + to_string(HP) + " å¼±ç‚¹ï¼š" + weakness;
+	return "¸Ã·À¾ß·ÀÓù¼Ó³É: " + to_string(defense) + " ×î´óÉúÃü¼Ó³É: " + to_string(HP) + " Èõµã£º" + weakness;
 }
+
 void Armor::describe() const
 {
 	cout << "Armor: " << name << ", Defense: " << defense << ", HP Bonus: " << HP << ", Weakness: " << weakness << endl;
 }
+
+
+
+
+
