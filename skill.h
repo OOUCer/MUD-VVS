@@ -14,14 +14,17 @@ protected:
     string name;      // 招式名称
     bool isAOE;       // 是否是范围效果
     bool isOffensive; // 是否是进攻类招式
+    string description;//招式描述
 public:
-    Skill(string name, bool isAOE, bool isOffensive);
+    Skill(string name, string description,bool isAOE, bool isOffensive);
 
     bool getIsAOE() const;
 
     string getName() const;
 
     bool getIsOffensive() const;
+
+    string getDescription() const;
 
     virtual bool getIsSelf() const = 0;
 
@@ -49,12 +52,15 @@ protected:
     skillEffectType extraEffect; // 附加效果
     float extraEffectIntensity;  // 实例：攻击x1.5 昏睡概率0.5
     int extraEffectDuration;
+    bool isSelf;
 
 public:
     offensiveSkill(
         string name,
+        string description,
         bool isAOE,
         bool isOffensive,
+        bool isSelf,
         float damageMultiplier,
         string attackType,
         int attackFrequency,
@@ -74,7 +80,7 @@ public:
 
     int getDuration() const;
 
-    virtual bool getIsSelf() const;
+    bool getIsSelf() const;
 };
 
 class supportSkill : public Skill
@@ -88,6 +94,7 @@ protected:
 public:
     supportSkill(
         string name,
+        string description,
         bool isAOE,
         bool isOffensive,
         bool isSelf,

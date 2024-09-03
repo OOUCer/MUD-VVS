@@ -27,7 +27,9 @@ protected:
     int gold;
     bool actionAvailability=true;
     bool hasReceivedWeaknessHit=false;
+    bool hitWeakness = false;
     bool isPlayer;
+    
 
     pair<bool, int> isComatose{ false,0 };
     bool isCharged=false;                 
@@ -47,7 +49,7 @@ public:
 
     int getAttack() const;
 
-    int getHP() const;
+    int getHP() ;
 
     void modifyHP(int modifyAmount);
 
@@ -72,6 +74,10 @@ public:
     void setWeaknessReceivedStatus(bool isHit);
 
     bool getWeaknessReceivedStatus();
+
+    void setHitWeakness(bool hit);
+
+    bool getHitWeakness();
 
     bool getAnticipateStatus();
 

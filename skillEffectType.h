@@ -1,4 +1,6 @@
 enum skillEffectType {
+	none,
+
 	selfAttackBoost,
 	selfDefenseBoost,
 	selfHitRateBoost,
@@ -6,6 +8,8 @@ enum skillEffectType {
 	selfComatose,
 	selfCharge,
 	selfAnticipate,
+	selfDamage,
+
 	giveAttackWeaken,
 	giveHitRateWeaken,
 	giveDefenseWeaken,

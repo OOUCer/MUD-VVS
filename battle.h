@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <random>
 #include <math.h>
+#include <iomanip>
 
 
 #include "character.h"
@@ -25,7 +26,7 @@ public:
 
     void sortBySpeed(vector<pair<int, Character*>>* sorted, Linchong* player, vector<Character*>* enemies);
 
-    bool evaluateBattleStatus(vector<pair<int, Character *>> &theCharacters);
+    bool evaluateBattleStatus(vector<pair<int, Character *>> &theCharacters, vector<Character*>* enemies);
 
     void manageWeaknessAndBuff(Character* theCharacter);
 
@@ -45,6 +46,8 @@ public:
 
     void useSkill(Character *user, vector<Character *> *enemies, int skillIndex);
 
+    void userSkill_enemy(Character* player, Character* enemy, int skillIndex);
+
     int getDamage(Character *attacker, Character *target, float damageMultiplier);
 
     int singleDamagePerform(Character *user, Character *enemy, int damage);
@@ -57,7 +60,7 @@ public:
 
     void describeEffect(Character* user, Character* enemy, Skill* theSkill);
 
-    void showEnemiesInformation(vector<Character*>* enemies);
+    void showEnemiesInformation(vector<Character*>* enemies, float hitRate);
 
     void showWeaponInformationInBattle(Character* user);
 
@@ -75,6 +78,7 @@ private:
     random_device rd;
     mt19937 gen;
     uniform_real_distribution<> dis;
+    
 };
 
 //#endif 
