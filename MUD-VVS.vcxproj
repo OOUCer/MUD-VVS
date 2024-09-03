@@ -130,6 +130,7 @@
     <ClCompile Include="battle.cpp" />
     <ClCompile Include="character.cpp" />
     <ClCompile Include="equipment.cpp" />
+    <ClCompile Include="Filestore.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map1.cpp" />
     <ClCompile Include="MUD-VVS.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="battle.h" />
     <ClInclude Include="character.h" />
     <ClInclude Include="equipment.h" />
+    <ClInclude Include="Filestore.h" />
     <ClInclude Include="map11.h" />
     <ClInclude Include="plot.h" />
     <ClInclude Include="shop.h" />

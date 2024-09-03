@@ -45,6 +45,9 @@
     <ClCompile Include="shopset.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Filestore.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="battle.h">
@@ -72,6 +75,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Filestore.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
