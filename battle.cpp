@@ -15,20 +15,24 @@ void Battle::startBattle(Linchong* player, vector<Character*>* enemies)
 	vector<pair<int, Character*>> sortedCharacters;
 	sortBySpeed(&sortedCharacters, player, enemies);
 	showSpeedLine(sortedCharacters);
-	cout << "--------------------------------------------------------" << endl;
+	cout << "--------------------------------------------------------————————————————————————————————————————" << endl;
+	for (auto& it : sortedCharacters)//设置hp为最大HP
+	{
+		it.second->modifyHP(-it.second->getHP() + it.second->getMaxHP());
+	}
 	int turn = 1;
 	while (true)
 	{
 		cout << "回合" << turn << "开始！" << endl;
 		
-		// 清除上一回合的弱点命中状态,管理基础属性buff状态
+		// 清除上一回合的弱点状态,管理基础属性buff状态
 		for (auto& it : sortedCharacters)
 		{
 			Character* theCharacter = it.second;
 			manageWeaknessAndBuff(theCharacter);
 		}
 
-		for (auto& it : sortedCharacters)
+		for (auto& it : sortedCharacters)//回合前显示状态
 		{
 			Character* theCharacter = it.second;
 			showAllStatus(theCharacter);
@@ -39,18 +43,14 @@ void Battle::startBattle(Linchong* player, vector<Character*>* enemies)
 			cout << "现在轮到" << it.second->getName() << "行动" << endl;
 			bool chargeFlag = false;
 			it.second->setActionAvailability(true);
-
 			manageComatoseStatus(it.second);
-
 			if (it.second->getChargeStatus())
 				chargeFlag = true;
-
 			if (it.second->getAnticipateStatus())
 			{
 				it.second->setAnticipateStatus(false);
 				cout << it.second->getName() << "停止了看破！" << endl;
 			}
-
 			if (!it.second->isPlayerControlled())
 			{
 				int actionCount = 0;
@@ -60,7 +60,7 @@ void Battle::startBattle(Linchong* player, vector<Character*>* enemies)
 					if (actionCount > 1)
 						cout << it.second->getName() << "发动了本回合第" << actionCount << "次行动！" << endl;
 					enemyTurn(it.second, player);
-					if (evaluateBattleStatus(sortedCharacters))
+					if (evaluateBattleStatus(sortedCharacters,enemies))
 						return;
 				}
 			}
@@ -70,19 +70,26 @@ void Battle::startBattle(Linchong* player, vector<Character*>* enemies)
 				while (it.second->getActionAvailability())
 				{
 					actionCount++;
+					if (player->getHitWeakness()&&(player->getWeapons()->size()!=1))
+					{
+						cout << "可以额外行动。是否立即切换武器且不消耗行动次数？(y/n)" << endl;
+						while (getchar() != '\n'); // 消耗掉直到换行符的所有字符  
+						char answer = getchar(); // 现在读取用户的实际输入  
+						if (answer == 'y')
+							weaponSwitch(player);
+					}
 					if (actionCount > 1)
 						cout << it.second->getName() << "发动了本回合第" << actionCount << "次行动！" << endl;
 					playerTurn(player, enemies);
-					if (evaluateBattleStatus(sortedCharacters))
+					if (evaluateBattleStatus(sortedCharacters,enemies))
 						return;
 				}
 			}
-
 			if (chargeFlag)
 				it.second->setChargeStatus(false);
 		}
 		turn++;
-		cout << "--------------------------------------------------------" << endl;
+		cout << "--------------------------------------------------------————————————————————————————————————————" << endl;
 	}
 }
 
@@ -99,7 +106,7 @@ void Battle::sortBySpeed(vector<pair<int, Character*>>* sorted, Linchong* player
 		{ return a.first > b.first; });
 }
 
-bool Battle::evaluateBattleStatus(vector<pair<int, Character*>>& theCharacters)
+bool Battle::evaluateBattleStatus(vector<pair<int, Character*>>& theCharacters, vector<Character*>* enemies)
 {
 	for (auto it = theCharacters.begin(); it != theCharacters.end();)
 	{
@@ -114,10 +121,21 @@ bool Battle::evaluateBattleStatus(vector<pair<int, Character*>>& theCharacters)
 			{
 				cout << it->second->getName() << " 被击败了！" << endl;
 				it = theCharacters.erase(it); // 移除阵亡的敌人
+				
 			}
 		}
 		else
 			it++;
+	}
+	for (auto it = enemies->begin(); it != enemies->end();) {
+		Character* character = *it; // 解引用迭代器以获取 Character*  
+		if (character->getHP() <= 0) 
+		{
+			it = enemies->erase(it); // 移除阵亡的敌人  
+		}
+		else {
+			it++; // 如果敌人未阵亡，则继续迭代  
+		}
 	}
 
 	if (theCharacters.size() == 1 && theCharacters[0].second->isPlayerControlled())
@@ -126,13 +144,13 @@ bool Battle::evaluateBattleStatus(vector<pair<int, Character*>>& theCharacters)
 		cout << "林冲赢得了战斗胜利！" << endl;
 		return true;
 	}
-
 	return false; // 继续战斗
 }
 
 void Battle::manageWeaknessAndBuff(Character* theCharacter)
 {
 	theCharacter->setWeaknessReceivedStatus(false);
+	theCharacter->setHitWeakness(false);
 	if (!theCharacter->getEffectStatus()->empty())
 	{
 		for (auto itEffect = theCharacter->getEffectStatus()->begin(); itEffect != theCharacter->getEffectStatus()->end();)
@@ -167,7 +185,18 @@ void Battle::manageWeaknessAndBuff(Character* theCharacter)
 
 void Battle::enemyTurn(Character* enemy, Character* player)
 {
-	normalAttack(player, enemy);
+	if (enemy->getSkills()->empty())
+	{
+		normalAttack(player, enemy);
+		return;
+	}
+	uniform_int_distribution<> dis2(1,enemy->getSkills()->size());
+	float randomValue = dis(gen);
+	int index = dis2(gen);
+	if (randomValue < 0.55)
+		normalAttack(player, enemy);
+	else
+		userSkill_enemy(player, enemy, index - 1);
 }
 
 void Battle::playerTurn(Character* player, vector<Character*>* enemies)
@@ -178,7 +207,12 @@ void Battle::playerTurn(Character* player, vector<Character*>* enemies)
 	//确保用户输入有效的选择  
 	while (!validChoice) {
 		cout << "选择行动：1.普通攻击 2.招式 3.切换武器 4.观察对手" << endl;
-		cin >> choice; 
+		if (!(cin >> choice)) {
+			cin.clear(); 
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');   
+			cout << "无效的输入，请输入一个数字。" << endl;
+			continue; 
+		}
 		if (choice >= 1 && choice <= 4) {
 			validChoice = true;   
 			switch (choice)
@@ -186,7 +220,7 @@ void Battle::playerTurn(Character* player, vector<Character*>* enemies)
 			case 1: // 普通攻击  
 			{
 				cout << "选择攻击对象:" << endl;
-				showEnemiesInformation(enemies);
+				showEnemiesInformation(enemies,player->getHitRate());
 				int targetIndex;
 				cin >> targetIndex;
 				if (targetIndex >= 1 && targetIndex <= enemies->size()) {
@@ -229,7 +263,7 @@ void Battle::playerTurn(Character* player, vector<Character*>* enemies)
 					break;
 				}
 				weaponSwitch(player);
-				player->setActionAvailability(true);
+				player->setActionAvailability(false);
 				break;
 			}
 			case 4: // 观察对手  
@@ -249,7 +283,7 @@ int Battle::takeDamage(Character* target, int damage)
 {
 	if (damage < 0)
 	{
-		cout << target->getName() << "毫发无损！！" << endl<<endl;
+		cout << target->getName() << "毫发无损！！" << endl;
 		return 0;
 	}
 	if (target->getAnticipateStatus())
@@ -257,13 +291,13 @@ int Battle::takeDamage(Character* target, int damage)
 		damage *= 0.25;
 		target->modifyHP(-damage);
 		cout << target->getName() << "识破了！抵御了大部分伤害!" ;
-		cout << target->getName() << "受到" << damage << "点伤害!" << endl<<endl;
+		cout << target->getName() << "受到" << damage << "点伤害!" << endl;
 		return damage;
 	}
 	else
 	{
 		target->modifyHP(-damage);
-		cout << target->getName() << "受到" << damage << "点伤害！" << endl<<endl;
+		cout << target->getName() << "受到" << damage << "点伤害！" << endl;
 		return damage;
 	}
 }
@@ -284,9 +318,9 @@ bool Battle::isHittingWeakness(string theWeakness, string attackType)
 
 bool Battle::checkHit(float evasionRate, float hitRate)
 {
-	random_device rd;
-	mt19937 gen(rd());
-	uniform_real_distribution<> dis(0.0, 1.0);
+	//random_device rd;
+	//mt19937 gen(rd());
+	//uniform_real_distribution<> dis(0.0, 1.0);
 	float randomValue = dis(gen);
 	return randomValue <= hitRate * (1 - evasionRate);
 }
@@ -324,7 +358,7 @@ void Battle::useSkill(Character* user, vector<Character*>* enemies, int skillInd
 	{
 		if (theSkill->getIsAOE()) // 如果是aoe伤害
 		{
-			cout << user->getName() << "使用了招式:" << theSkill->getName() << endl;
+			cout << user->getName() << "使用了招式:" << theSkill->getName() << endl ;
 			for (Character* enemy : *enemies)
 			{
 				int damage = getDamage(user, enemy, theSkill->getDamageMultiplier());
@@ -335,18 +369,20 @@ void Battle::useSkill(Character* user, vector<Character*>* enemies, int skillInd
 					int totalDamage = 0;
 					for (int i = 0; i < theSkill->getAttackFrequency(); i++)
 					{
-						cout << "对" << enemy->getName() << "第" << i << "次攻击:" ;
+						cout << "对" << enemy->getName() << "第" << i+1 << "次攻击:"<<endl ;
 						totalDamage+=singleDamagePerform(user, enemy, damage); // 单次伤害评估
 					}
 					cout << "总计造成" << totalDamage << "点伤害！" << endl;
 				}
-				effectPerform(user, enemy, theSkill);
+				if(!theSkill->getIsSelf())
+					effectPerform(user, enemy, theSkill);
 			}
+			if (theSkill->getIsSelf()) effectPerform(user, 0, theSkill);
 		}
 		else
 		{ // 如果是单体伤害
 			cout << "选择攻击目标:" << endl;
-			showEnemiesInformation(enemies);
+			showEnemiesInformation(enemies,user->getHitRate());
 			int targetIndex;
 			cin >> targetIndex;
 			cout << user->getName() << "对" << (*enemies)[targetIndex-1]->getName() << "使用了招式:" << theSkill->getName() << endl;
@@ -383,6 +419,7 @@ void Battle::useSkill(Character* user, vector<Character*>* enemies, int skillInd
 			else
 			{
 				cout << "选择目标:" << endl;
+				showEnemiesInformation(enemies,1);
 				int targetIndex;
 				cin >> targetIndex;
 				cout << user->getName() << "对" << (*enemies)[targetIndex - 1]->getName() << "使用了招式:" << theSkill->getName() << endl;
@@ -390,6 +427,41 @@ void Battle::useSkill(Character* user, vector<Character*>* enemies, int skillInd
 			}
 		}
 		
+	}
+}
+
+void Battle::userSkill_enemy(Character* player, Character* enemy, int skillIndex)
+{
+	enemy->setActionAvailability(false);
+	Skill* theSkill = (*enemy->getSkills())[skillIndex];
+	if (theSkill->getIsOffensive()) // 如果是进攻性技能
+	{
+		cout << enemy->getName() << "使用了招式:" << theSkill->getName() << endl;
+		int damage = getDamage(enemy, player, theSkill->getDamageMultiplier());
+		if (theSkill->getAttackFrequency() == 1)
+			singleDamagePerform(enemy, player, damage);
+		else
+		{
+			int totalDamage = 0;
+			for (int i = 0; i < theSkill->getAttackFrequency(); i++)
+			{
+				cout << "对" << player->getName() << "第" << i + 1 << "次攻击:" << endl;
+				totalDamage += singleDamagePerform(enemy, player, damage); // 单次伤害评估
+			}
+			cout << "总计造成" << totalDamage << "点伤害！" << endl;
+		}
+		effectPerform(enemy, player, theSkill);
+	}
+	else // 如果是辅助技能
+	{
+		if (theSkill->getIsSelf()){
+			cout << enemy->getName() << "使用了招式:" << theSkill->getName() << endl;
+			effectPerform(enemy, 0, theSkill);
+		}
+		else{
+			cout << enemy->getName() << "使用了招式:" << theSkill->getName() << endl;
+			effectPerform(enemy, player, theSkill);
+		}
 	}
 }
 
@@ -416,6 +488,7 @@ int Battle::singleDamagePerform(Character* user, Character* enemy, int damage)
 			{
 				cout << user->getName() << "获得额外行动的机会！";
 				user->setActionAvailability(true);
+				user->setHitWeakness(true);
 				enemy->setWeaknessReceivedStatus(true);
 			}
 		}
@@ -424,7 +497,7 @@ int Battle::singleDamagePerform(Character* user, Character* enemy, int damage)
 	}
 	else
 	{
-		cout << "未命中！" << endl;
+		cout << "未命中" << enemy->getName()<<endl;
 		return 0;
 	}
 }
@@ -476,6 +549,12 @@ void Battle::effectPerform(Character* user, Character* enemy, Skill* theSkill)
 		describeEffect(user, enemy, theSkill);
 		break;
 	}
+	case selfDamage: {
+		int damage = user->getMaxHP() * theSkill->getEffectIntensity();
+		takeDamage(user, damage);
+		describeEffect(user, enemy, theSkill);
+		break;
+	}
 	case giveAttackWeaken:
 	case giveHitRateWeaken:
 	case giveDefenseWeaken:
@@ -495,12 +574,12 @@ void Battle::effectPerform(Character* user, Character* enemy, Skill* theSkill)
 		if (checkHit(0, theSkill->getEffectIntensity()))
 		{
 			enemy->setComatoseStatus(true, theSkill->getDuration());
-			int gainHP = enemy->getMaxHP() * 0.75;
-			enemy->modifyHP(gainHP);
 			describeEffect(user, enemy, theSkill);
 		}
+		else
+			cout << enemy->getName() << "没有受到影响！" << endl;
 	}
-
+	case none:
 	default:
 		break;
 	}
@@ -520,40 +599,37 @@ bool Battle::checkAndOffset(Character* character, Skill* theSkill)//抵消相反效果
 	case selfAttackBoost:
 		for (auto it = effectStatus->begin(); it != effectStatus->end(); ) 
 		{
-			if (it->first == selfAttackBoost || it->first == giveAttackWeaken) { 
+			if (it->first == selfAttackBoost || it->first == giveAttackWeaken) 
+			{ 
 				if (((theSkill->getEffectIntensity()-1) * (it->second.first - 1)) < 0) //如果相悖
 				{
-					effectStatus->erase(it++);  
-					offsetOccurred = true;//抵消出现
-					break;   
+					offsetOccurred = true;//抵消出现  
 				}
-				++it; // 如果不删除，则移动到下一个元素  
+				effectStatus->erase(it++);
 			}
 			else {
 				++it; // 如果键不匹配，也移动到下一个元素  
 			}
 		}
-		offsetOccurred = true;//抵消出现
 		break;
 	case giveDefenseWeaken:
 	case selfDefenseBoost:
 	{
 		for (auto it = effectStatus->begin(); it != effectStatus->end(); )
 		{
-			if (it->first == giveDefenseWeaken || it->first == selfDefenseBoost) {
-				if (((theSkill->getEffectIntensity() - 1) * (it->second.first - 1)) < 0)
+			if (it->first == giveDefenseWeaken || it->first == selfDefenseBoost)
+			{
+				if (((theSkill->getEffectIntensity() - 1) * (it->second.first - 1)) < 0)//如抵消
 				{
-					effectStatus->erase(it++);
 					offsetOccurred = true;
-					break;
 				}
-				++it; // 如果不删除，则移动到下一个元素  
+				effectStatus->erase(it++);
+				break;
 			}
 			else {
 				++it; // 如果键不匹配，也移动到下一个元素  
 			}
 		}
-		offsetOccurred = true;
 		break;
 	}
 	case giveEvationWeaken:
@@ -564,17 +640,15 @@ bool Battle::checkAndOffset(Character* character, Skill* theSkill)//抵消相反效果
 			if (it->first == giveEvationWeaken || it->first == selfEvationBoost) {
 				if (((theSkill->getEffectIntensity() - 1) * (it->second.first - 1)) < 0)
 				{
-					effectStatus->erase(it++);
 					offsetOccurred = true;
-					break;
 				}
-				++it; // 如果不删除，则移动到下一个元素  
+				effectStatus->erase(it++);
+				break;
 			}
 			else {
 				++it; // 如果键不匹配，也移动到下一个元素  
 			}
 		}
-		offsetOccurred = true;
 		break;
 	}
 	case selfHitRateBoost:
@@ -585,17 +659,14 @@ bool Battle::checkAndOffset(Character* character, Skill* theSkill)//抵消相反效果
 			if (it->first == giveHitRateWeaken || it->first == selfHitRateBoost) {
 				if (((theSkill->getEffectIntensity() - 1) * (it->second.first - 1)) < 0)
 				{
-					effectStatus->erase(it++);
 					offsetOccurred = true;
-					break;
 				}
-				++it; // 如果不删除，则移动到下一个元素  
+				effectStatus->erase(it++);
 			}
 			else {
 				++it; // 如果键不匹配，也移动到下一个元素  
 			}
 		}
-		offsetOccurred = true;
 		break;
 	}
 	default: break;
@@ -672,6 +743,9 @@ void Battle::describeEffect(Character* user, Character* enemy, Skill* theSkill)
 			cout << user->getName() << "正看破敌方攻势！" << endl;
 			break;
 		}
+		case selfDamage: {
+			cout << user->getName() << "损耗了自身HP" << endl;break;
+		}
 		case giveAttackWeaken:
 		{
 			cout << enemy->getName() << "攻击力大幅下降了，持续" << theSkill->getDuration() << "回合！" << endl;
@@ -684,12 +758,12 @@ void Battle::describeEffect(Character* user, Character* enemy, Skill* theSkill)
 		}
 		case giveDefenseWeaken:
 		{
-			cout << enemy->getName() << "防御力大幅上升了，持续" << theSkill->getDuration() << "回合！" << endl;
+			cout << enemy->getName() << "防御力大幅下降了，持续" << theSkill->getDuration() << "回合！" << endl;
 			break;
 		}
 		case giveEvationWeaken:
 		{	
-			cout << enemy->getName() << "回避率大幅上升了，持续" << theSkill->getDuration() << "回合！" << endl;
+			cout << enemy->getName() << "回避率大幅下降了，持续" << theSkill->getDuration() << "回合！" << endl;
 			break;
 		}
 		case giveComatose:
@@ -703,11 +777,14 @@ void Battle::describeEffect(Character* user, Character* enemy, Skill* theSkill)
 		}
 }
 
-void Battle::showEnemiesInformation(vector<Character*>* enemies) {
+void Battle::showEnemiesInformation(vector<Character*>* enemies,float hitRate) {
 	int i = 1;
+	float trueHitRate;
 	for (auto& it : *enemies)
 	{
-		cout << i << ":" << it->getName() << " ";
+		trueHitRate = (1 - it->getEvasionRate()) * hitRate;
+		cout << i << ":" << it->getName();
+		cout<<setprecision(3)<<"(命中率:" << trueHitRate*100 << "%)"<<endl;;
 		i++;
 	}
 	cout << endl;
@@ -732,29 +809,31 @@ void Battle::showSkillInformationInBattle(Character* user)
 	vector<Skill*>* skills = user->getSkills();
 	Weapon* theWeapon = user->getFirstWeapon();
 	int i = 1;
+	cout << "++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
 	for (auto& it : *skills)
 	{
 		if (it->getIsOffensive())
 		{
-			cout << "招式序号:" << i << endl << "招式名称:" << it->getName() << endl;
-			cout << "攻击类型:" << it->getAttackType() ;
+			cout << "#" << i << " " << it->getName();
+			cout << "【" << it->getDescription();
+			cout << "】【" << it->getAttackType() ;
 			
 			if (it->getAttackType() == theWeapon->getAttackType())
-				cout << "（与武器匹配）" << endl;
+				cout << "(匹配)】" << endl;
 			else
-				cout << "（与武器不匹配）" << endl;
-			cout << "技能描述:" << it->getDescription()<<endl;
+				cout << "(冲突)】" << endl;
+			
 
 		}
 		else
 		{
-			cout << "招式序号:" << i << endl << "招式名称:" << it->getName() << endl;
-			cout << "技能描述:" << it->getDescription() << endl;;
+			cout << "#" << i  << " " << it->getName() ;
+			cout << "【" << it->getDescription() <<"】"<< endl;
 			
 		}
 		i++;
-		cout << endl;
 	}
+	cout << "++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
 }
 
 void Battle::showSpeedLine(vector<pair<int, Character*>> sortedCharacters)
@@ -778,14 +857,21 @@ void Battle::showStartInformation(Linchong* player, vector<Character*>* enemies)
 {
 	cout << "战斗开始了！" << endl<<endl;
 	cout << "敌人共" << enemies->size() << "人:" << endl;
-	showEnemiesInformation(enemies);
+	int i = 1;
+	for (auto& it : *enemies)
+	{
+		cout << i << ":" << it->getName() <<"  "<< endl;
+		i++;
+	}
+	cout << endl;
 }
 
 void Battle::showAllStatus(Character* character)
 {
 	map<skillEffectType, pair<float, int>>* theStatus=character->getEffectStatus();
 	bool haveStatus = false;
-	cout << character->getName() << "特殊状态：";
+	float hpRate = static_cast<float>(character->getHP()) / character->getMaxHP();
+	cout <<setprecision(2)<< character->getName() << "HP剩余" << static_cast<int>(100*hpRate)<< "%  特殊状态：";
 	if (character->getChargeStatus()) {
 		cout << "已蓄力 ";
 		haveStatus = true;

@@ -22,8 +22,9 @@ int Character::getAttack() const
     return currentAttack;
 }
 
-int Character::getHP() const
+int Character::getHP() 
 {
+    if (HP > getMaxHP())HP =getMaxHP() ;
     return HP;
 }
 
@@ -61,6 +62,7 @@ float Character::getHitRate() const
         if (effect.first == selfHitRateBoost || effect.first == giveHitRateWeaken)
             currentHitRate *= effect.second.first;
     }
+    if (currentHitRate >= 1) return 1;
     return currentHitRate;
 }
 
@@ -72,6 +74,7 @@ float Character::getEvasionRate() const
         if (effect.first == selfEvationBoost || effect.first == giveEvationWeaken)
             currentEvasionRate *= effect.second.first;
     }
+    if (currentEvasionRate >= 1) return 1;
     return currentEvasionRate;
 }
 
@@ -103,6 +106,16 @@ void Character::setWeaknessReceivedStatus(bool isHit)
 bool Character::getWeaknessReceivedStatus()
 {
     return hasReceivedWeaknessHit;
+}
+
+void Character::setHitWeakness(bool hit)
+{
+    hitWeakness = hit;
+}
+
+bool Character::getHitWeakness()
+{
+    return hitWeakness;
 }
 
 bool Character::getAnticipateStatus()
@@ -155,8 +168,6 @@ vector<Skill*>* Character::getSkills()
 {
     return &skills;
 }
-
-
 
 void Character::addEffect(const skillEffectType &effect, float intensity, int duration)
 {
