@@ -49,14 +49,21 @@ public:
     // 获取角色的攻击力  
     int getAttack() const;
 
+    void setAttack(int newAttack);
+
     // 获取角色的当前生命值  
     int getHP();
 
     // 修改角色的生命值  
     void modifyHP(int modifyAmount);
 
+
+    void setHP(int newHP);
+
     // 获取角色的最大生命值  
     int getMaxHP() const;
+
+    void setMaxHP(int newMaxHP);
 
     // 获取角色的防御力  
     int getDefense() const;
@@ -72,6 +79,8 @@ public:
 
     // 获取角色拥有的金币数量  
     int getGold() const;
+
+    void setGold(int newGold);
 
     // 判断角色是否为玩家控制  
     bool isPlayerControlled() const;

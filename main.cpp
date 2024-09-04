@@ -7,7 +7,7 @@
 #include"UI.h"
 struct Time
 {
-    int plottime=1;
+    int plottime = 1;
 };
 int main()
 {
