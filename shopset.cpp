@@ -53,13 +53,13 @@ bool Shop2::buyItem(Linchong& character, size_t index) {
 
 
 void shopset() {
-	Linchong linchong("林冲", 0, 0, 0, 0, 0, 0, 0, 999, 0, 0);
-    Weapon dajian("大剑", 50, 300, 0, 0.4, "砍击");
-	Weapon tiegun("铁棍", 50, 200, 5, 0.6, "打击");
-	Weapon cijian("刺剑", 50, 110, 10, 1, "贯通");
-	Armor bujia("布甲", 50, 50, 100,"贯通");
-	Armor tiejia("铁甲", 100, 100, 200, "打击");
-	Armor linjia("鳞甲", 200, 200, 400, "砍击");
+	Linchong linchong(" 林冲 ", 0, 0, 0, 0, 0, 0, 0, 999, 0, 0);
+    Weapon dajian(" 大剑 ", 50, 300, 0, 0.4, " 砍击 ");
+	Weapon tiegun(" 铁棍 ", 50, 200, 5, 0.6, " 打击 ");
+	Weapon cijian(" 刺剑 ", 50, 110, 10, 1, " 贯通 ");
+	Armor bujia(" 布甲 ", 50, 50, 100, " 贯通 ");
+	Armor tiejia(" 铁甲 ", 100, 100, 200, " 打击 ");
+	Armor linjia(" 鳞甲 ", 200, 200, 400, " 砍击 ");
 
 	Shop1 shop1;
 	Shop2 shop2;
@@ -103,7 +103,7 @@ void shopset() {
 		cout << "购买武器选择1，购买防具选择2，退出选择0" << endl;
 	}
 
-	cout << "展示：" << endl;
+	cout << " 展示： " << endl;
 	linchong.printArmors();
 	linchong.printWeapons();
 }
