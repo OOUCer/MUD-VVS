@@ -1,5 +1,5 @@
-//#ifndef CHARACTER_H
-//#define CHARACTER_H
+#ifndef CHARACTER_H
+#define CHARACTER_H
 
 #include <string>
 #include <vector>
@@ -139,4 +139,4 @@ public:
     bool buyItem2(Armor *equipment);
 };
 
-//#endif // CHARACTER_H
+#endif// CHARACTER_H

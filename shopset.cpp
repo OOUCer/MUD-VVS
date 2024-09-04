@@ -57,7 +57,6 @@ void shopset() {
     Weapon dajian("大剑", 50, 300, 0, 0.4, "砍击");
 	Weapon tiegun("铁棍", 50, 200, 5, 0.6, "打击");
 	Weapon cijian("刺剑", 50, 110, 10, 1, "贯通");
-
 	Armor bujia("布甲", 50, 50, 100,"贯通");
 	Armor tiejia("铁甲", 100, 100, 200, "打击");
 	Armor linjia("鳞甲", 200, 200, 400, "砍击");

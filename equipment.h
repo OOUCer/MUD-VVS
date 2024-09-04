@@ -1,5 +1,5 @@
-//#ifndef EQUIPMENT_H
-//#define EQUIPMENT_H
+#ifndef EQUIPMENT_H
+#define EQUIPMENT_H
 
 #include <string>
 #include <iostream>
@@ -77,4 +77,4 @@ public:
 	//virtual string getAttackType() const;
 };
 
-//#endif
+#endif

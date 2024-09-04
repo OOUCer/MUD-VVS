@@ -1,3 +1,5 @@
+#ifndef SKILLEFFECTTYPE_H
+#define SKILLEFFECTTYPE_H
 enum skillEffectType {
 	none,
 
@@ -16,3 +18,4 @@ enum skillEffectType {
 	giveEvationWeaken,
 	giveComatose
 };
+#endif

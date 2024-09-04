@@ -1,5 +1,5 @@
-//#ifndef SKILL_H
-//#define SKILL_H
+#ifndef SKILL_H
+#define SKILL_H
 
 #include <iostream>
 #include <vector>
@@ -118,4 +118,4 @@ public:
     virtual int getAttackFrequency() const;
 };
 
-//#endif
+#endif
