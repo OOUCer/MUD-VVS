@@ -15,20 +15,11 @@ protected:
 	int price;
 
 public:
-	Equipment(string name, int price);
+	Equipment(string name, int price);// 构造函数，用于初始化装备的名称和价格
 
-	string getName() const;
-	int getPrice() const;
+	string getName() const;// 获取装备的名称 
+	int getPrice() const;// 获取装备的价格  
 
-	//virtual string getDescription() const =0;
-	//virtual void describe() const =0;
-	//virtual string getAttackType() const=0;
-	//virtual string getWeakness() const=0;
-	//virtual int getAttack() const=0;
-	//virtual int getSpeed() const=0;
-	//virtual float getHitRate() const=0;
-	//virtual int getDefense() const=0;
-	//virtual int getHP() const=0;
 	
 };
 
@@ -41,18 +32,14 @@ private:
 	string attackType;
 
 public:
-	Weapon(string name, int price, int attack, int speed, float hitRate, string attackType);
-	int getAttack() const ;
-	int getSpeed() const ;
-	float getHitRate() const ;
-	string getAttackType() const ;
-	string getDescription() const ;
-	void describe() const ;
+	Weapon(string name, int price, int attack, int speed, float hitRate, string attackType);// 构造函数，用于初始化武器的所有属性
+	int getAttack() const ;// 获取武器的攻击力
+	int getSpeed() const ;// 获取武器的攻击速度  
+	float getHitRate() const ; // 获取武器的命中率 
+	string getAttackType() const ;// 获取武器的攻击类型
+	string getDescription() const ;// 获取武器的详细描述字符串  
+	void describe() const ;// 打印武器的详细描述
 
-
-	//virtual string getWeakness() const;
-	//virtual int getDefense() const;
-	//virtual int getHP() const;
 };
 
 class Armor : public Equipment
@@ -63,18 +50,12 @@ private:
 	string weakness;
 
 public:
-	Armor(string name, int price, int defense, int HP, string weakness);
-	int getDefense() const ;
-	int getHP() const  ;
-	string getWeakness() const ;
-	string getDescription() const ;
-	void describe() const ;
-
-
-	//virtual int getAttack() const;
-	//virtual int getSpeed() const;
-	//virtual float getHitRate() const;
-	//virtual string getAttackType() const;
+	Armor(string name, int price, int defense, int HP, string weakness);// 构造函数，用于初始化护甲的所有属性
+	int getDefense() const ;// 获取护甲的防御力 
+	int getHP() const  ;// 获取护甲提供的额外生命值
+	string getWeakness() const ;// 获取护甲的弱点
+	string getDescription() const ;// 获取护甲的详细描述字符串
+	void describe() const ;// 打印护甲的详细描述
 };
 
 #endif

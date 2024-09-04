@@ -11,7 +11,7 @@ int Equipment::getPrice() const { return price; }
 //void Equipment::describe() const
 //{
 //	cout << "Name: " << name << ", Price: " << price << endl;
-//}
+//} 
 
 Weapon::Weapon(string name, int price, int attack, int speed, float hitRate, string attackType)
 	: Equipment(name, price), attack(attack), speed(speed), hitRate(hitRate), attackType(attackType) {}
