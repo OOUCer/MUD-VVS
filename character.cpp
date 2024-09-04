@@ -261,7 +261,35 @@ int Linchong::getPlace() const
 
 void Linchong::changePlace()
 {
-    // Implement the logic to change the place of the character.
+    cout << "你要去哪：" << endl;
+    int placeflag;
+    cin >> placeflag;
+    cout << "你来到了";
+    place = placeflag;
+    switch (place)
+    {
+    case 1:
+        cout << "茶酒店";
+        break;
+    case 2:
+        cout << "武馆";
+        break;
+    case 3:
+        cout << "营房";
+        break;
+    case 4:
+        cout << "草料场";
+        break;
+    case 5:
+        cout << "茶酒店";
+        break;
+    case 6:
+        cout << "市井";
+        break;
+    case 7:
+        cout << "古庙";
+        break;
+    }// Implement the logic to change the place of the character.
 }
 
 void Linchong::printWeapons() const
