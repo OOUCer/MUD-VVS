@@ -2,6 +2,7 @@
 #include<Windows.h>
 #include<iostream>
 #include<vector>
+#include"plot.h"
 class UI
 {
 private:

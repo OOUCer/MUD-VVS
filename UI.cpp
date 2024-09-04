@@ -4,7 +4,7 @@
 #include <mmsystem.h>
 #include<iostream>
 #include<vector>
-#include"plot.h"
+
 #include"UI.h"
 #pragma comment(lib, "winmm.lib") // Á´½Óµ½WinMM¿â 
 
