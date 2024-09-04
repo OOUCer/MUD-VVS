@@ -18,27 +18,27 @@ protected:
 public:
     Skill(string name, string description,bool isAOE, bool isOffensive);
 
-    bool getIsAOE() const;
+    bool getIsAOE() const;//返回是否范围效果
 
-    string getName() const;
+    string getName() const;//返回名字
 
-    bool getIsOffensive() const;
+    bool getIsOffensive() const;//返回是否进攻招式
 
-    string getDescription() const;
+    string getDescription() const;//返回描述
 
-    virtual bool getIsSelf() const = 0;
+    virtual bool getIsSelf() const = 0;//返回是否作用自己
 
-    virtual float getDamageMultiplier() const = 0;
+    virtual float getDamageMultiplier() const = 0;//返回伤害倍率
 
-    virtual string getAttackType() const = 0;
+    virtual string getAttackType() const = 0;//返回攻击类型
 
-    virtual int getAttackFrequency() const = 0;
+    virtual int getAttackFrequency() const = 0;//返回攻击频率
 
-    virtual skillEffectType getEffect() const = 0;
+    virtual skillEffectType getEffect() const = 0;//返回效果
 
-    virtual float getEffectIntensity() const = 0;
+    virtual float getEffectIntensity() const = 0;//返回效果强度
 
-    virtual int getDuration() const = 0;
+    virtual int getDuration() const = 0;//返回效果持续时间
 
     
 };
@@ -51,8 +51,8 @@ protected:
     int attackFrequency;         // 连击次数
     skillEffectType extraEffect; // 附加效果
     float extraEffectIntensity;  // 实例：攻击x1.5 昏睡概率0.5
-    int extraEffectDuration;
-    bool isSelf;
+    int extraEffectDuration;//附加效果持续时间
+    bool isSelf;//是否作用自己
 
 public:
     offensiveSkill(
@@ -66,21 +66,21 @@ public:
         int attackFrequency,
         skillEffectType extraEffect,
         float extraEffectIntensity,
-        int extraEffectDuration);
+        int extraEffectDuration);//构造
 
-    float getDamageMultiplier() const;
+    float getDamageMultiplier() const;//返回伤害倍率
 
-    string getAttackType() const;
+    string getAttackType() const;//返回攻击类型
 
-    int getAttackFrequency() const;
+    int getAttackFrequency() const;//返回攻击频率
 
-    skillEffectType getEffect() const;
+    skillEffectType getEffect() const;//返回效果
 
-    float getEffectIntensity() const;
+    float getEffectIntensity() const;//返回效果强度
 
-    int getDuration() const;
+    int getDuration() const;//返回持续时间
 
-    bool getIsSelf() const;
+    bool getIsSelf() const;//返回是否作用自己
 };
 
 class supportSkill : public Skill
@@ -100,22 +100,22 @@ public:
         bool isSelf,
         skillEffectType effect,
         float effectIntensity,
-        int duration);
+        int duration);//构造
         
 
-    skillEffectType getEffect() const;
+    skillEffectType getEffect() const;//返回招式效果
 
-    float getEffectIntensity() const;
+    float getEffectIntensity() const;//返回效果强度
 
-    int getDuration() const;
+    int getDuration() const;//返回持续时间
 
-    bool getIsSelf() const;
+    bool getIsSelf() const;//返回是否作用自己
 
-    virtual float getDamageMultiplier() const;
+    virtual float getDamageMultiplier() const;//返回伤害倍率
 
-    virtual string getAttackType() const;
+    virtual string getAttackType() const;//返回攻击类型
 
-    virtual int getAttackFrequency() const;
+    virtual int getAttackFrequency() const;//返回攻击频率
 };
 
 //#endif

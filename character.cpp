@@ -5,7 +5,6 @@ using namespace std;
 Character::Character(const string &name, int attack, int HP, int maxHP, int defense, int speed, float hitRate, float evasionRate, int gold, bool isPlayer)
     : name(name), attack(attack), HP(HP), maxHP(maxHP), defense(defense), speed(speed), hitRate(hitRate), evasionRate(evasionRate), gold(gold), isPlayer(isPlayer) {}
 
-
 string Character::getName() const
 {
     return name;
@@ -116,6 +115,26 @@ void Character::setHitWeakness(bool hit)
 bool Character::getHitWeakness()
 {
     return hitWeakness;
+}
+
+int Character::getSkillPoint()
+{
+    return skillPoint;
+}
+
+void Character::setSkillPoint(int point)
+{
+    skillPoint = point;
+}
+
+int Character::getActionCount()
+{
+    return actionCount;
+}
+
+void Character::setActionCount(int count)
+{
+    actionCount = count;
 }
 
 bool Character::getAnticipateStatus()
