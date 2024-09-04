@@ -120,6 +120,9 @@ int UI::showstart() {
 
 int UI::showmenu()
 {
-    cout << "1.显示属性          2.显示背包";
-    return 0;
+    cout << "1.显示属性                    2.显示背包" << endl;
+    cout << "3.储存游戏进度                4.返回主菜单" << endl;
+    int flag;
+    cin >> flag;
+    return flag;
 }
