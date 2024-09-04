@@ -4,7 +4,7 @@
 #include <mmsystem.h>
 #include<iostream>
 #include<vector>
-
+#include"character.h"
 #include"UI.h"
 #pragma comment(lib, "winmm.lib") // 链接到WinMM库 
 
@@ -51,7 +51,8 @@ void UI::ClearConsoleLines(HANDLE hConsole, SHORT s, SHORT e) {
     // （可选）移动光标到屏幕底部或其他位置  
      //SetConsoleCursorPosition(hConsole, {0, csbi.dwSize.Y + e-s});  
 }
-int UI::showstart() {
+int UI::ready()
+{
     Plot plot;
     SetSize(100, 40);
     SetConsoleColor(4);
@@ -75,8 +76,8 @@ int UI::showstart() {
     //cout << "林教头风雪山神庙" << endl;
     cout << endl;
     //PlaySound(TEXT("C:\\FFOutput\\2301442833.wav"), NULL, SND_FILENAME | SND_ASYNC);
-    
-    
+
+
     for (int i = 0; i < 29; i++)
         cout << " ";
     cout << "--------------------------------------------" << endl;;
@@ -95,7 +96,7 @@ int UI::showstart() {
     for (int i = 0; i < 36; i++)
         cout << " ";
     cout << endl;
- 
+
     for (int i = 0; i < 36; i++)
         cout << " ";
     plot.PrintWithDelay("自谓冥中施计毒，谁知暗里有神扶。", 500);
@@ -111,6 +112,11 @@ int UI::showstart() {
     for (int i = 0; i < 36; i++)
         cout << " ";
     cout << endl;
+    return 0;
+}
+int UI::showstart() {
+    Plot plot;
+    
     cout << "1.开始征程     2.读取存档     3.退出" << endl;
     cout << "请注意，如果未保存游戏就退出，会导致游戏进度丢失" << endl;
     int flag;
@@ -125,4 +131,33 @@ int UI::showmenu()
     int flag;
     cin >> flag;
     return flag;
+}
+
+void UI::shuxing(Linchong lc)
+{
+    cout << "名称： " << lc.getName();
+    for (int i = 0; i < 15; i++)
+        cout << " ";
+    cout << "财富： " << lc.getGold() << endl;
+
+
+    cout << "最大生命： " << lc.getMaxHP();
+    for (int i = 0; i < 15; i++)
+        cout << " ";
+    cout << "当前生命： " << lc.getHP()<<endl;
+   
+    
+    cout << "攻击： " << lc.getAttack();
+    for (int i = 0; i < 15; i++)
+        cout << " ";
+    cout << "防御： " << lc.getDefense()<<endl;
+
+
+    cout << "闪避： " << lc.getEvasionRate();
+    for (int i = 0; i < 15; i++)
+        cout << " ";
+    cout << "命中： " << lc.getHitRate()<<endl;
+
+    
+    cout << "速度： " << lc.getSpeed();
 }

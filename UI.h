@@ -9,6 +9,8 @@ private:
 	bool SetSize(int width, int height);
 	void ClearConsoleLines(HANDLE hConsole, SHORT s, SHORT e);
 public:
-	int showstart();//开始展示
+	int ready();//准备界面
+	int showstart();//开始界面,主菜单
 	int showmenu();//展示菜单
+	void shuxing(Linchong lc);//展示属性
 };

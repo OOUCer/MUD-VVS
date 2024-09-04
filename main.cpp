@@ -15,12 +15,16 @@ int main()
     Map map;
     Plot plot;
     Time t;
-    ui.showstart();
-    plot.PrintPrompt();
-    plot.PrintPrologue();
-    plot.PrintScene(t.plottime);
+    ui.ready();
+    ui.showstart();//开始界面
+    plot.PrintPrompt();//按ctrl加速
+    plot.PrintPrologue();//前情提要
+    plot.PrintScene(t.plottime);//第一幕
     ++t.plottime;
-    plot.PrintScene(t.plottime);
+    plot.PrintScene(t.plottime);//第二幕
+    ++t.plottime;
+    plot.PrintScene(t.plottime);//第三幕
+
 }
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单

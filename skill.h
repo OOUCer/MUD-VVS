@@ -41,6 +41,8 @@ public:
     virtual int getDuration() const = 0;//返回效果持续时间
 
     
+
+
 };
 
 class offensiveSkill : public Skill

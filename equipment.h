@@ -56,6 +56,7 @@ public:
 	string getWeakness() const ;// 获取护甲的弱点
 	string getDescription() const ;// 获取护甲的详细描述字符串
 	void describe() const ;// 打印护甲的详细描述
+
 };
 
 #endif
