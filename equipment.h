@@ -15,6 +15,7 @@ protected:
 	int price;
 
 public:
+	Equipment();
 	Equipment(string name, int price);// 构造函数，用于初始化装备的名称和价格
 
 	string getName() const;// 获取装备的名称 
@@ -32,6 +33,7 @@ private:
 	string attackType;
 
 public:
+	Weapon();
 	Weapon(string name, int price, int attack, int speed, float hitRate, string attackType);// 构造函数，用于初始化武器的所有属性
 	int getAttack() const ;// 获取武器的攻击力
 	int getSpeed() const ;// 获取武器的攻击速度  
@@ -50,6 +52,7 @@ private:
 	string weakness;
 
 public:
+	Armor();
 	Armor(string name, int price, int defense, int HP, string weakness);// 构造函数，用于初始化护甲的所有属性
 	int getDefense() const ;// 获取护甲的防御力 
 	int getHP() const  ;// 获取护甲提供的额外生命值

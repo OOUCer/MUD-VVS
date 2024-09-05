@@ -2,6 +2,12 @@
 
 using namespace std;
 
+Equipment::Equipment()
+{
+	name = " ";
+	price = 0;
+}
+
 Equipment::Equipment(string name, int price) : name(name), price(price) {}
 
 string Equipment::getName() const { return name; }
@@ -12,6 +18,15 @@ int Equipment::getPrice() const { return price; }
 //{
 //	cout << "Name: " << name << ", Price: " << price << endl;
 //} 
+
+Weapon::Weapon()
+{
+	attack = 0;
+	speed = 0;
+	hitRate = 0.0;
+	attackType = " ";
+
+}
 
 Weapon::Weapon(string name, int price, int attack, int speed, float hitRate, string attackType)
 	: Equipment(name, price), attack(attack), speed(speed), hitRate(hitRate), attackType(attackType) {}
@@ -34,8 +49,16 @@ void Weapon::describe() const
 	cout << "Weapon: " << name << ", Attack: " << attack << ", Speed: " << speed << ", Hit Rate: " << hitRate << ", Attack string: " << attackType << endl;
 }
 
+Armor::Armor()
+{
+	defense = 0;
+	HP = 0;
+	weakness = " ";
+}
+
 Armor::Armor(string name, int price, int defense, int HP, string weakness)
-	: Equipment(name, price), defense(defense), HP(HP), weakness(weakness) {}
+	: Equipment(name, price), defense(defense), HP(HP), weakness(weakness) {
+}
 
 int Armor::getDefense() const { return defense; }
 

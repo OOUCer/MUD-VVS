@@ -2,7 +2,26 @@
 
 using namespace std;
 
+Skill::Skill()
+{
+    name = " ";
+    description = " ";
+    isAOE = 0;
+    isOffensive = 0;
+    isSelf = 0;
+}
+
 Skill::Skill(string name, string description,bool isAOE, bool isOffensive,bool isSelf) : name(name),description(description), isAOE(isAOE), isOffensive(isOffensive),isSelf(isSelf) {}
+
+offensiveSkill::offensiveSkill()
+{
+    damageMultiplier = 0.0;
+    attackType = " ";
+    attackFrequency = 0;
+    extraEffectIntensity = 0.0;
+    extraEffect = none;
+    extraEffectDuration = 0;
+}
 
 offensiveSkill::offensiveSkill(
     string name,
@@ -24,6 +43,13 @@ offensiveSkill::offensiveSkill(
                                extraEffectIntensity(extraEffectIntensity),
                                extraEffectDuration(extraEffectDuration) {};
                                
+supportSkill::supportSkill()
+{
+    effect = none;
+    effectIntensity = 0.0;
+    duration = 0;
+}
+
 supportSkill::supportSkill(
     string name,
     string description,

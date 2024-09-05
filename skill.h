@@ -17,6 +17,7 @@ protected:
     string description;//招式描述
     bool isSelf;//是否作用自己
 public:
+    Skill();
     Skill(string name, string description, bool isAOE, bool isOffensive, bool isSelf);
 
     bool getIsAOE() const;//返回是否范围效果
@@ -58,6 +59,7 @@ protected:
     
 
 public:
+    offensiveSkill();
     offensiveSkill(
         string name,
         string description,
@@ -95,6 +97,7 @@ protected:
  
 
 public:
+    supportSkill();
     supportSkill(
         string name,
         string description,
