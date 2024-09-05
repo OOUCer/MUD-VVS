@@ -1,5 +1,5 @@
-#ifndef BATTLE_H
-#define BATTLE_H
+//#ifndef BATTLE_H
+//#define BATTLE_H
 
 #include <iostream>
 #include <vector>
@@ -21,7 +21,7 @@ public:
 
     void sortBySpeed(vector<pair<int, Character*>>* sorted, Linchong* player, vector<Character*>* enemies);//获得出手顺序
 
-    bool evaluateBattleStatus(vector<pair<int, Character *>> &theCharacters, vector<Character*>* enemies);//监控死亡
+    bool evaluateBattleStatus(vector<pair<int, Character *>> &theCharacters, vector<Character*>* enemies,int flag);//监控死亡
 
     void manageWeaknessAndBuff(Character* theCharacter);//管理弱点和状态
 
@@ -78,4 +78,4 @@ private:
     
 };
 
-#endif 
+//#endif 
