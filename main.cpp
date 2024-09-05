@@ -5,30 +5,65 @@
 #include"map11.h"
 #include"plot.h"
 #include"UI.h"
-#include"shop.h"
 #include"Filestore.h"
+#include"shop.h"
 struct Time
 {
     int plottime = 1;
 };
+void change1();//幕与幕之间衔接
+int change2();
+UI ui;
+Map map1;
+Linchong linchong("林冲", 100, 100, 100, 100, 100, 100, 1000, 100, 1, 1);
+Linchong* lc = &linchong;
+Plot plot(lc);
+Time t;
+Filestore files;
 int main()
 {
-    //UI ui;
-    //Map map;
-    //Linchong linchong("林冲", 100, 100, 100, 100, 100, 100, 1000, 100, 1, 1);
-    //Linchong* lc = &linchong;
-    //Plot plot(lc);
-    //Time t;
-    //ui.ready();
+
+
+   // ui.ready();
     //ui.showstart();//开始界面
-    //plot.PrintPrompt();//按ctrl加速
-    //plot.PrintPrologue();//前情提要
-    //plot.PrintScene(t.plottime);//第一幕
-    //++t.plottime;
-    //plot.PrintScene(t.plottime);//第二幕
-    //++t.plottime;
-    //plot.PrintScene(t.plottime);//第三幕
-    shopset();
+   // plot.PrintPrompt();//按ctrl加速
+   // plot.PrintPrologue();//前情提要
+    plot.PrintScene(t.plottime);//第一幕
+
+    change1();
+    plot.PrintScene(t.plottime);
+
+}
+ void change1() {
+    int f = plot.Printchange(t.plottime);
+    int f_func = 0;
+    if (f)
+    {
+        f_func = change2();
+        if (f_func == 1)
+        {
+
+        }
+        if (f_func == 4)
+        {
+            change1();
+        }
+    }
+    else
+        return;
+}
+ int change2()
+ {
+     int f= ui.showmenu();
+     int f_func = 0;
+    
+     if (f == 1)//显示属性
+     {
+         ui.shuxing(lc);
+         change2();
+     }
+     if (f == 2)//显示背包
+     {
 
      }
      if (f == 3)//存档
