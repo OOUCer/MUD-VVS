@@ -90,6 +90,8 @@ public:
 
     // 根据场景编号打印对应场景的描述
     void PrintScene(int scene); // 更新参数类型为 int
+
+    Plot() = default;
 };
 
 #endif // PLOT_H

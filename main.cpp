@@ -15,7 +15,7 @@ int main()
 {
     UI ui;
     Map map;
-    Plot plot;
+    //Plot plot;
     Time t;
     shopset();
 

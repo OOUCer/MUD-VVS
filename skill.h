@@ -29,7 +29,7 @@ public:
 
     bool getIsSelf() const ;//返回是否作用自己
 
-    virtual float getDamageMultiplier() const = 0;//返回伤害倍率
+    virtual float getDamageMultiplier() const =0;//返回伤害倍率
 
     virtual string getAttackType() const = 0;//返回攻击类型
 
