@@ -14,7 +14,7 @@ class Plot {
 private:
     bool isCtrlPressed = false;
     int defaultDelayMs = 30;
-    int acceleratedDelayMs = 10;
+    int acceleratedDelayMs = -2;
     int day; // 当前天数
     Character* character; // 用于访问 Character 类的实例
     thread keyboardThread; // 用于处理键盘输入的线程
