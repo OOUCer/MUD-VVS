@@ -20,8 +20,6 @@ bool Shop1::buyItem(Linchong& character, size_t index) {
 	auto it = inventory.begin() + index; // 获取迭代器  
 	auto& equipment = *it; // 解引用迭代器以获取对 unique_ptr 的引用  
 	if (character.buyItem1(equipment.get())) { // 传递裸指针给 Character 的 buyItem 方法  
-		// 如果购买成功，从商店中移除该物品  
-		inventory.erase(it); // 使用迭代器来安全地移除元素  
 		return true;
 	}
 	return false;
@@ -44,8 +42,6 @@ bool Shop2::buyItem(Linchong& character, size_t index) {
 	auto it = inventory.begin() + index; // 获取迭代器  
 	auto& equipment = *it; // 解引用迭代器以获取对 unique_ptr 的引用  
 	if (character.buyItem2(equipment.get())) { // 传递裸指针给 Character 的 buyItem 方法  
-		// 如果购买成功，从商店中移除该物品  
-		inventory.erase(it); // 使用迭代器来安全地移除元素  
 		return true;
 	}
 	return false;
@@ -80,7 +76,10 @@ void shopset() {
 			cout << "请选择你要购买的武器序号,退出选择0" << endl;
 			while (cin >> id) {
 				// 尝试购买物品  
-				if (id == 0)break;
+				if (id == 0) { 
+					system("cls");
+					break;
+				}
 				if (shop1.buyItem(linchong, id - 1)) { // 尝试购买索引为0的物品（Sword）  
 					shop1.listItems(); // 再次列出物品以查看变化  
 				}
@@ -92,7 +91,10 @@ void shopset() {
 			cout << "请选择你要购买的防具序号，退出选择0" << endl;
 			while (cin >> id) {
 				// 尝试购买物品  
-				if (id == 0)break;
+				if (id == 0) {
+					system("cls");
+					break;
+				}
 				if (shop2.buyItem(linchong, id - 1)) { // 尝试购买索引为0的物品（Sword）  
 					shop2.listItems(); // 再次列出物品以查看变化  
 				}
@@ -104,6 +106,6 @@ void shopset() {
 	}
 
 	cout << " 展示： " << endl;
-	linchong.printArmors();
 	linchong.printWeapons();
+	linchong.printArmors();
 }

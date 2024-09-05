@@ -329,6 +329,14 @@ void Linchong::printArmors() const
 
 bool Linchong::buyItem1(Weapon* equipment)
 {
+    for (const auto& weapon : weapons)
+    {
+        if (weapon->getName() == equipment->getName()) {
+            cout << "你已经买过了，不需要再次购买哦！" << endl;
+            return false;
+        };
+    }
+
     if (equipment->getPrice() <= gold)
     {
         gold -= equipment->getPrice();
@@ -345,6 +353,14 @@ bool Linchong::buyItem1(Weapon* equipment)
 
 bool Linchong::buyItem2(Armor* equipment)
 {
+    for (const auto& armor : armors)
+    {
+        if (armor->getName() == equipment->getName()) {
+            cout << "你已经买过了，不需要再次购买哦！" << endl;
+            return false;
+        };
+    }
+
     if (equipment->getPrice() <= gold)
     {
         gold -= equipment->getPrice();
