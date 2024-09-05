@@ -105,7 +105,4 @@ void shopset() {
 		cout << "¹ºÂòÎäÆ÷Ñ¡Ôñ1£¬¹ºÂò·À¾ßÑ¡Ôñ2£¬ÍË³öÑ¡Ôñ0" << endl;
 	}
 
-	cout << " Õ¹Ê¾£º " << endl;
-	linchong.printWeapons();
-	linchong.printArmors();
 }

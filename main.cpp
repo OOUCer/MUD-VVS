@@ -64,7 +64,8 @@ int main()
      }
      if (f == 2)//ÏÔÊ¾±³°ü
      {
-
+         linchong.printWeapons();
+         linchong.printArmors();
      }
      if (f == 3)//´æµµ
      {
