@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-Character::Character(const string &name, int attack, int HP, int maxHP, int defense, int speed, float hitRate, float evasionRate, int gold, bool isPlayer)
+Character::Character(const string& name, int attack, int HP, int maxHP, int defense, int speed, float hitRate, float evasionRate, int gold, bool isPlayer)
     : name(name), attack(attack), HP(HP), maxHP(maxHP), defense(defense), speed(speed), hitRate(hitRate), evasionRate(evasionRate), gold(gold), isPlayer(isPlayer) {}
 
 string Character::getName() const
@@ -13,7 +13,7 @@ string Character::getName() const
 int Character::getAttack() const
 {
     int currentAttack = attack + (weapons.empty() ? 0 : weapons[0]->getAttack());
-    for (const auto &effect : effectStatus)
+    for (const auto& effect : effectStatus)
     {
         if (effect.first == selfAttackBoost || effect.first == giveAttackWeaken)
             currentAttack *= effect.second.first;
@@ -21,9 +21,11 @@ int Character::getAttack() const
     return currentAttack;
 }
 
-int Character::getHP() 
+void Character::setAttack(int newAttack) { attack = newAttack; }
+
+int Character::getHP()
 {
-    if (HP > getMaxHP())HP =getMaxHP() ;
+    if (HP > getMaxHP())HP = getMaxHP();
     return HP;
 }
 
@@ -32,15 +34,19 @@ void Character::modifyHP(int modifyAmount)
     HP += modifyAmount;
 }
 
+void Character::setHP(int newHP) { HP = newHP; }
+
 int Character::getMaxHP() const
 {
     return maxHP + (armors.empty() ? 0 : armors[0]->getHP());
 }
 
+void Character::setMaxHP(int newMaxHP) { maxHP = newMaxHP; }
+
 int Character::getDefense() const
 {
     int currentDefense = defense + (armors.empty() ? 0 : armors[0]->getDefense());
-    for (const auto &effect : effectStatus)
+    for (const auto& effect : effectStatus)
     {
         if (effect.first == selfDefenseBoost || effect.first == giveDefenseWeaken)
             currentDefense *= effect.second.first;
@@ -56,7 +62,7 @@ int Character::getSpeed() const
 float Character::getHitRate() const
 {
     float currentHitRate = hitRate + (weapons.empty() ? 0.0f : weapons[0]->getHitRate());
-    for (const auto &effect : effectStatus)
+    for (const auto& effect : effectStatus)
     {
         if (effect.first == selfHitRateBoost || effect.first == giveHitRateWeaken)
             currentHitRate *= effect.second.first;
@@ -68,7 +74,7 @@ float Character::getHitRate() const
 float Character::getEvasionRate() const
 {
     float currentEvasionRate = evasionRate;
-    for (const auto &effect : effectStatus)
+    for (const auto& effect : effectStatus)
     {
         if (effect.first == selfEvationBoost || effect.first == giveEvationWeaken)
             currentEvasionRate *= effect.second.first;
@@ -82,6 +88,7 @@ int Character::getGold() const
     return gold;
 }
 
+void Character::setGold(int newGold) { gold = newGold; }
 bool Character::isPlayerControlled() const
 {
     return isPlayer;
@@ -188,7 +195,7 @@ vector<Skill*>* Character::getSkills()
     return &skills;
 }
 
-void Character::addEffect(const skillEffectType &effect, float intensity, int duration)
+void Character::addEffect(const skillEffectType& effect, float intensity, int duration)
 {
     effectStatus[effect] = make_pair(intensity, duration);
 }
@@ -199,14 +206,14 @@ void Character::removeEffect(const skillEffectType& effect)
     {
         if (it->first == effect)
         {
-            it = effectStatus.erase(it);   
-            break;   
+            it = effectStatus.erase(it);
+            break;
         }
         else
         {
-            ++it; 
+            ++it;
         }
-    } 
+    }
 }
 
 void Character::addWeapon(Weapon* weapon)
@@ -250,7 +257,7 @@ vector<Armor*>* Character::getArmors()
 
 
 
-Linchong::Linchong(const string &name, int attack, int HP, int maxHP, int defense, int speed, float hitRate, float evasionRate, int gold, bool isPlayer, int place)
+Linchong::Linchong(const string& name, int attack, int HP, int maxHP, int defense, int speed, float hitRate, float evasionRate, int gold, bool isPlayer, int place)
     : Character(name, attack, HP, maxHP, defense, speed, hitRate, evasionRate, gold, isPlayer), place(place) {}
 
 
@@ -294,7 +301,7 @@ void Linchong::changePlace()
 
 void Linchong::printWeapons() const
 {
-    for (const auto &weapon : weapons)
+    for (const auto& weapon : weapons)
     {
         cout << weapon->getName() << ": " << weapon->getDescription() << endl;
     }
@@ -302,13 +309,13 @@ void Linchong::printWeapons() const
 
 void Linchong::printArmors() const
 {
-    for (const auto &armor : armors)
+    for (const auto& armor : armors)
     {
         cout << armor->getName() << ": " << armor->getDescription() << endl;
     }
 }
 
-bool Linchong::buyItem1(Weapon *equipment)
+bool Linchong::buyItem1(Weapon* equipment)
 {
     if (equipment->getPrice() <= gold)
     {
@@ -324,7 +331,7 @@ bool Linchong::buyItem1(Weapon *equipment)
     }
 }
 
-bool Linchong::buyItem2(Armor *equipment)
+bool Linchong::buyItem2(Armor* equipment)
 {
     if (equipment->getPrice() <= gold)
     {
