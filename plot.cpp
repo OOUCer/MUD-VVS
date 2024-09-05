@@ -98,6 +98,25 @@ void Plot::PrintScene(int scene) {
     }
 }
 
+int Plot::Printchange(int t)//返回0，进入下一幕，返回1，进入菜单
+{
+    Sleep(1000);
+    string input;
+    int flag=0;
+    std::cout << "1.下一幕             2.更多" << endl;
+    cin>> input; 
+
+    if (input=="1") {
+        ++t;
+        flag = 0;
+    }
+    else if(input=="2") {
+        flag = 1;
+    }
+
+    return flag;
+}
+
 void Plot::PrintScene1() {
     placeflag = 4;
     SetConsoleColor(8);
