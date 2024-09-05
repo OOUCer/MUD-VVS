@@ -236,6 +236,21 @@ void Character::addSkill(Skill* skill)
     }
 }
 
+void Character::addOffensiveSkill(offensiveSkill* skill)
+{
+    if (skill != nullptr)
+    {
+        oSkills.push_back(skill);
+    }
+}
+
+void Character::addSupportSkill(supportSkill* skill){
+    if (skill != nullptr)
+    {
+        sSkills.push_back(skill);
+    }
+}
+
 map<skillEffectType, pair<float, int>>* Character::getEffectStatus()
 {
     return &effectStatus;

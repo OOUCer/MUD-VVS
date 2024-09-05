@@ -11,8 +11,7 @@
 #include "skill.h"
 
 using namespace std;
-class Character
-{
+class Character{
 protected:
     string name;
     int attack;
@@ -158,6 +157,8 @@ public:
 
     // 给角色添加一个技能  
     void addSkill(Skill* skill);
+    void addOffensiveSkill(offensiveSkill* skill);
+    void addSupportSkill(supportSkill* skill);
 
     // 获取角色当前的所有效果状态  
     map<skillEffectType, pair<float, int>>* getEffectStatus();

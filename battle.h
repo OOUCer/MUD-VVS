@@ -11,7 +11,6 @@
 #include "character.h"
 #include "UI.h"
 
-
 class Battle
 {
 public:
@@ -69,7 +68,7 @@ public:
 
     void manageSkillOrder(Character* character);//对技能顺序分类
 
-
+    void prepareSkill(Character* character);
 
 private:
     random_device rd;
