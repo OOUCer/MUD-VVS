@@ -1,5 +1,5 @@
-//#ifndef BATTLE_H
-//#define BATTLE_H
+#ifndef BATTLE_H
+#define BATTLE_H
 
 #include <iostream>
 #include <vector>
@@ -78,4 +78,4 @@ private:
     
 };
 
-//#endif 
+#endif 
