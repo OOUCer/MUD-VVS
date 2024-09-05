@@ -127,37 +127,44 @@ int UI::showstart() {
 int UI::showmenu()
 {
     cout << "1.显示属性                    2.显示背包" << endl;
-    cout << "3.储存游戏进度                4.返回主菜单" << endl;
+    cout << "3.储存游戏进度                4.返回上一级" << endl;
+    cout << "5.退出游戏" << endl;
     int flag;
     cin >> flag;
+    if (flag == 5)
+    {
+        cout << "正在退出";
+        exit(EXIT_SUCCESS);
+    }
     return flag;
 }
 
-void UI::shuxing(Linchong lc)
+int UI::shuxing(Linchong* lc)
 {
-    cout << "名称： " << lc.getName();
+    cout << "名称： " << lc->getName();
     for (int i = 0; i < 15; i++)
         cout << " ";
-    cout << "财富： " << lc.getGold() << endl;
+    cout << "财富： " << lc->getGold() << endl;
 
 
-    cout << "最大生命： " << lc.getMaxHP();
+    cout << "最大生命： " << lc->getMaxHP();
     for (int i = 0; i < 15; i++)
         cout << " ";
-    cout << "当前生命： " << lc.getHP()<<endl;
+    cout << "当前生命： " << lc->getHP()<<endl;
    
     
-    cout << "攻击： " << lc.getAttack();
+    cout << "攻击： " << lc->getAttack();
     for (int i = 0; i < 15; i++)
         cout << " ";
-    cout << "防御： " << lc.getDefense()<<endl;
+    cout << "防御： " << lc->getDefense()<<endl;
 
 
-    cout << "闪避： " << lc.getEvasionRate();
+    cout << "闪避： " << lc->getEvasionRate();
     for (int i = 0; i < 15; i++)
         cout << " ";
-    cout << "命中： " << lc.getHitRate()<<endl;
+    cout << "命中： " << lc->getHitRate()<<endl;
 
     
-    cout << "速度： " << lc.getSpeed();
+    cout << "速度： " << lc->getSpeed() << endl;
+    return 0;
 }

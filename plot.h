@@ -93,7 +93,11 @@ public:
     // 根据场景编号打印对应场景的描述
     void PrintScene(int scene); // 更新参数类型为 int
 
+    //默认构造函数
     Plot() = default;
+
+    //打印过场
+    int Printchange(int);//返回0，进入下一幕，返回1，进入菜单。传入时间
 };
 
 #endif // PLOT_H

@@ -12,5 +12,5 @@ public:
 	int ready();//准备界面
 	int showstart();//开始界面,主菜单
 	int showmenu();//展示菜单
-	void shuxing(Linchong lc);//展示属性
+	int shuxing(Linchong* lc);//展示属性
 };
