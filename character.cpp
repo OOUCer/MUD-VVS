@@ -190,10 +190,6 @@ Armor* Character::getFirstArmor()
     return !armors.empty() ? armors.front() : nullptr;
 }
 
-vector<Skill*>* Character::getSkills()
-{
-    return &skills;
-}
 
 void Character::addEffect(const skillEffectType& effect, float intensity, int duration)
 {
@@ -254,6 +250,22 @@ vector<Armor*>* Character::getArmors()
 {
     return &armors;
 }
+
+vector<Skill*>* Character::getSkills()
+{
+    return &skills;
+}
+
+vector<offensiveSkill*>* Character::getoSkills()
+{
+    return &oSkills;
+}
+
+vector<supportSkill*>* Character::getsSkills()
+{
+    return &sSkills;
+}
+
 
 
 

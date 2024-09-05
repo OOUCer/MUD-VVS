@@ -36,7 +36,9 @@ protected:
 
     vector<Weapon*> weapons;
     vector<Armor*> armors;
-    vector<Skill*> skills;
+    vector<supportSkill*> sSkills;
+    vector<offensiveSkill*> oSkills;
+    vector<Skill*> skills;//无用，测试用，勿删除
     map<skillEffectType, pair<float, int>> effectStatus;//自动初始化为空
 
 public:
@@ -166,8 +168,10 @@ public:
     // 获取角色的所有护甲（以指针向量的形式）  
     vector<Armor*>* getArmors();
 
-    // 获取角色的所有技能（以指针向量的形式）  
-    vector<Skill*>* getSkills();
+    // 获取角色的所有技能（以指针向量的形式） 
+    vector<Skill*> *getSkills();
+    vector<offensiveSkill*>* getoSkills();
+    vector<supportSkill*>* getsSkills();
 };
 
 class Linchong : public Character

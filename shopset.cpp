@@ -11,17 +11,17 @@ void Shop1::listItems() const {
 		cout << equipment->getName() << ": " << equipment->getDescription() << " Price: " << equipment->getPrice() << endl;
 	}
 }
-// å°è¯•ä»å•†åº—è´­ä¹°ç‰©å“  
+// ³¢ÊÔ´ÓÉÌµê¹ºÂòÎïÆ·  
 bool Shop1::buyItem(Linchong& character, size_t index) {
 	if (index >= inventory.size()) {
-		cout << "è¾“å…¥æœ‰è¯¯" << endl;
+		cout << "ÊäÈëÓĞÎó" << endl;
 		return false;
 	}
-	auto it = inventory.begin() + index; // è·å–è¿­ä»£å™¨  
-	auto& equipment = *it; // è§£å¼•ç”¨è¿­ä»£å™¨ä»¥è·å–å¯¹ unique_ptr çš„å¼•ç”¨  
-	if (character.buyItem1(equipment.get())) { // ä¼ é€’è£¸æŒ‡é’ˆç»™ Character çš„ buyItem æ–¹æ³•  
-		// å¦‚æœè´­ä¹°æˆåŠŸï¼Œä»å•†åº—ä¸­ç§»é™¤è¯¥ç‰©å“  
-		inventory.erase(it); // ä½¿ç”¨è¿­ä»£å™¨æ¥å®‰å…¨åœ°ç§»é™¤å…ƒç´   
+	auto it = inventory.begin() + index; // »ñÈ¡µü´úÆ÷  
+	auto& equipment = *it; // ½âÒıÓÃµü´úÆ÷ÒÔ»ñÈ¡¶Ô unique_ptr µÄÒıÓÃ  
+	if (character.buyItem1(equipment.get())) { // ´«µİÂãÖ¸Õë¸ø Character µÄ buyItem ·½·¨  
+		// Èç¹û¹ºÂò³É¹¦£¬´ÓÉÌµêÖĞÒÆ³ı¸ÃÎïÆ·  
+		inventory.erase(it); // Ê¹ÓÃµü´úÆ÷À´°²È«µØÒÆ³ıÔªËØ  
 		return true;
 	}
 	return false;
@@ -35,17 +35,17 @@ void Shop2::listItems() const {
 		cout << equipment->getName() << ": " << equipment->getDescription() << " Price: " << equipment->getPrice() << endl;
 	}
 }
-// å°è¯•ä»å•†åº—è´­ä¹°ç‰©å“  
+// ³¢ÊÔ´ÓÉÌµê¹ºÂòÎïÆ·  
 bool Shop2::buyItem(Linchong& character, size_t index) {
 	if (index >= inventory.size()) {
-		cout << "è¾“å…¥æœ‰è¯¯" << endl;
+		cout << "ÊäÈëÓĞÎó" << endl;
 		return false;
 	}
-	auto it = inventory.begin() + index; // è·å–è¿­ä»£å™¨  
-	auto& equipment = *it; // è§£å¼•ç”¨è¿­ä»£å™¨ä»¥è·å–å¯¹ unique_ptr çš„å¼•ç”¨  
-	if (character.buyItem2(equipment.get())) { // ä¼ é€’è£¸æŒ‡é’ˆç»™ Character çš„ buyItem æ–¹æ³•  
-		// å¦‚æœè´­ä¹°æˆåŠŸï¼Œä»å•†åº—ä¸­ç§»é™¤è¯¥ç‰©å“  
-		inventory.erase(it); // ä½¿ç”¨è¿­ä»£å™¨æ¥å®‰å…¨åœ°ç§»é™¤å…ƒç´   
+	auto it = inventory.begin() + index; // »ñÈ¡µü´úÆ÷  
+	auto& equipment = *it; // ½âÒıÓÃµü´úÆ÷ÒÔ»ñÈ¡¶Ô unique_ptr µÄÒıÓÃ  
+	if (character.buyItem2(equipment.get())) { // ´«µİÂãÖ¸Õë¸ø Character µÄ buyItem ·½·¨  
+		// Èç¹û¹ºÂò³É¹¦£¬´ÓÉÌµêÖĞÒÆ³ı¸ÃÎïÆ·  
+		inventory.erase(it); // Ê¹ÓÃµü´úÆ÷À´°²È«µØÒÆ³ıÔªËØ  
 		return true;
 	}
 	return false;
@@ -53,13 +53,13 @@ bool Shop2::buyItem(Linchong& character, size_t index) {
 
 
 void shopset() {
-	Linchong linchong(" æ—å†² ", 0, 0, 0, 0, 0, 0, 0, 999, 0, 0);
-    Weapon dajian(" å¤§å‰‘ ", 50, 300, 0, 0.4, " ç å‡» ");
-	Weapon tiegun(" é“æ£ ", 50, 200, 5, 0.6, " æ‰“å‡» ");
-	Weapon cijian(" åˆºå‰‘ ", 50, 110, 10, 1, " è´¯é€š ");
-	Armor bujia(" å¸ƒç”² ", 50, 50, 100, " è´¯é€š ");
-	Armor tiejia(" é“ç”² ", 100, 100, 200, " æ‰“å‡» ");
-	Armor linjia(" é³ç”² ", 200, 200, 400, " ç å‡» ");
+	Linchong linchong(" ÁÖ³å ", 0, 0, 0, 0, 0, 0, 0, 999, 0, 0);
+    Weapon dajian(" ´ó½£ ", 50, 300, 0, 0.4, " ¿³»÷ ");
+	Weapon tiegun(" Ìú¹÷ ", 50, 200, 5, 0.6, " ´ò»÷ ");
+	Weapon cijian(" ´Ì½£ ", 50, 110, 10, 1, " ¹áÍ¨ ");
+	Armor bujia(" ²¼¼× ", 50, 50, 100, " ¹áÍ¨ ");
+	Armor tiejia(" Ìú¼× ", 100, 100, 200, " ´ò»÷ ");
+	Armor linjia(" ÁÛ¼× ", 200, 200, 400, " ¿³»÷ ");
 
 	Shop1 shop1;
 	Shop2 shop2;
@@ -72,38 +72,38 @@ void shopset() {
 
 	int n;
 	int id;
-	cout << "è´­ä¹°æ­¦å™¨é€‰æ‹©1ï¼Œè´­ä¹°é˜²å…·é€‰æ‹©2ï¼Œé€€å‡ºé€‰æ‹©0" << endl;
+	cout << "¹ºÂòÎäÆ÷Ñ¡Ôñ1£¬¹ºÂò·À¾ßÑ¡Ôñ2£¬ÍË³öÑ¡Ôñ0" << endl;
 	while (cin >> n) {
 		if (n == 0) break;
 		if (n == 1) {
 			shop1.listItems();
-			cout << "è¯·é€‰æ‹©ä½ è¦è´­ä¹°çš„æ­¦å™¨åºå·,é€€å‡ºé€‰æ‹©0" << endl;
+			cout << "ÇëÑ¡ÔñÄãÒª¹ºÂòµÄÎäÆ÷ĞòºÅ,ÍË³öÑ¡Ôñ0" << endl;
 			while (cin >> id) {
-				// å°è¯•è´­ä¹°ç‰©å“  
+				// ³¢ÊÔ¹ºÂòÎïÆ·  
 				if (id == 0)break;
-				if (shop1.buyItem(linchong, id - 1)) { // å°è¯•è´­ä¹°ç´¢å¼•ä¸º0çš„ç‰©å“ï¼ˆSwordï¼‰  
-					shop1.listItems(); // å†æ¬¡åˆ—å‡ºç‰©å“ä»¥æŸ¥çœ‹å˜åŒ–  
+				if (shop1.buyItem(linchong, id - 1)) { // ³¢ÊÔ¹ºÂòË÷ÒıÎª0µÄÎïÆ·£¨Sword£©  
+					shop1.listItems(); // ÔÙ´ÎÁĞ³öÎïÆ·ÒÔ²é¿´±ä»¯  
 				}
-				cout << "è¯·é€‰æ‹©ä½ è¦è´­ä¹°çš„æ­¦å™¨åºå·ï¼Œé€€å‡ºé€‰æ‹©0" << endl;
+				cout << "ÇëÑ¡ÔñÄãÒª¹ºÂòµÄÎäÆ÷ĞòºÅ£¬ÍË³öÑ¡Ôñ0" << endl;
 			}
 		}
 		if (n == 2) {
 			shop2.listItems();
-			cout << "è¯·é€‰æ‹©ä½ è¦è´­ä¹°çš„é˜²å…·åºå·ï¼Œé€€å‡ºé€‰æ‹©0" << endl;
+			cout << "ÇëÑ¡ÔñÄãÒª¹ºÂòµÄ·À¾ßĞòºÅ£¬ÍË³öÑ¡Ôñ0" << endl;
 			while (cin >> id) {
-				// å°è¯•è´­ä¹°ç‰©å“  
+				// ³¢ÊÔ¹ºÂòÎïÆ·  
 				if (id == 0)break;
-				if (shop2.buyItem(linchong, id - 1)) { // å°è¯•è´­ä¹°ç´¢å¼•ä¸º0çš„ç‰©å“ï¼ˆSwordï¼‰  
-					shop2.listItems(); // å†æ¬¡åˆ—å‡ºç‰©å“ä»¥æŸ¥çœ‹å˜åŒ–  
+				if (shop2.buyItem(linchong, id - 1)) { // ³¢ÊÔ¹ºÂòË÷ÒıÎª0µÄÎïÆ·£¨Sword£©  
+					shop2.listItems(); // ÔÙ´ÎÁĞ³öÎïÆ·ÒÔ²é¿´±ä»¯  
 				}
-				cout << "è¯·é€‰æ‹©ä½ è¦è´­ä¹°çš„é˜²å…·åºå·ï¼Œé€€å‡ºé€‰æ‹©0" << endl;
+				cout << "ÇëÑ¡ÔñÄãÒª¹ºÂòµÄ·À¾ßĞòºÅ£¬ÍË³öÑ¡Ôñ0" << endl;
 			}
 		}
 
-		cout << "è´­ä¹°æ­¦å™¨é€‰æ‹©1ï¼Œè´­ä¹°é˜²å…·é€‰æ‹©2ï¼Œé€€å‡ºé€‰æ‹©0" << endl;
+		cout << "¹ºÂòÎäÆ÷Ñ¡Ôñ1£¬¹ºÂò·À¾ßÑ¡Ôñ2£¬ÍË³öÑ¡Ôñ0" << endl;
 	}
 
-	cout << " å±•ç¤ºï¼š " << endl;
+	cout << " Õ¹Ê¾£º " << endl;
 	linchong.printArmors();
 	linchong.printWeapons();
 }

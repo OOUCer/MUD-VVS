@@ -1,4 +1,4 @@
-#include "Filestore.h"
+/*#include "Filestore.h"
 #include "character.h"
 #include"equipment.h"
 #include"skill.h"
@@ -110,3 +110,4 @@ void Filestore::loadSkills(vector<Skill*>& skills, ifstream& file) {
         file.read((char*)skill, sizeof(Skill));  // 读取每个技能的数据
     }
 }
+*/

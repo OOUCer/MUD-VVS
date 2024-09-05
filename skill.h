@@ -15,8 +15,9 @@ protected:
     bool isAOE;       // 是否是范围效果
     bool isOffensive; // 是否是进攻类招式
     string description;//招式描述
+    bool isSelf;//是否作用自己
 public:
-    Skill(string name, string description,bool isAOE, bool isOffensive);
+    Skill(string name, string description, bool isAOE, bool isOffensive, bool isSelf);
 
     bool getIsAOE() const;//返回是否范围效果
 
@@ -26,9 +27,9 @@ public:
 
     string getDescription() const;//返回描述
 
-    virtual bool getIsSelf() const = 0;//返回是否作用自己
+    bool getIsSelf() const ;//返回是否作用自己
 
-    virtual float getDamageMultiplier() const = 0;//返回伤害倍率
+    virtual float getDamageMultiplier() const =0;//返回伤害倍率
 
     virtual string getAttackType() const = 0;//返回攻击类型
 
@@ -54,7 +55,7 @@ protected:
     skillEffectType extraEffect; // 附加效果
     float extraEffectIntensity;  // 实例：攻击x1.5 昏睡概率0.5
     int extraEffectDuration;//附加效果持续时间
-    bool isSelf;//是否作用自己
+    
 
 public:
     offensiveSkill(
@@ -82,7 +83,7 @@ public:
 
     int getDuration() const;//返回持续时间
 
-    bool getIsSelf() const;//返回是否作用自己
+    //返回是否作用自己
 };
 
 class supportSkill : public Skill
@@ -91,7 +92,7 @@ protected:
     skillEffectType effect;
     float effectIntensity;
     int duration;
-    bool isSelf;
+ 
 
 public:
     supportSkill(
@@ -111,7 +112,7 @@ public:
 
     int getDuration() const;//返回持续时间
 
-    bool getIsSelf() const;//返回是否作用自己
+   //返回是否作用自己
 
     virtual float getDamageMultiplier() const;//返回伤害倍率
 
