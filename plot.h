@@ -69,6 +69,8 @@ private:
     // 打印场景10的描述
     void PrintScene10();
 
+
+
 public:
     // 构造函数，接受一个 Character 指针
     Plot(Character* charPtr);
@@ -90,6 +92,8 @@ public:
 
     // 根据场景编号打印对应场景的描述
     void PrintScene(int scene); // 更新参数类型为 int
+
+    Plot() = default;
 };
 
 #endif // PLOT_H

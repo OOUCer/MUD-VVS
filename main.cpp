@@ -13,7 +13,9 @@ int main()
 {
     UI ui;
     Map map;
-    Plot plot;
+    Linchong linchong("林冲", 100, 100, 100, 100, 100, 100, 1000, 100, 1, 1);
+    Linchong* lc = &linchong;
+    Plot plot(lc);
     Time t;
     ui.ready();
     ui.showstart();//开始界面
