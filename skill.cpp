@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Skill::Skill(string name, string description,bool isAOE, bool isOffensive) : name(name),description(description), isAOE(isAOE), isOffensive(isOffensive) {}
+Skill::Skill(string name, string description,bool isAOE, bool isOffensive,bool isSelf) : name(name),description(description), isAOE(isAOE), isOffensive(isOffensive),isSelf(isSelf) {}
 
 offensiveSkill::offensiveSkill(
     string name,
@@ -15,8 +15,8 @@ offensiveSkill::offensiveSkill(
     int attackFrequency,
     skillEffectType extraEffect,
     float extraEffectIntensity,
-    int extraEffectDuration) : Skill(name, description,isAOE, isOffensive),
-                               isSelf(isSelf),
+    int extraEffectDuration) : Skill(name, description,isAOE, isOffensive,isSelf),
+                               //isSelf(isSelf),
                                damageMultiplier(damageMultiplier),
                                attackType(attackType),
                                attackFrequency(attackFrequency),
@@ -32,8 +32,8 @@ supportSkill::supportSkill(
     bool isSelf,
     skillEffectType effect,
     float effectIntensity,
-    int duration) : Skill(name,description, isAOE, isOffensive),
-                    isSelf(isSelf),
+    int duration) : Skill(name,description, isAOE, isOffensive,isSelf),
+                    //isSelf(isSelf),
                     effect(effect),
                     effectIntensity(effectIntensity),
                     duration(duration) {};
@@ -49,6 +49,11 @@ string Skill::getDescription() const
     return description;
 }
 
+bool Skill::getIsSelf() const
+{
+    return isSelf;
+}
+
 float offensiveSkill::getDamageMultiplier() const { return damageMultiplier; }
 
 string offensiveSkill::getAttackType() const { return attackType; }
@@ -61,10 +66,11 @@ float offensiveSkill::getEffectIntensity() const { return extraEffectIntensity; 
 
 int offensiveSkill::getDuration() const { return extraEffectDuration; }
 
+/*
 bool offensiveSkill::getIsSelf() const
 {
     return isSelf;
-}
+}*/
 
 skillEffectType supportSkill::getEffect() const { return effect; }
 
@@ -72,10 +78,10 @@ float supportSkill::getEffectIntensity() const { return effectIntensity; }
 
 int supportSkill::getDuration() const { return duration; }
 
-bool supportSkill::getIsSelf() const
-{
-    return isSelf;
-}
+//bool supportSkill::getIsSelf() const
+//{
+//    return isSelf;
+//}
 
 float supportSkill::getDamageMultiplier() const
 {
