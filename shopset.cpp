@@ -48,8 +48,8 @@ bool Shop2::buyItem(Linchong& character, size_t index) {
 }
 
 
-void shopset() {
-	Linchong linchong(" ÁÖ³å ", 0, 0, 0, 0, 0, 0, 0, 999, 0, 0);
+void shopset(Linchong& linchong) {
+	
     Weapon dajian(" ´ó½£ ", 50, 300, 0, 0.4, " ¿³»÷ ");
 	Weapon tiegun(" Ìú¹÷ ", 50, 200, 5, 0.6, " ´ò»÷ ");
 	Weapon cijian(" ´Ì½£ ", 50, 110, 10, 1, " ¹áÍ¨ ");

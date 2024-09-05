@@ -7,12 +7,18 @@
 #include"UI.h"
 #include"Filestore.h"
 #include"shop.h"
+
 struct Time
 {
     int plottime = 1;
 };
+
+
+void shopset(Linchong &linchong);
 void change1();//幕与幕之间衔接
 int change2();
+
+
 UI ui;
 Map map1;
 Linchong linchong("林冲", 100, 100, 100, 100, 100, 100, 1000, 100, 1, 1);
@@ -28,10 +34,12 @@ int main()
     //ui.showstart();//开始界面
    // plot.PrintPrompt();//按ctrl加速
    // plot.PrintPrologue();//前情提要
-    plot.PrintScene(t.plottime);//第一幕
+    //plot.PrintScene(t.plottime);//第一幕
 
     change1();
-    plot.PrintScene(t.plottime);
+    shopset(linchong);
+    change1();
+    plot.PrintScene(3);
 
 }
  void change1() {
@@ -65,10 +73,12 @@ int main()
      if (f == 2)//显示背包
      {
 
+         change2();
      }
      if (f == 3)//存档
      {
          files.saveGame(linchong);
+         change2();
      }
      if (f == 4)
         return f;
