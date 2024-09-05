@@ -76,7 +76,10 @@ void shopset() {
 			cout << "请选择你要购买的武器序号,退出选择0" << endl;
 			while (cin >> id) {
 				// 尝试购买物品  
-				if (id == 0)break;
+				if (id == 0) { 
+					system("cls");
+					break;
+				}
 				if (shop1.buyItem(linchong, id - 1)) { // 尝试购买索引为0的物品（Sword）  
 					shop1.listItems(); // 再次列出物品以查看变化  
 				}
@@ -88,7 +91,10 @@ void shopset() {
 			cout << "请选择你要购买的防具序号，退出选择0" << endl;
 			while (cin >> id) {
 				// 尝试购买物品  
-				if (id == 0)break;
+				if (id == 0) {
+					system("cls");
+					break;
+				}
 				if (shop2.buyItem(linchong, id - 1)) { // 尝试购买索引为0的物品（Sword）  
 					shop2.listItems(); // 再次列出物品以查看变化  
 				}
