@@ -97,10 +97,10 @@ void Map::move(int placeflag)//传入地址标识（其实应该放人物里面）
         cout << "草料场";
         break;
     case 5:
-        cout << "茶酒店";
+        cout << "市井";
         break;
     case 6:
-        cout << "市井";
+        cout << "码头";
         break;
     case 7:
         cout << "古庙";

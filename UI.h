@@ -1,3 +1,5 @@
+#ifndef UI_H
+#define UI_H
 #pragma once
 #include<Windows.h>
 #include<iostream>
@@ -14,3 +16,4 @@ public:
 	int showmenu();//展示菜单
 	int shuxing(Linchong* lc);//展示属性
 };
+#endif

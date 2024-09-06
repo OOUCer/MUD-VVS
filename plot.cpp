@@ -6,6 +6,7 @@
 #include <thread>
 #include <map>
 #include <functional>
+#include "map11.h"
 
 using namespace std;
 
@@ -135,7 +136,7 @@ void Plot::PrintScene1() {
     SetConsoleColor(12);
     PrintWithDelay("“夫妻二人正没个亲眷，今日得恩人到来，便是从天降下。”\n", 30);
     SetConsoleColor(10);
-    PrintWithDelay("盘缠+100。棉袄+1。\n", 30);
+    PrintWithDelay("盘缠+100。\n", 30);
     if (character) {
         int gold = character->getGold();
         character->setGold(gold + 50);
@@ -162,7 +163,13 @@ void Plot::PrintScene2() {
     SetConsoleColor(7);
     PrintWithDelay("李小二道：", 30);
     SetConsoleColor(12);
-    PrintWithDelay("“只要提防他便了。建议恩人去街上商店上买点防身用品。”\n", 30);
+    PrintWithDelay("“只要提防他便了。恩人，这是这里的地图，还请收下。建议恩人去街上商店上买点防身用品。”\n", 30);
+    SetConsoleColor(6);
+    Map map2;
+    map2.showmap(1);
+    SetConsoleColor(7);
+    PrintWithDelay("李小二道：", 30);
+    PrintWithDelay("“这地图上标红色的，便是恩人目前所在的地方。恩人来小人的茶酒馆来可以休息回复体力，买点东西。去武馆可以提升武力，学习技能。去码头可以赚钱。”\n", 30);
     SetConsoleColor(6);
 }
 
@@ -177,12 +184,12 @@ void Plot::PrintScene3() {
     PrintWithDelay("【恭喜你解锁市井：市井中有各种商店，可以购买各种物品，补给和装备。】\n", 30);
     // 选择部分
     // 开始八天的养成系统
-    runDevelopmentSystem();
+    //runDevelopmentSystem();
 }
 
 void Plot::PrintScene4() {
     SetConsoleColor(8);
-    PrintWithDelay("第四幕：\n十一月十五上午，你走进点视厅，厅内空间宽敞，散发着清凉的气息。管营坐在宽大的木桌后。\n", 30);
+    PrintWithDelay("第四幕：\n十一月十五上午，管营将你带进点视厅，厅内空间宽敞，散发着清凉的气息。管营坐在宽大的木桌后。\n", 30);
     SetConsoleColor(7);
     PrintWithDelay("管营抬起头来，目光严肃：", 30);
     SetConsoleColor(12);
@@ -274,27 +281,7 @@ void Plot::PrintScene10() {
 }
 
 
-void Plot::runDevelopmentSystem() {
-    while (day <= 8) { // 修改为day <= 8，确保8天的养成系统
-        SetConsoleColor(1);
-        std::cout << "现在是养成的第" << day++ << "天,";
-        PrintWithDelay("请输入下面的标号：\n可选项：1.武馆（提升武力）\n2.商店（酒，牛肉，刀，枪，弓箭，鲁智深的禅杖，杨志的戒刀）\n3.码头（运货赚钱,钱可以用来购买商店中的武器和防具）\n4.营房（提升体力）\n", 30);
-        int choice;
-        std::cin >> choice;
 
-        // 查找并执行用户选择的功能
-        auto it = actionMap.find(choice);
-        if (it != actionMap.end()) {
-            it->second(); // 调用处理函数
-        }
-        else {
-            SetConsoleColor(12);
-            PrintWithDelay("无效的选择，请输入有效的标号。\n", 30);
-            day--; // 不增加天数
-            SetConsoleColor(1);
-        }
-    }
-}
 
 void Plot::handleTraining() {
     if (character) {
@@ -325,8 +312,7 @@ void Plot::handleTraining() {
         PrintWithDelay("“请注意，训练会消耗你的体力。如果你的体力不足，将无法继续训练。训练后的体力会恢复到最大体力的一部分。”\n\n", 30);
         SetConsoleColor(7);
         PrintWithDelay("你在馆内接受了强化训练，感觉自己的能力得到了显著提升。\n", 30);
-        SetConsoleColor(10);
-        PrintWithDelay("武力+10。钱包-10。体力-20。\n", 30);
+
         character->setAttack(attack + 10);
         character->setGold(gold - 10);
     }
@@ -344,13 +330,7 @@ void Plot::handleShop() {
     SetConsoleColor(12); // 红色
     PrintWithDelay("“欢迎光临，客官！您需要些什么？”\n", 30);
     SetConsoleColor(7); // 白色
-    PrintWithDelay("你仔细挑选了一些武器和防具，准备应对可能的危险。\n", 30);
-    SetConsoleColor(10); // 绿色
-    PrintWithDelay("武器装备+1。钱包-50。\n", 30);
-    // 假设有一个装备系统
-    // equipment += 1;
-    character->setGold(gold - 50);
-    SetConsoleColor(6);
+
 }
 
 void Plot::handleDock() {

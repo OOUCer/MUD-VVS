@@ -27,17 +27,7 @@ private:
     // 打印介绍背景信息
     void PrintIntroduce(const string& backgroundSentence);
 
-    // 处理在武馆中的训练操作
-    void handleTraining();
 
-    // 处理在商店中的购买操作
-    void handleShop();
-
-    // 处理在码头的运货操作
-    void handleDock();
-
-    // 处理在营房的休息操作
-    void handleBarracks();
 
     // 打印场景1的描述
     void PrintScene1();
@@ -79,7 +69,19 @@ public:
     ~Plot();
 
     // 运行养成系统
-    void runDevelopmentSystem();
+    //void runDevelopmentSystem();
+
+        // 处理在武馆中的训练操作
+    void handleTraining();
+
+    // 处理在商店中的购买操作
+    void handleShop();
+
+    // 处理在码头的运货操作
+    void handleDock();
+
+    // 处理在营房的休息操作
+    void handleBarracks();
 
     // 打印带延迟的文本
     void PrintWithDelay(const string& text, int delayMs);
