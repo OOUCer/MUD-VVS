@@ -13,6 +13,68 @@ struct Time
     int plottime = 1;
 };
 
+Linchong linchong("林冲", 100, 100, 100, 100, 100, 100, 1000, 100, 1, 1);
+
+Shop1 shop1;
+Shop2 shop2;
+
+void shopset(Linchong& linchong) {
+
+    Weapon dajian(" 大剑 ", 50, 300, 0, 0.4, " 砍击 ");
+    Weapon tiegun(" 铁棍 ", 50, 200, 5, 0.6, " 打击 ");
+    Weapon cijian(" 刺剑 ", 50, 110, 10, 1, " 贯通 ");
+    Armor bujia(" 布甲 ", 50, 50, 100, " 贯通 ");
+    Armor tiejia(" 铁甲 ", 100, 100, 200, " 打击 ");
+    Armor linjia(" 鳞甲 ", 200, 200, 400, " 砍击 ");
+
+
+    shop1.addItem(make_unique<Weapon>(dajian));
+    shop1.addItem(make_unique<Weapon>(tiegun));
+    shop1.addItem(make_unique<Weapon>(cijian));
+    shop2.addItem(make_unique<Armor>(bujia));
+    shop2.addItem(make_unique<Armor>(tiejia));
+    shop2.addItem(make_unique<Armor>(linjia));
+
+    int n;
+    int id;
+    cout << "购买武器选择1，购买防具选择2，退出选择0" << endl;
+    while (cin >> n) {
+        if (n == 0) break;
+        if (n == 1) {
+            shop1.listItems();
+            cout << "请选择你要购买的武器序号,退出选择0" << endl;
+            while (cin >> id) {
+                // 尝试购买物品  
+                if (id == 0) {
+                    system("cls");
+                    break;
+                }
+                if (shop1.buyItem(linchong, id - 1)) { // 尝试购买索引为0的物品（Sword）  
+                    shop1.listItems(); // 再次列出物品以查看变化  
+                }
+                cout << "请选择你要购买的武器序号，退出选择0" << endl;
+            }
+        }
+        if (n == 2) {
+            shop2.listItems();
+            cout << "请选择你要购买的防具序号，退出选择0" << endl;
+            while (cin >> id) {
+                // 尝试购买物品  
+                if (id == 0) {
+                    system("cls");
+                    break;
+                }
+                if (shop2.buyItem(linchong, id - 1)) { // 尝试购买索引为0的物品（Sword）  
+                    shop2.listItems(); // 再次列出物品以查看变化  
+                }
+                cout << "请选择你要购买的防具序号，退出选择0" << endl;
+            }
+        }
+
+        cout << "购买武器选择1，购买防具选择2，退出选择0" << endl;
+    }
+
+}
 
 void shopset(Linchong &linchong);
 void pre_battle(vector<Character*>&enemies, Linchong* lc, Character* character1, Character* character2);//战斗系统准备
@@ -60,6 +122,12 @@ supportSkill skill_15("泼沙", "敌人命中率下降", true, false, false, giveHitRateW
 supportSkill skill_16("摇篮曲", "可能时敌人昏迷", true, false, false, giveComatose, 0.75, 3);
 supportSkill skill_17("清除浓雾", "使敌人回避率下降", true, false, false, giveEvationWeaken, 0.7, 3);
 
+    //lc->addOffensiveSkill(&skill_1);
+    //lc->addOffensiveSkill(&skill_2);
+    //lc->addOffensiveSkill(&skill_3);
+    //lc->addOffensiveSkill(&skill_4);
+    //lc->addOffensiveSkill(&skill_5);
+    //lc->addOffensiveSkill(&skill_6);
     
 int main(){
     //测试战斗系统________________
@@ -154,7 +222,8 @@ void pre_battle(vector<Character*>&enemies, Linchong*lc, Character*character1, C
      }
      if (f == 2)//显示背包
      {
-
+         linchong.printWeapons();
+         linchong.printArmors();
          change2();
      }
      if (f == 3)//存档
