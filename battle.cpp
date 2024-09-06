@@ -804,7 +804,7 @@ void Battle::showAllStatus(Character* character){
 	map<skillEffectType, pair<float, int>>* theStatus = character->getEffectStatus();
 	bool haveStatus = false;
 	float hpRate = static_cast<float>(character->getHP()) / character->getMaxHP();
-	cout << setprecision(2) << character->getName() << "HPÊ£Óà" << static_cast<int>(100 * hpRate) << "%  ÌØÊâ×´Ì¬£º";
+	cout << setprecision(2) << character->getName() << "HPÊ£Óà" << character->getHP()<<"("<< static_cast<int>(100 * hpRate) << "%)  ÌØÊâ×´Ì¬£º";
 	if (character->getChargeStatus()) {
 		cout << "ÒÑÐîÁ¦ ";
 		haveStatus = true;
