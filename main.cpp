@@ -35,8 +35,11 @@ int change2();
     Shop1 shop1;
     Shop2 shop2;
     vector<Character*> enemies;
-    Character* character1 = new Character("ÍÁ·Ë1", 40, 100, 100, 10, 10, 0.8, 0.1, 100, false);
-    Character* character2 = new Character("ÍÁ·Ë2", 40, 100, 100, 10, 10, 0.8, 0.1, 100, false);
+    Character* smallen1 = new Character("ÍÁ·Ë1", 10, 100, 100, 10, 10, 0.8, 0.01, 100, false);
+    Character* smallen2 = new Character("ÍÁ·Ë2", 10, 100, 100, 10, 10, 0.8, 0.01, 100, false);
+    Character* bigen1 = new Character("¹ÜÓª", 40, 200, 200, 30, 20, 0.8, 0.01, 0, false);
+    Character* bigen2 = new Character("²î²¦", 40, 200, 200, 30, 20, 0.8, 0.01, 0, false);
+    Character* bigen3 = new Character("Â½ÓÝºî", 80, 500, 500, 50, 20, 0.8, 0.01, 0, false);
 
     Weapon weapon1("½£", 20, 30, 10, 0.1, "Õ¶»÷");
     Weapon weapon2("µ¶", 20, 30, 10, 0.1, "Õ¶»÷");
@@ -90,9 +93,9 @@ int main(){
 
 
     //change1();
-    //shopset(linchong);
-    //change1();
-    plot.PrintScene(2);
+    shopset(linchong);
+    change1();
+    //plot.PrintScene(2);
 
     return 0;
 
@@ -139,7 +142,7 @@ void runDevelopmentSystem() {
 
 
 
-void pre_battle(vector<Character*>&enemies, Linchong*lc, Character*character1, Character*character2)
+void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, Character*character2)
 {
     enemies.push_back(character1);
     enemies.push_back(character2);
@@ -187,10 +190,7 @@ void pre_battle(vector<Character*>&enemies, Linchong*lc, Character*character1, C
     if (f)
     {
         f_func = change2();
-        if (f_func == 1)
-        {
 
-        }
         if (f_func == 4)
         {
             change1();
