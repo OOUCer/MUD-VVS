@@ -27,7 +27,7 @@ int change2();
 
     UI ui;
     Map map1;
-    Linchong linchong("ажЁЕ", 80, 1000, 800, 10, 80, 0.8, 0.1, 100, true, 100);
+    Linchong linchong("ажЁЕ", 80, 800, 800, 10, 80, 0.8, 0.1, 100, true, 100);
     Linchong* lc = &linchong;
     Plot plot(lc);
     Time t;
