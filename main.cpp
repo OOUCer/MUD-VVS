@@ -43,7 +43,7 @@ int change2();
     Weapon weapon2("刀", 20, 30, 10, 0.1, "斩击");
     Weapon weapon3("棍", 20, 30, 10, 0.1, "打击");
     Weapon weapon4("矛", 20, 30, 10, 0.1, "贯通");
-    Weapon weapon5_lc("花枪", 20, 30, 10, 0.1, "贯通");
+    Weapon weapon5("花枪", 20, 30, 10, 0.1, "贯通");
 
     Armor armor1("防具1", 20, 30, 100, "斩击");
     Armor armor2("防具2", 20, 30, 100, "贯通");
