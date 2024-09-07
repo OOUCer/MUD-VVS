@@ -6,9 +6,12 @@
 void Shop1::addItem(unique_ptr<Weapon> equipment) {
 	inventory.push_back(move(equipment));
 }
-void Shop1::listItems() const {
+void Shop1::listItems() const { // 只列出前三个物品  
+	size_t count = 0;
 	for (const auto& equipment : inventory) {
+		if (count >= 3) break; // 只列出前三个  
 		cout << equipment->getName() << ": " << equipment->getDescription() << " Price: " << equipment->getPrice() << endl;
+		++count;
 	}
 }
 // 尝试从商店购买物品  
@@ -28,9 +31,12 @@ bool Shop1::buyItem(Linchong& character, size_t index) {
 void Shop2::addItem(unique_ptr<Armor> equipment) {
 	inventory.push_back(move(equipment));
 }
-void Shop2::listItems() const {
+void Shop2::listItems() const { // 只列出前三个物品  
+	size_t count = 0;
 	for (const auto& equipment : inventory) {
+		if (count >= 3) break; // 只列出前三个  
 		cout << equipment->getName() << ": " << equipment->getDescription() << " Price: " << equipment->getPrice() << endl;
+		++count;
 	}
 }
 // 尝试从商店购买物品  
