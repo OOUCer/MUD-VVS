@@ -238,7 +238,7 @@ void Character::addSkill(Skill* skill)
 
 void Character::addOffensiveSkill(offensiveSkill* skill)
 {
-    //cout << "你学会了：" << skill->getName() << endl;
+    cout << "你学会了：" << skill->getName() << endl;
     if (skill != nullptr)
     {
         oSkills.push_back(skill);
@@ -246,7 +246,7 @@ void Character::addOffensiveSkill(offensiveSkill* skill)
 }
 
 void Character::addSupportSkill(supportSkill* skill){
-    //cout << "你学会了：" << skill->getName() << endl;
+    cout << "你学会了：" << skill->getName() << endl;
     if (skill != nullptr)
     {
         sSkills.push_back(skill);
@@ -444,23 +444,5 @@ bool Linchong::buyItem2(Armor* equipment)
     {
         cout << "钱不够！你需要" << equipment->getPrice() << "块钱，但是你只有" << gold << "块钱." << endl;
         return false;
-    }
-}
-
-void Linchong::addOffensiveSkill(offensiveSkill* skill)
-{
-    cout << "你学会了：" << skill->getName() << endl;
-    if (skill != nullptr)
-    {
-        oSkills.push_back(skill);
-    }
-}
-
-void Linchong::addSupportSkill(supportSkill* skill)
-{
-    cout << "你学会了：" << skill->getName() << endl;
-    if (skill != nullptr)
-    {
-        sSkills.push_back(skill);
     }
 }

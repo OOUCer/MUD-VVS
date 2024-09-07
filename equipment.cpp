@@ -33,7 +33,7 @@ void Equipment::loadFromFile(ifstream& file) {
     file.read((char*)&price, sizeof(price));  // ∂¡»°º€∏Ò
 }
 
-Weapon::Weapon() : attack(0), speed(0), hitRate(0.0), attackType(" ") {}
+Weapon::Weapon() :Equipment(" ", 0), attack(0), speed(0), hitRate(0.0), attackType(" ") {}
 
 Weapon::Weapon(string name, int price, int attack, int speed, float hitRate, string attackType)
     : Equipment(name, price), attack(attack), speed(speed), hitRate(hitRate), attackType(attackType) {}

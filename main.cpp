@@ -83,7 +83,7 @@ int change2();
 int main(){
     //≤‚ ‘’Ω∂∑œµÕ≥________________
     //pre_battle(enemies,  lc, character1,character2);
-    int flag;
+    int flag;  
     //PlaySound(TEXT("309764634.wav"), NULL, SND_FILENAME | SND_ASYNC);
     PlaySound(TEXT("309764634.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
 
