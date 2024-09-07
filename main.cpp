@@ -80,8 +80,8 @@ int main(){
     int flag;
     //PlaySound(TEXT("309764634.wav"), NULL, SND_FILENAME | SND_ASYNC);
     PlaySound(TEXT("309764634.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
-    lc->addWeapon(&weapon_default);//林冲添加默认武器
-    lc->addArmor(&armor_default);//林冲添加默认装备
+    lc->addWeapon(&weapon_default);
+    lc->addArmor(&armor_default);
     // 这里可以添加你的主程序代码  
     // 由于使用了SND_ASYNC，所以音乐会在后台播放  
     // 如果你想让程序等待直到用户关闭，可以使用以下代码  
