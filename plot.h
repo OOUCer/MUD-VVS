@@ -71,8 +71,9 @@ public:
     // 运行养成系统
     //void runDevelopmentSystem();
 
+    void PrintScene11();
         // 处理在武馆中的训练操作
-    void handleTraining();
+    int handleTraining();
 
     // 处理在商店中的购买操作
     void handleShop();
@@ -81,7 +82,7 @@ public:
     void handleDock();
 
     // 处理在营房的休息操作
-    void handleBarracks();
+    int handleBarracks();
 
     // 打印带延迟的文本
     void PrintWithDelay(const string& text, int delayMs);

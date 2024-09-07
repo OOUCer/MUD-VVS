@@ -2,7 +2,7 @@
 #include"Windows.h"
 #include"map11.h"
 using namespace std;
-void Map::showmap(int placeflag)//传入地址标志int型，人物在哪，哪个地点就显示为红色。
+void Map::showmap(int placeflag)//传入地址标志int型，人物在哪，哪个地点就显示为红色。//1茶酒店，2武馆，3营房4草料场5市井，6码头，7古庙
 {
     cout << "             ";
     if (placeflag == 1)

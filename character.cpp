@@ -238,6 +238,7 @@ void Character::addSkill(Skill* skill)
 
 void Character::addOffensiveSkill(offensiveSkill* skill)
 {
+    cout << "你学会了：" << skill->getName() << endl;
     if (skill != nullptr)
     {
         oSkills.push_back(skill);
@@ -245,6 +246,7 @@ void Character::addOffensiveSkill(offensiveSkill* skill)
 }
 
 void Character::addSupportSkill(supportSkill* skill){
+    cout << "你学会了：" << skill->getName() << endl;
     if (skill != nullptr)
     {
         sSkills.push_back(skill);
@@ -293,11 +295,27 @@ int Linchong::getPlace() const
     return place;
 }
 
-void Linchong::changePlace()
+void Linchong::changePlace(int t)
 {
     cout << "你要去哪：" << endl;
     int placeflag;
     cin >> placeflag;
+    if (t == 6)
+    {
+        if (placeflag != 5)
+        {
+            cout << "这里可没有酒喝" << endl;
+            changePlace(t);
+        }
+    }
+    if (t <= 3)
+    {
+        if (placeflag == 4 || placeflag == 5 || placeflag == 7)
+        {
+            cout << "此地点暂未开放，请重新选择" << endl;
+            changePlace(t);
+        }
+    }
     cout << "你来到了";
     place = placeflag;
     switch (place)
@@ -315,10 +333,10 @@ void Linchong::changePlace()
         cout << "草料场";
         break;
     case 5:
-        cout << "茶酒店";
+        cout << "市井";
         break;
     case 6:
-        cout << "市井";
+        cout << "码头";
         break;
     case 7:
         cout << "古庙";

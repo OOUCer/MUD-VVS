@@ -101,7 +101,7 @@ void Plot::PrintScene(int scene) {
 
 int Plot::Printchange(int t)//返回0，进入下一幕，返回1，进入菜单
 {
-    Sleep(1000);
+    Sleep(500);
     string input;
     int flag=0;
     std::cout << "1.下一幕             2.更多" << endl;
@@ -128,21 +128,22 @@ void Plot::PrintScene1() {
     SetConsoleColor(12);
     PrintWithDelay("“营前开了个茶酒店。因讨钱过来，遇见恩人。恩人不知为何事在这里？”\n", 30);
     SetConsoleColor(7);
-    PrintWithDelay("林冲指着脸上道：", 30);
+    PrintWithDelay("你指着脸上道：", 30);
     SetConsoleColor(12);
     PrintWithDelay("“我因恶了高太尉，生事陷害，受了一场官司，刺配到这里。不想今日到此遇见。”\n", 30);
     SetConsoleColor(7);
-    PrintWithDelay("李小二请林冲到家里面坐定，叫妻子出来拜了恩人。\n两口儿欢喜道：", 30);
+    PrintWithDelay("李小二请你到家里面坐定，叫妻子出来拜了恩人。\n两口儿欢喜道：", 30);
     SetConsoleColor(12);
     PrintWithDelay("“夫妻二人正没个亲眷，今日得恩人到来，便是从天降下。”\n", 30);
     SetConsoleColor(10);
     PrintWithDelay("盘缠+100。\n", 30);
     if (character) {
         int gold = character->getGold();
-        character->setGold(gold + 50);
+        character->setGold(gold + 100);
     }
-    SetConsoleColor(6);
-    PrintWithDelay("【恭喜你解锁茶酒店：提供食宿和信息交流，有时有物品掉落】\n", 30);
+    /*SetConsoleColor(6);
+    PrintWithDelay("【恭喜你解锁茶酒店：提供食宿和信息交流，有时有物品掉落】\n", 30);*/
+    SetConsoleColor(15);
 }
 
 
@@ -151,13 +152,13 @@ void Plot::PrintScene2() {
     PrintWithDelay("第二幕：\n十一月初六，中午，寒风刺骨，街道上的雪被踩得松软。\n", 30);
     placeflag = 1;
     SetConsoleColor(7);
-    PrintWithDelay("林冲走入茶酒店。\n", 30);
+    PrintWithDelay("你走入茶酒店。\n", 30);
     SetConsoleColor(7);
     PrintWithDelay("李小二慌忙道：", 30);
     SetConsoleColor(12);
     PrintWithDelay("“却才有个东京来的人，在我这里请管营、差拨吃了半日酒。临了只见差拨应道：‘都在我两个身上，好歹要结果了他。’那两个把一包金银，都与管营、差拨。\n", 30);
     SetConsoleColor(7);
-    PrintWithDelay("林冲听了，大惊道：", 30);
+    PrintWithDelay("你听了，大惊道：", 30);
     SetConsoleColor(12);
     PrintWithDelay("“这三十岁的正是陆虞候。那泼贱贼也敢来这里害我！休要撞着我，只教他骨肉为泥！”\n", 30);
     SetConsoleColor(7);
@@ -175,13 +176,29 @@ void Plot::PrintScene2() {
 
 void Plot::PrintScene3() {
     SetConsoleColor(8);
-    PrintWithDelay("第三幕:\n你走出茶酒店，走在雪地上。商店的木门敞开着，店内透出柔和的灯光。\n", 30);
+    PrintWithDelay("第三幕:\n你正与李小二交谈时，一位鹤发童颜的老者走了进来，手中拿一算命的招牌。\n", 30);
     SetConsoleColor(7);
-    placeflag = 5;
+    PrintWithDelay("是否花费20盘缠算一下命？\n", 30);
+    cout << "1.是          2.否" << endl;
+    int flag;
+    cin >> flag;
+    if (flag == 1)
+    {
+        PrintWithDelay("老者摸了摸手骨，又看了看面像，大惊到：“这位小兄弟，你八天后会有血光之灾，到时向东而行，其灾必解。”\n", 30);
+        cout << "盘缠 - 20" << endl;
+        if (character) {
+            int gold = character->getGold();
+            character->setGold(gold - 20);
+        }
+    }
+    else
+        PrintWithDelay("你没理会那位老者，但他却一把将其拉过，摸了摸手骨，又看了看面像，大惊到：“这位小兄弟，你八天后会有血光之灾，到时向东而行，其灾必解。”\n", 30);
+    PrintWithDelay("你拜谢老者，却不必再提。只见你与李小二又交谈两句后，便离开了茶酒店\n", 30);
+    /*placeflag = 5;
     PrintWithDelay("商店：", 30);
     SetConsoleColor(12);
     PrintWithDelay("“叫卖~~客官要买些什么？”\n", 30);
-    PrintWithDelay("【恭喜你解锁市井：市井中有各种商店，可以购买各种物品，补给和装备。】\n", 30);
+    PrintWithDelay("【恭喜你解锁市井：市井中有各种商店，可以购买各种物品，补给和装备。】\n", 30);*/
     // 选择部分
     // 开始八天的养成系统
     //runDevelopmentSystem();
@@ -194,8 +211,9 @@ void Plot::PrintScene4() {
     PrintWithDelay("管营抬起头来，目光严肃：", 30);
     SetConsoleColor(12);
     PrintWithDelay("“此间东门外十五里，有座大军草场，有些常例钱取觅。如今，我抬举你去替那老军来守天王堂。”\n", 30);
-    SetConsoleColor(6);
-    PrintWithDelay("【恭喜你解锁草料场：负责存放草料，可以在这里获得物品。】\n", 30);
+  /*  SetConsoleColor(6);
+    PrintWithDelay("【恭喜你解锁草料场：负责存放草料，可以在这里获得物品。】\n", 30);*/
+    SetConsoleColor(7);
 }
 
 void Plot::PrintScene5() {
@@ -203,7 +221,7 @@ void Plot::PrintScene5() {
     SetConsoleColor(8); // 灰色
     PrintWithDelay("第五幕：\n你和差拨一同来到东门外。推开门时，木头发出轻微的吱呀声。屋内布满了草。\n", 30);
     SetConsoleColor(7); // 白色
-    PrintWithDelay("差拨走到老军面前，派他交割。老军吩咐林冲看管草堆后收拾行李，临了说道：\n", 30);
+    PrintWithDelay("差拨走到老军面前，派他交割。老军吩咐你看管草堆后收拾行李，临了说道：\n", 30);
     SetConsoleColor(12); // 红色
     PrintWithDelay("“火盆、锅子、碗、碟，都借与你。”\n", 30);
     SetConsoleColor(7); // 白色
@@ -211,97 +229,110 @@ void Plot::PrintScene5() {
     SetConsoleColor(12); // 红色
     PrintWithDelay("“你若买酒吃时，只出草场，投东大路去三二里，便有市井。”\n", 30);
     placeflag = 5;
-    SetConsoleColor(10); // 绿色
-    PrintWithDelay("火盆+1，葫芦+1。\n", 30);
-    SetConsoleColor(6);
+    SetConsoleColor(7); // 白色
+    //PrintWithDelay("火盆+1，葫芦+1。\n", 30);
+    //SetConsoleColor(6);
 }
 
 void Plot::PrintScene6() {
     SetConsoleColor(8); // 灰色
     placeflag = 4;
-    PrintWithDelay("第六幕：\n就坐下生些焰火起来，地炉里的火焰渐渐升起。仰面看那草屋时，四下被朔风吹撼，摇振得动。\n", 30);
+    PrintWithDelay("第六幕：\n你就坐下生些焰火起来，地炉里的火焰渐渐升起。仰面看那草屋时，四下被朔风吹撼，摇振得动。\n", 30);
     SetConsoleColor(7); // 白色
-    PrintWithDelay("林冲：", 30);
+    PrintWithDelay("你：", 30);
     SetConsoleColor(12); // 红色
     PrintWithDelay("“要不那市井沽点酒？”\n", 30);
-    placeflag = 5;
-    SetConsoleColor(6);
+    //placeflag = 5;
+    SetConsoleColor(7);
 }
 
 void Plot::PrintScene7() {
     SetConsoleColor(8); // 灰色
     placeflag = 7;
-    PrintWithDelay("第七幕：\n行不上半里多路，看见一所古庙。\n进入庙中，发现几名小偷正在里面，周围的烛光映照出他们阴险的面孔。\n你心里一紧，准备进入战斗。\n", 30);
-    SetConsoleColor(6);
-    PrintWithDelay("【恭喜你解锁古庙：避难场所，但也可能遇到危险从而引起战斗。】\n", 30);
+    PrintWithDelay("第七幕：\n行不上半里多路，看见一所古庙。\n进入庙中，发现几名土匪正在里面，周围的烛光映照出他们阴险的面孔。\n你心里一紧，准备进入战斗。\n", 30);
+    //SetConsoleColor(6);
+    //PrintWithDelay("【恭喜你解锁古庙：避难场所，但也可能遇到危险从而引起战斗。】\n", 30);
+    //SetConsoleColor(7); // 白色
+    //placeflag = 5;
+    //PrintWithDelay("店家：", 30);
+    //SetConsoleColor(12); // 红色
+    //PrintWithDelay("“天气寒冷，且酌三杯，权当接风。”", 30);
+    //SetConsoleColor(10); // 白色
+    //PrintWithDelay("店家切一盘熟牛肉，烫一壶热酒，请你吃。\n", 30);
+    //SetConsoleColor(10); // 绿色
+    //PrintWithDelay("状态回满\n", 30);
+    //SetConsoleColor(6);
+}
+
+void Plot::PrintScene11()
+{
     SetConsoleColor(7); // 白色
     placeflag = 5;
     PrintWithDelay("店家：", 30);
     SetConsoleColor(12); // 红色
     PrintWithDelay("“天气寒冷，且酌三杯，权当接风。”", 30);
     SetConsoleColor(10); // 白色
-    PrintWithDelay("店家切一盘熟牛肉，烫一壶热酒，请林冲吃。\n", 30);
+    PrintWithDelay("店家切一盘熟牛肉，烫一壶热酒，请你吃。\n", 30);
     SetConsoleColor(10); // 绿色
-    PrintWithDelay("购买酒恢复生命30点，牛肉恢复体力40点。\n", 30);
-    SetConsoleColor(6);
+    PrintWithDelay("状态回满\n", 30);
+    SetConsoleColor(7);
 }
-
 void Plot::PrintScene8() {
     placeflag = 4;
     SetConsoleColor(8); // 灰色
-    PrintWithDelay("第八幕：\n腊月初一，你回到草场，只见两间草厅已经被厚重的积雪压倒，雪花在空中纷飞，覆盖了一切。\n", 30);
+    PrintWithDelay("第八幕：\n你回到草场，只见两间草厅已经被厚重的积雪压倒，雪花在空中纷飞，覆盖了一切。\n", 30);
     SetConsoleColor(7); // 白色
-    PrintWithDelay("林冲：", 30);
+    PrintWithDelay("你：", 30);
     SetConsoleColor(12); // 红色
     PrintWithDelay("“去古庙对付一晚。”\n", 30);
     placeflag = 7;
-    SetConsoleColor(6);
+    SetConsoleColor(7);
 }
 
 void Plot::PrintScene9() {
     SetConsoleColor(8); // 灰色
-    PrintWithDelay("第九幕：\n腊月初二早晨，回到草场，火焰在草场上蔓延。\n你握紧手中的枪，准备开门扑灭火焰。就在此时，你听到前方传来急促的脚步声和低声对话。\n你听那三个人时，一个是差拨，一个是陆虞候，一个是富安。\n", 30);
+    PrintWithDelay("第九幕：\n正在休息时，忽然你望见草料场起火了\n你收拾行李，准备开门扑灭火焰。就在此时，你听到前方传来急促的脚步声和低声对话。\n你听那三个人时，一个是差拨，一个是陆虞候，一个是富安。\n", 30);
     SetConsoleColor(7); // 白色
-    PrintWithDelay("林冲心中一阵惊慌，低声道：”", 30);
+    PrintWithDelay("你心中一阵惊慌，低声道：”", 30);
     SetConsoleColor(12); // 红色
-    PrintWithDelay("“天可怜见林冲！若不是倒了草厅，我准定被这厮们烧死了！”\n", 30);
+    PrintWithDelay("“天可怜见你！若不是倒了草厅，我准定被这厮们烧死了！”\n", 30);
     SetConsoleColor(7); // 白色
     PrintWithDelay("轻轻把石头掇开，挺着花枪,大喝一声：”\n", 30);
     SetConsoleColor(12); // 红色
     PrintWithDelay("“泼贼那里去！”\n", 30);
     SetConsoleColor(10); // 绿色
     PrintWithDelay("进入战斗。\n", 30);
-    SetConsoleColor(6);
+    SetConsoleColor(7);
 }
 
 void Plot::PrintScene10() {
     SetConsoleColor(8); // 灰色
     PrintWithDelay("第十幕：\n凛凛严凝雾气昏，空中祥瑞降纷纷。须臾四野难分路，顷刻千山不见痕。\n银世界，玉乾坤，望中隐隐接昆仑。若还下到三更后，彷佛填平玉帝门。", 30);
-    SetConsoleColor(6);
+    SetConsoleColor(7);
 }
 
 
 
 
-void Plot::handleTraining() {
+int Plot::handleTraining() {
     if (character) {
         int gold = character->getGold();
         int attack = character->getAttack();
         int currentHP = character->getHP();
         int maxHP = character->getMaxHP();
 
-        // 检查体力是否足够
-        if (currentHP < 20) {  // 假设训练需要至少20点体力
-            SetConsoleColor(12);
-            PrintWithDelay("你的体力不足，无法进行训练。\n", 30);
-            SetConsoleColor(7);
-            return;
-        }
+        //// 检查体力是否足够
+        //if (currentHP < 20) {  // 假设训练需要至少20点体力
+        //    SetConsoleColor(12);
+        //    PrintWithDelay("你的体力不足，无法进行训练。\n", 30);
+        //    SetConsoleColor(7);
+        //    return;
+        //}
 
-        // 进行训练相关的逻辑
-        // 更新体力值
-        character->modifyHP(-20);  // 训练消耗 20 点体力
-        character->setGold(gold - 10);  // 训练花费 10 金
+        //// 进行训练相关的逻辑
+        //// 更新体力值
+        //character->modifyHP(-20);  // 训练消耗 20 点体力
+       // character->setGold(gold - 10);  // 训练花费 10 金
 
         SetConsoleColor(8);
         PrintWithDelay("武馆内练习的声音此起彼伏。\n", 30);
@@ -311,12 +342,29 @@ void Plot::handleTraining() {
         PrintWithDelay("“欢迎来到武馆！在这里，你可以通过训练获得强大的技能，提升你的战斗能力。我们的训练包括增加攻击力、防御力、以及一些特殊技能。”\n", 30);
         PrintWithDelay("“请注意，训练会消耗你的体力。如果你的体力不足，将无法继续训练。训练后的体力会恢复到最大体力的一部分。”\n\n", 30);
         SetConsoleColor(7);
-        PrintWithDelay("你在馆内接受了强化训练，感觉自己的能力得到了显著提升。\n", 30);
-
-        character->setAttack(attack + 10);
-        character->setGold(gold - 10);
+        PrintWithDelay("是否花费10盘缠进行训练\n", 30);
+        cout << "1.是           2.否" << endl;
+        int flag;
+        cin >> flag;
+        if (flag == 1)
+        {
+            if (gold < 10)
+            {
+                PrintWithDelay("盘缠不足，请去码头赚钱后再来\n", 30);
+                return 0;
+            }
+            else
+            {
+                PrintWithDelay("你在馆内接受了强化训练，感觉自己的能力得到了显著提升。\n", 30);
+                return 1;
+            }
+        }
+        else
+        {
+            return 0;
+        }
     }
-    SetConsoleColor(6);
+    SetConsoleColor(7);
 }
 
 
@@ -346,10 +394,10 @@ void Plot::handleDock() {
     SetConsoleColor(10); // 绿色
     PrintWithDelay("钱包+50\n", 30);
     character->setGold(gold + 50);
-    SetConsoleColor(6);
+    SetConsoleColor(7);
 }
 
-void Plot::handleBarracks() {
+int Plot::handleBarracks() {
     if (character) {
         bool running = true;
         while (running) {
@@ -363,58 +411,59 @@ void Plot::handleBarracks() {
             SetConsoleColor(7); // 白色
             PrintWithDelay("请选择你想要的操作：\n", 30);
             SetConsoleColor(10); // 绿色
-            PrintWithDelay("1. 休息一下\n", 30);
-            PrintWithDelay("2. 查看当前状态\n", 30);
-            PrintWithDelay("3. 返回主菜单\n", 30);
-            SetConsoleColor(6); // 黄色
-            PrintWithDelay("请输入选项（1-3）：", 30);
+           // PrintWithDelay("1. 休息一下\n", 30);
+            PrintWithDelay("1. 查看菜单\n", 30);
+            cout << "            ";
+            PrintWithDelay("2. 离开\n", 30);
+            //SetConsoleColor(6); // 黄色
+            //PrintWithDelay("请输入选项（1-3）：", 30);
 
             int choice;
             cin >> choice;
+            return choice;
+            //switch (choice) {
+            //case 1:
+            //    // 休息功能
+            //    SetConsoleColor(8); // 灰色
+            //    PrintWithDelay("你决定休息一下，为接下来的挑战做准备。\n", 30);
+            //    SetConsoleColor(10); // 绿色
+            //    PrintWithDelay("最大生命值+10。 生命值+50。（不超过最大生命值）\n", 30);
+            //    character->setMaxHP(maxHP + 10);
+            //    character->modifyHP(50);
 
-            switch (choice) {
-            case 1:
-                // 休息功能
-                SetConsoleColor(8); // 灰色
-                PrintWithDelay("你决定休息一下，为接下来的挑战做准备。\n", 30);
-                SetConsoleColor(10); // 绿色
-                PrintWithDelay("最大生命值+10。 生命值+50。（不超过最大生命值）\n", 30);
-                character->setMaxHP(maxHP + 10);
-                character->modifyHP(50);
+            //    // 确保当前HP不超过最大HP
+            //    if (character->getHP() > character->getMaxHP()) {
+            //        character->setHP(character->getMaxHP());
+            //    }
+            //    break;
 
-                // 确保当前HP不超过最大HP
-                if (character->getHP() > character->getMaxHP()) {
-                    character->setHP(character->getMaxHP());
-                }
-                break;
+            //case 2:
+            //    // 查看当前状态
+            //    SetConsoleColor(8); // 灰色
+            //    PrintWithDelay("当前状态如下：\n", 30);
+            //    SetConsoleColor(7); // 白色
+            //    PrintWithDelay("生命值：", 30);
+            //    cout << character->getHP() << "/" << character->getMaxHP() << "\n";
+            //    PrintWithDelay("金币：", 30);
+            //    cout << character->getGold() << "\n";
+            //    SetConsoleColor(6); // 黄色
+            //    PrintWithDelay("按任意键返回菜单...", 30);
+            //    cin.ignore(); // 等待用户输入
+            //    cin.get();
+            //    break;
 
-            case 2:
-                // 查看当前状态
-                SetConsoleColor(8); // 灰色
-                PrintWithDelay("当前状态如下：\n", 30);
-                SetConsoleColor(7); // 白色
-                PrintWithDelay("生命值：", 30);
-                cout << character->getHP() << "/" << character->getMaxHP() << "\n";
-                PrintWithDelay("金币：", 30);
-                cout << character->getGold() << "\n";
-                SetConsoleColor(6); // 黄色
-                PrintWithDelay("按任意键返回菜单...", 30);
-                cin.ignore(); // 等待用户输入
-                cin.get();
-                break;
+            //case 3:
+            //    // 返回主菜单
+            //    running = false;
+            //    break;
 
-            case 3:
-                // 返回主菜单
-                running = false;
-                break;
-
-            default:
-                // 无效选项
-                SetConsoleColor(12); // 红色
-                PrintWithDelay("无效选项，请重新选择。\n", 30);
-                SetConsoleColor(6); // 黄色
-                break;
-            }
+            //default:
+            //    // 无效选项
+            //    SetConsoleColor(12); // 红色
+            //    PrintWithDelay("无效选项，请重新选择。\n", 30);
+            //    SetConsoleColor(6); // 黄色
+            //    break;
+            //}
         }
     }
 }

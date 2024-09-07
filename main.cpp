@@ -20,7 +20,8 @@ struct Time
 void SetConsoleColor(int);
 void shopset(Linchong &linchong);
 void runDevelopmentSystem();//养成系统
-void pre_battle(vector<Character*>&enemies, Linchong* lc, Character* character1, Character* character2);//战斗系统准备
+void pre_battle1(vector<Character*>& enemies, Linchong* lc, Character* character1, Character* character2,Character* character3);
+void pre_battle2(vector<Character*>&enemies, Linchong* lc, Character* character1, Character* character2);//战斗系统准备
 void change1();//幕与幕之间衔接
 int change2();
 
@@ -85,18 +86,39 @@ int main(){
 
 
 
-   // ui.ready();
-    //ui.showstart();//开始界面
-   // plot.PrintPrompt();//按ctrl加速
-   // plot.PrintPrologue();//前情提要
-    //plot.PrintScene(t.plottime);//第一幕
-
-
-    //change1();
-    shopset(linchong);
+    ui.ready();
+    ui.showstart();//开始界面
+    plot.PrintPrompt();//按ctrl加速
+    plot.PrintPrologue();//前情提要
+    plot.PrintScene(t.plottime);//第一幕
     change1();
+    plot.PrintScene(t.plottime);//第二幕
+    map1.showmap(1);
+    change1();
+    plot.PrintScene(t.plottime);//3
+    change1();
+    runDevelopmentSystem();//养成
+    plot.PrintScene(t.plottime);//4
+    change1();
+    plot.PrintScene(t.plottime);//5
+    change1();
+    plot.PrintScene(t.plottime);//6
+    map1.showmap(lc->getPlace());
+    lc->changePlace(t.plottime);
+    plot.PrintScene11();
+    change1();
+    plot.PrintScene(t.plottime);//7
+    pre_battle2(enemies, lc, smallen1, smallen2);
+    change1(); 
+    plot.PrintScene(t.plottime);//8
+    change1(); 
+    plot.PrintScene(t.plottime);//9
+    pre_battle1(enemies, lc, bigen1, bigen2, bigen3);
+    change1(); 
+    plot.PrintScene(t.plottime);//10
+    cout << "游戏结束" << endl;
     //plot.PrintScene(2);
-
+    ui.showstart();//主菜单
     return 0;
 
 }
@@ -133,10 +155,97 @@ void runDevelopmentSystem() {
             break;
         }
         map1.showmap(lc->getPlace());
-        lc->changePlace();
-        plot.PrintWithDelay("请输入下面的标号：\n可选项：1.武馆（提升武力）\n2.商店（酒，牛肉，刀，枪，弓箭，鲁智深的禅杖，杨志的戒刀）\n3.码头（运货赚钱,钱可以用来购买商店中的武器和防具）\n4.营房（提升体力）\n", 30);
+        lc->changePlace(t.plottime);
+        switch (lc->getPlace())//1茶酒店，2武馆，3营房4草料场5市井，6码头，7古庙
+        {
+        case 1:
+            shopset(linchong); ++day; break;
+        case 2:
+            if (plot.handleTraining())
+            {
+                switch (day)
+                {
+                case 1:
+                    lc->addOffensiveSkill(&skill_1); break;
+                case 2:
+                    lc->addOffensiveSkill(&skill_2); lc->addSupportSkill(&skill_11); break;
+                case 3:
+                    lc->addOffensiveSkill(&skill_3); lc->addSupportSkill(&skill_12); break;
+                case 4:
+                    lc->addOffensiveSkill(&skill_6); lc->addSupportSkill(&skill_13); break;
+                case 5:
+                    lc->addSupportSkill(&skill_7); lc->addSupportSkill(&skill_16); break;
+                case 6:
+                    lc->addSupportSkill(&skill_8); lc->addSupportSkill(&skill_17); break;
+                case 7:
+                    lc->addSupportSkill(&skill_9); break;
+                case 8:
+                    lc->addSupportSkill(&skill_10); break;
+                default:
+                    break;
+                }
+            }
+            ; ++day; break;
+        case 3:
+            if (plot.handleBarracks() == 1)
+            {
+                change2();
+            }
+            break;
+        case 6:
+            plot.handleDock(); ++day; break;
+        default:
+            break;
+        }
+        //plot.PrintWithDelay("请输入下面的标号：\n可选项：1.武馆（提升武力）\n2.商店（酒，牛肉，刀，枪，弓箭，鲁智深的禅杖，杨志的戒刀）\n3.码头（运货赚钱,钱可以用来购买商店中的武器和防具）\n4.营房（提升体力）\n", 30);
         
     }
+}
+
+void pre_battle1(vector<Character*>& enemies, Linchong* lc, Character* character1, Character* character2, Character* character3)
+{
+    enemies.push_back(character1);
+    enemies.push_back(character2);
+    enemies.push_back(character3);
+    //lc->addOffensiveSkill(&skill_1);
+    //lc->addOffensiveSkill(&skill_2);
+    //lc->addOffensiveSkill(&skill_3);
+    ////lc->addOffensiveSkill(&skill_4);
+    ////lc->addOffensiveSkill(&skill_5);
+    //lc->addOffensiveSkill(&skill_6);
+
+    //lc->addSupportSkill(&skill_7);
+    //lc->addSupportSkill(&skill_8);
+    //lc->addSupportSkill(&skill_9);
+    //lc->addSupportSkill(&skill_10);
+    //lc->addSupportSkill(&skill_11);
+    //lc->addSupportSkill(&skill_12);
+    //lc->addSupportSkill(&skill_13);
+    ////lc->addSupportSkill(&skill_14);
+    ////lc->addSupportSkill(&skill_15);
+    //lc->addSupportSkill(&skill_16);
+    //lc->addSupportSkill(&skill_17);
+
+
+    character1->addWeapon(&weapon1);
+    character1->addArmor(&armor1);
+    character1->addOffensiveSkill(&skill_1);
+    character1->addSupportSkill(&skill_8);
+
+    character2->addWeapon(&weapon5);
+    character2->addArmor(&armor2);
+    character2->addOffensiveSkill(&skill_6);
+    character2->addSupportSkill(&skill_10);
+
+    character3->addWeapon(&weapon4);
+    character3->addArmor(&armor3);
+    character3->addOffensiveSkill(&skill_3);
+    character3->addSupportSkill(&skill_9);
+    Battle battle_1;
+    battle_1.startBattle(lc, &enemies);
+    delete character1;
+    delete character2;
+    delete character3;
 }
 
 
@@ -146,29 +255,25 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
 {
     enemies.push_back(character1);
     enemies.push_back(character2);
-    lc->addOffensiveSkill(&skill_1);
-    lc->addOffensiveSkill(&skill_2);
-    lc->addOffensiveSkill(&skill_3);
-    //lc->addOffensiveSkill(&skill_4);
-    //lc->addOffensiveSkill(&skill_5);
-    lc->addOffensiveSkill(&skill_6);
+    //lc->addOffensiveSkill(&skill_1);
+    //lc->addOffensiveSkill(&skill_2);
+    //lc->addOffensiveSkill(&skill_3);
+    ////lc->addOffensiveSkill(&skill_4);
+    ////lc->addOffensiveSkill(&skill_5);
+    //lc->addOffensiveSkill(&skill_6);
 
-    lc->addSupportSkill(&skill_7);
-    lc->addSupportSkill(&skill_8);
-    lc->addSupportSkill(&skill_9);
-    lc->addSupportSkill(&skill_10);
-    lc->addSupportSkill(&skill_11);
-    lc->addSupportSkill(&skill_12);
-    lc->addSupportSkill(&skill_13);
-    //lc->addSupportSkill(&skill_14);
-    //lc->addSupportSkill(&skill_15);
-    lc->addSupportSkill(&skill_16);
-    lc->addSupportSkill(&skill_17);
+    //lc->addSupportSkill(&skill_7);
+    //lc->addSupportSkill(&skill_8);
+    //lc->addSupportSkill(&skill_9);
+    //lc->addSupportSkill(&skill_10);
+    //lc->addSupportSkill(&skill_11);
+    //lc->addSupportSkill(&skill_12);
+    //lc->addSupportSkill(&skill_13);
+    ////lc->addSupportSkill(&skill_14);
+    ////lc->addSupportSkill(&skill_15);
+    //lc->addSupportSkill(&skill_16);
+    //lc->addSupportSkill(&skill_17);
 
-    lc->addArmor(&armor3);
-    lc->addWeapon(&weapon4);
-    lc->addWeapon(&weapon2);
-    lc->addWeapon(&weapon3);
 
     character1->addWeapon(&weapon1);
     character1->addArmor(&armor1);
@@ -243,7 +348,8 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
 
      int n;
      int id;
-     cout << "购买武器选择1，购买防具选择2，退出选择0" << endl;
+     plot.PrintWithDelay("李小二：“走一走，瞧一瞧！恩人您买点什么？”", 30);
+     cout << "0.退出          1.武器           2.防具" << endl;
      while (cin >> n) {
          if (n == 0) break;
          if (n == 1) {
@@ -277,7 +383,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
              }
          }
 
-         cout << "购买武器选择1，购买防具选择2，退出选择0" << endl;
+         cout << "0.退出          1.武器           2.防具" << endl;
      }
 
  }

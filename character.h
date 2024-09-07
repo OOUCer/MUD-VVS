@@ -188,7 +188,7 @@ public:
     int getPlace() const;
 
     // 改变角色的位置（具体实现依赖于游戏逻辑）  
-    void changePlace();
+    void changePlace(int t);
 
     // 打印角色拥有的所有武器  
     void printWeapons() const;
