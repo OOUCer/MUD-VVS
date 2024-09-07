@@ -14,9 +14,6 @@ struct Time
 };
 
 
-
-
-
 void SetConsoleColor(int);
 void shopset(Linchong &linchong);
 void runDevelopmentSystem();//Ñø³ÉÏµÍ³
@@ -46,7 +43,7 @@ int change2();
     Weapon weapon2("µ¶", 20, 30, 10, 0.1, "Õ¶»÷");
     Weapon weapon3("¹÷", 20, 30, 10, 0.1, "´ò»÷");
     Weapon weapon4("Ã¬", 20, 30, 10, 0.1, "¹áÍ¨");
-    Weapon weapon5("Ç¹", 20, 30, 10, 0.1, "¹áÍ¨");
+    Weapon weapon5_lc("»¨Ç¹", 20, 30, 10, 0.1, "¹áÍ¨");
 
     Armor armor1("·À¾ß1", 20, 30, 100, "Õ¶»÷");
     Armor armor2("·À¾ß2", 20, 30, 100, "¹áÍ¨");
@@ -331,12 +328,12 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
   }
  void shopset(Linchong& linchong) {
 
-     Weapon dajian(" ´ó½£ ", 50, 300, 0, 0.4, " ¿³»÷ ");
-     Weapon tiegun(" Ìú¹÷ ", 50, 200, 5, 0.6, " ´ò»÷ ");
-     Weapon cijian(" ´Ì½£ ", 50, 110, 10, 1, " ¹áÍ¨ ");
-     Armor bujia(" ²¼¼× ", 50, 50, 100, " ¹áÍ¨ ");
-     Armor tiejia(" Ìú¼× ", 100, 100, 200, " ´ò»÷ ");
-     Armor linjia(" ÁÛ¼× ", 200, 200, 400, " ¿³»÷ ");
+     Weapon dajian("´ó½£", 50, 300, 0, 0.4, "Õ¶»÷");
+     Weapon tiegun("Ìú¹÷", 50, 200, 5, 0.6, "´ò»÷");
+     Weapon cijian("´Ì½£", 50, 110, 10, 1, "¹áÍ¨");
+     Armor bujia("²¼¼×", 50, 50, 100, "¹áÍ¨");
+     Armor tiejia("Ìú¼×", 100, 100, 200, "´ò»÷");
+     Armor linjia("ÁÛ¼×", 200, 200, 400, "Õ¶»÷");
 
 
      shop1.addItem(make_unique<Weapon>(dajian));
