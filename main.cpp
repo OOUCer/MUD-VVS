@@ -126,12 +126,13 @@ int main(){
             plot.PrintScene(t.plottime);//6
             map1.showmap(lc->getPlace());
             lc->changePlace(t.plottime);
+            pre_battle2(enemies, lc, smallen1, smallen2);
             plot.PrintScene11();
             change1(); 
             break;
         case 7:
             plot.PrintScene(t.plottime);//7
-            pre_battle2(enemies, lc, smallen1, smallen2);
+            
             change1(); 
             break;
         case 8:
