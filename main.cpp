@@ -1,4 +1,4 @@
-// MUDÉè¼Æ.cpp : ´ËÎÄ¼ş°üº¬ "main" º¯Êı¡£³ÌĞòÖ´ĞĞ½«ÔÚ´Ë´¦¿ªÊ¼²¢½áÊø¡£
+// MUDè®¾è®¡.cpp : æ­¤æ–‡ä»¶åŒ…å« "main" å‡½æ•°ã€‚ç¨‹åºæ‰§è¡Œå°†åœ¨æ­¤å¤„å¼€å§‹å¹¶ç»“æŸã€‚
 //
 #include <iostream>
 #include"battle.h"
@@ -9,7 +9,7 @@
 #include"shop.h"
 #include <windows.h>  
 #include <mmsystem.h>  
-#pragma comment(lib, "winmm.lib")  // Á´½Óµ½winmm.lib
+#pragma comment(lib, "winmm.lib")  // é“¾æ¥åˆ°winmm.lib
 struct Time
 {
     int plottime = 1;
@@ -19,16 +19,15 @@ struct Time
 
 void SetConsoleColor(int);
 void shopset(Linchong &linchong);
-void runDevelopmentSystem();//Ñø³ÉÏµÍ³
+void runDevelopmentSystem();//å…»æˆç³»ç»Ÿ
 void pre_battle1(vector<Character*>& enemies, Linchong* lc, Character* character1, Character* character2,Character* character3);
-void pre_battle2(vector<Character*>&enemies, Linchong* lc, Character* character1, Character* character2);//Õ½¶·ÏµÍ³×¼±¸
-void change1();//Ä»ÓëÄ»Ö®¼äÏÎ½Ó
+void pre_battle2(vector<Character*>&enemies, Linchong* lc, Character* character1, Character* character2);//æˆ˜æ–—ç³»ç»Ÿå‡†å¤‡
+void change1();//å¹•ä¸å¹•ä¹‹é—´è¡”æ¥
 int change2();
-
 
     UI ui;
     Map map1;
-    Linchong linchong("ÁÖ³å", 80, 800, 800, 10, 80, 0.8, 0.1, 100, true, 100);
+    Linchong linchong("æ—å†²", 80, 800, 800, 10, 80, 0.8, 0.1, 100, true, 100);
     Linchong* lc = &linchong;
     Plot plot(lc);
     Time t;
@@ -36,71 +35,66 @@ int change2();
     Shop1 shop1;
     Shop2 shop2;
     vector<Character*> enemies;
-    Character* smallen1 = new Character("ÍÁ·Ë1", 10, 100, 100, 10, 10, 0.8, 0.01, 100, false);
-    Character* smallen2 = new Character("ÍÁ·Ë2", 10, 100, 100, 10, 10, 0.8, 0.01, 100, false);
-    Character* bigen1 = new Character("¹ÜÓª", 40, 200, 200, 30, 20, 0.8, 0.01, 0, false);
-    Character* bigen2 = new Character("²î²¦", 40, 200, 200, 30, 20, 0.8, 0.01, 0, false);
-    Character* bigen3 = new Character("Â½Óİºî", 80, 500, 500, 50, 20, 0.8, 0.01, 0, false);
+    Character* smallen1 = new Character("åœŸåŒª1", 10, 100, 100, 10, 10, 0.8, 0.01, 100, false);
+    Character* smallen2 = new Character("åœŸåŒª2", 10, 100, 100, 10, 10, 0.8, 0.01, 100, false);
+    Character* bigen1 = new Character("ç®¡è¥", 40, 200, 200, 30, 20, 0.8, 0.01, 0, false);
+    Character* bigen2 = new Character("å·®æ‹¨", 40, 200, 200, 30, 20, 0.8, 0.01, 0, false);
+    Character* bigen3 = new Character("é™†è™ä¾¯", 80, 500, 500, 50, 20, 0.8, 0.01, 0, false);
 
-    Weapon weapon1("½£", 20, 30, 10, 0.1, "Õ¶»÷");
-    Weapon weapon2("µ¶", 20, 30, 10, 0.1, "Õ¶»÷");
-    Weapon weapon3("¹÷", 20, 30, 10, 0.1, "´ò»÷");
-    Weapon weapon4("Ã¬", 20, 30, 10, 0.1, "¹áÍ¨");
-    Weapon weapon5("»¨Ç¹", 20, 30, 10, 0.1, "¹áÍ¨");
+    Weapon weapon1("å‰‘", 20, 30, 10, 0.1, "æ–©å‡»");
+    Weapon weapon2("åˆ€", 20, 30, 10, 0.1, "æ–©å‡»");
+    Weapon weapon3("æ£", 20, 30, 10, 0.1, "æ‰“å‡»");
+    Weapon weapon4("çŸ›", 20, 30, 10, 0.1, "è´¯é€š");
+    Weapon weapon5("èŠ±æª", 20, 30, 10, 0.1, "è´¯é€š");
+    Weapon weapon_default("æ—å†²çš„èŠ±æª", 20, 30, 10, 0.1, "è´¯é€š");
 
-    Armor armor1("·À¾ß1", 20, 30, 100, "Õ¶»÷");
-    Armor armor2("·À¾ß2", 20, 30, 100, "¹áÍ¨");
-    Armor armor3("·À¾ß3", 20, 30, 100, "´ò»÷");
+    Armor armor1("é˜²å…·1", 20, 30, 100, "æ–©å‡»");
+    Armor armor2("é˜²å…·2", 20, 30, 100, "è´¯é€š");
+    Armor armor3("é˜²å…·3", 20, 30, 100, "æ‰“å‡»");
+    Armor armor_default("æ—å†²çš„å¸ƒç”²", 20, 30, 100, "æ–©å‡»");
 
-    offensiveSkill skill_1("µ¶¹â½£Ó°", "·è¿ñÁ¬»÷6´Î£¬×Ô¼º·ÀÓùÏÂ½µ", false, true, true, 0.7, "Õ¶»÷", 6, selfDefenseBoost, 0.8, 3);
-    offensiveSkill skill_2("Ç¹³öÈçÁú", "µ¥Ìå¹¥»÷5´Î£¬×Ô¼º¹¥»÷ÏÂ½µ", false, true, true, 0.8, "¹áÍ¨", 5, selfAttackBoost, 0.8, 3);
-    offensiveSkill skill_3("µÇ·æÏİÕó", "¾Ş¶îÈ«Ìå¹¥»÷£¬ËğºÄ×Ô¼ºÉúÃü", true, true, true, 3.4, "´ò»÷", 1, selfDamage, 0.2, 0);
-    //offensiveSkill skill_4("¹âÈĞ±©Óê", "È«Ìå¹¥»÷3´Î", true, true, true, 0.7, "Õ¶»÷", 3, none, 0, 0);
-    //offensiveSkill skill_5("·ÛËé´ò»÷", "·ÛËéµ¥Ìå·ÀÓù", false, true, false, 2.2, "´ò»÷", 1, giveDefenseWeaken, 0.8, 3);
-    offensiveSkill skill_6("ºáÉ¨Ç§¾ü", "È«Ìå¹¥»÷2´Î", true, true, true, 1.2, "¹áÍ¨", 2, none, 0, 0);
+    offensiveSkill skill_1("åˆ€å…‰å‰‘å½±", "ç–¯ç‹‚è¿å‡»6æ¬¡ï¼Œè‡ªå·±é˜²å¾¡ä¸‹é™", false, true, true, 0.7, "æ–©å‡»", 6, selfDefenseBoost, 0.8, 3);
+    offensiveSkill skill_2("æªå‡ºå¦‚é¾™", "å•ä½“æ”»å‡»5æ¬¡ï¼Œè‡ªå·±æ”»å‡»ä¸‹é™", false, true, true, 0.8, "è´¯é€š", 5, selfAttackBoost, 0.8, 3);
+    offensiveSkill skill_3("ç™»é”‹é™·é˜µ", "å·¨é¢å…¨ä½“æ”»å‡»ï¼ŒæŸè€—è‡ªå·±ç”Ÿå‘½", true, true, true, 3.4, "æ‰“å‡»", 1, selfDamage, 0.2, 0);
+    //offensiveSkill skill_4("å…‰åˆƒæš´é›¨", "å…¨ä½“æ”»å‡»3æ¬¡", true, true, true, 0.7, "æ–©å‡»", 3, none, 0, 0);
+    //offensiveSkill skill_5("ç²‰ç¢æ‰“å‡»", "ç²‰ç¢å•ä½“é˜²å¾¡", false, true, false, 2.2, "æ‰“å‡»", 1, giveDefenseWeaken, 0.8, 3);
+    offensiveSkill skill_6("æ¨ªæ‰«åƒå†›", "å…¨ä½“æ”»å‡»2æ¬¡", true, true, true, 1.2, "è´¯é€š", 2, none, 0, 0);
 
-    supportSkill skill_7("ĞİÑøÉúÏ¢", "»Ö¸´ÌåÁ¦£¬×ÔÉíÏİÈë»èÃÔ×´Ì¬", false, false, true, selfComatose, 1, 3);
-    supportSkill skill_8("ÒÔÒİ´ıÀÍ", "ÏÂ»ØºÏÉËº¦ÃÍÔö", false, false, true, selfCharge, 1, 1);
-    supportSkill skill_9("Éí¾­°ÙÕ½", "Ê¶ÆÆ¹¥»÷£¬²»±»»÷ÖĞÈõµã", false, false, true, selfAnticipate, 1, 1);
-    supportSkill skill_10("ĞîÊÆ´ı·¢", "×ÔÉí¹¥»÷Á¦ÉÏÉı", false, false, true, selfAttackBoost, 1.3, 3);
-    supportSkill skill_11("Í­Í·Ìú±Û", "×ÔÉí·ÀÓùÉÏÉı", false, false, true, selfDefenseBoost, 1.3, 3);
-    supportSkill skill_12("¾¼¾¼ÓĞÉñ", "×ÔÉíÃüÖĞÂÊÉÏÉı", false, false, true, selfHitRateBoost, 1.3, 3);
-    supportSkill skill_13("ÉíÇáÈçÑà", "×ÔÉí»Ø±ÜÂÊÉÏÉı", false, false, true, selfEvationBoost, 1.3, 3);
-    //supportSkill skill_14("ÍşÏÅ", "µĞÈË¹¥»÷Á¦ÏÂ½µ", true, false, false, giveAttackWeaken, 0.8, 3);
-    //supportSkill skill_15("ÆÃÉ³", "µĞÈËÃüÖĞÂÊÏÂ½µ", true, false, false, giveHitRateWeaken, 0.8, 3);
-    supportSkill skill_16("×İ±ø½ÙÂÓ", "¿ÉÄÜÊ±µĞÈË»èÃÔ", true, false, false, giveComatose, 0.75, 3);
-    supportSkill skill_17("ÆÆÕóÇú", "Ê¹µĞÈË»Ø±ÜÂÊÏÂ½µ", true, false, false, giveEvationWeaken, 0.7, 3);
-
-
-
-
-
-
-
+    supportSkill skill_7("ä¼‘å…»ç”Ÿæ¯", "æ¢å¤ä½“åŠ›ï¼Œè‡ªèº«é™·å…¥æ˜è¿·çŠ¶æ€", false, false, true, selfComatose, 1, 3);
+    supportSkill skill_8("ä»¥é€¸å¾…åŠ³", "ä¸‹å›åˆä¼¤å®³çŒ›å¢", false, false, true, selfCharge, 1, 1);
+    supportSkill skill_9("èº«ç»ç™¾æˆ˜", "è¯†ç ´æ”»å‡»ï¼Œä¸è¢«å‡»ä¸­å¼±ç‚¹", false, false, true, selfAnticipate, 1, 1);
+    supportSkill skill_10("è“„åŠ¿å¾…å‘", "è‡ªèº«æ”»å‡»åŠ›ä¸Šå‡", false, false, true, selfAttackBoost, 1.3, 3);
+    supportSkill skill_11("é“œå¤´é“è‡‚", "è‡ªèº«é˜²å¾¡ä¸Šå‡", false, false, true, selfDefenseBoost, 1.3, 3);
+    supportSkill skill_12("ç‚¯ç‚¯æœ‰ç¥", "è‡ªèº«å‘½ä¸­ç‡ä¸Šå‡", false, false, true, selfHitRateBoost, 1.3, 3);
+    supportSkill skill_13("èº«è½»å¦‚ç‡•", "è‡ªèº«å›é¿ç‡ä¸Šå‡", false, false, true, selfEvationBoost, 1.3, 3);
+    //supportSkill skill_14("å¨å“", "æ•Œäººæ”»å‡»åŠ›ä¸‹é™", true, false, false, giveAttackWeaken, 0.8, 3);
+    //supportSkill skill_15("æ³¼æ²™", "æ•Œäººå‘½ä¸­ç‡ä¸‹é™", true, false, false, giveHitRateWeaken, 0.8, 3);
+    supportSkill skill_16("çºµå…µåŠ«æ ", "å¯èƒ½æ—¶æ•Œäººæ˜è¿·", true, false, false, giveComatose, 0.75, 3);
+    supportSkill skill_17("ç ´é˜µæ›²", "ä½¿æ•Œäººå›é¿ç‡ä¸‹é™", true, false, false, giveEvationWeaken, 0.7, 3);
 
 
 
 int main(){
-    //²âÊÔÕ½¶·ÏµÍ³________________
+    //æµ‹è¯•æˆ˜æ–—ç³»ç»Ÿ________________
     //pre_battle(enemies,  lc, character1,character2);
     int flag;  
     //PlaySound(TEXT("309764634.wav"), NULL, SND_FILENAME | SND_ASYNC);
     PlaySound(TEXT("309764634.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
 
-    // ÕâÀï¿ÉÒÔÌí¼ÓÄãµÄÖ÷³ÌĞò´úÂë  
-    // ÓÉÓÚÊ¹ÓÃÁËSND_ASYNC£¬ËùÒÔÒôÀÖ»áÔÚºóÌ¨²¥·Å  
-    // Èç¹ûÄãÏëÈÃ³ÌĞòµÈ´ıÖ±µ½ÓÃ»§¹Ø±Õ£¬¿ÉÒÔÊ¹ÓÃÒÔÏÂ´úÂë  
+    // è¿™é‡Œå¯ä»¥æ·»åŠ ä½ çš„ä¸»ç¨‹åºä»£ç   
+    // ç”±äºä½¿ç”¨äº†SND_ASYNCï¼Œæ‰€ä»¥éŸ³ä¹ä¼šåœ¨åå°æ’­æ”¾  
+    // å¦‚æœä½ æƒ³è®©ç¨‹åºç­‰å¾…ç›´åˆ°ç”¨æˆ·å…³é—­ï¼Œå¯ä»¥ä½¿ç”¨ä»¥ä¸‹ä»£ç   
 
     ui.ready();
-    flag=ui.showstart();//¿ªÊ¼½çÃæ
+    flag=ui.showstart();//å¼€å§‹ç•Œé¢
     if (flag == 2)
     {
-        cout << "ÕıÔÚ¼ÓÔØ" << endl;
+        cout << "æ­£åœ¨åŠ è½½" << endl;
         files.loadGame(linchong);
     }
     else if (flag == 3)
     {
-        cout << "ÕıÔÚÍË³ö" << endl;
+        cout << "æ­£åœ¨é€€å‡º" << endl;
         exit(1);
     }
     while(t.plottime<=10)
@@ -108,20 +102,20 @@ int main(){
         switch (t.plottime)
         {
         case 1:
-            plot.PrintPrompt();//°´ctrl¼ÓËÙ
-            plot.PrintPrologue();//Ç°ÇéÌáÒª
-            plot.PrintScene(t.plottime);//µÚÒ»Ä»
+            plot.PrintPrompt();//æŒ‰ctrlåŠ é€Ÿ
+            plot.PrintPrologue();//å‰æƒ…æè¦
+            plot.PrintScene(t.plottime);//ç¬¬ä¸€å¹•
             change1();
             break;
         case 2:
-            plot.PrintScene(t.plottime);//µÚ¶şÄ»
+            plot.PrintScene(t.plottime);//ç¬¬äºŒå¹•
             
             change1(); 
             break;
         case 3:
             plot.PrintScene(t.plottime);//3
             change1();
-            runDevelopmentSystem();//Ñø³É
+            runDevelopmentSystem();//å…»æˆ
             break;
         case 4:
             plot.PrintScene(t.plottime);//4
@@ -159,7 +153,7 @@ int main(){
             break;
         }
     }
-    cout << "ÓÎÏ·½áÊø" << endl;
+    cout << "æ¸¸æˆç»“æŸ" << endl;
     MSG msg;
     while (GetMessage(&msg, NULL, 0, 0)) {
         TranslateMessage(&msg);
@@ -183,25 +177,25 @@ int main(){
 
 
 void runDevelopmentSystem() {
-    while (t.day <= 8) { // ĞŞ¸ÄÎªday <= 8£¬È·±£8ÌìµÄÑø³ÉÏµÍ³
+    while (t.day <= 8) { // ä¿®æ”¹ä¸ºday <= 8ï¼Œç¡®ä¿8å¤©çš„å…»æˆç³»ç»Ÿ
         SetConsoleColor(7);
-        cout << "ÏÖÔÚÊÇÊ®Ò»ÔÂ";
+        cout << "ç°åœ¨æ˜¯åä¸€æœˆ";
         switch (t.day)
         {
-        case 1:cout << "³õÁù" << endl; break;
-        case 2:cout << "³õÆß" << endl; break;
-        case 3:cout << "³õ°Ë" << endl; break;
-        case 4:cout << "³õ¾Å" << endl; break;
-        case 5:cout << "Ê®ÈÕ" << endl; break;
-        case 6:cout << "Ê®Ò»" << endl; break;
-        case 7:cout << "Ê®¶ş" << endl; break;
-        case 8:cout << "Ê®Èı" << endl; break;
+        case 1:cout << "åˆå…­" << endl; break;
+        case 2:cout << "åˆä¸ƒ" << endl; break;
+        case 3:cout << "åˆå…«" << endl; break;
+        case 4:cout << "åˆä¹" << endl; break;
+        case 5:cout << "åæ—¥" << endl; break;
+        case 6:cout << "åä¸€" << endl; break;
+        case 7:cout << "åäºŒ" << endl; break;
+        case 8:cout << "åä¸‰" << endl; break;
         default:
             break;
         }
         map1.showmap(lc->getPlace());
         lc->changePlace(t.plottime);
-        switch (lc->getPlace())//1²è¾Æµê£¬2Îä¹İ£¬3Óª·¿4²İÁÏ³¡5ÊĞ¾®£¬6ÂëÍ·£¬7¹ÅÃí
+        switch (lc->getPlace())//1èŒ¶é…’åº—ï¼Œ2æ­¦é¦†ï¼Œ3è¥æˆ¿4è‰æ–™åœº5å¸‚äº•ï¼Œ6ç å¤´ï¼Œ7å¤åº™
         {
         case 1:
             shopset(linchong); ++t.day; break;
@@ -242,7 +236,7 @@ void runDevelopmentSystem() {
         default:
             break;
         }
-        //plot.PrintWithDelay("ÇëÊäÈëÏÂÃæµÄ±êºÅ£º\n¿ÉÑ¡Ïî£º1.Îä¹İ£¨ÌáÉıÎäÁ¦£©\n2.ÉÌµê£¨¾Æ£¬Å£Èâ£¬µ¶£¬Ç¹£¬¹­¼ı£¬Â³ÖÇÉîµÄìøÕÈ£¬ÑîÖ¾µÄ½äµ¶£©\n3.ÂëÍ·£¨ÔË»õ×¬Ç®,Ç®¿ÉÒÔÓÃÀ´¹ºÂòÉÌµêÖĞµÄÎäÆ÷ºÍ·À¾ß£©\n4.Óª·¿£¨ÌáÉıÌåÁ¦£©\n", 30);
+        //plot.PrintWithDelay("è¯·è¾“å…¥ä¸‹é¢çš„æ ‡å·ï¼š\nå¯é€‰é¡¹ï¼š1.æ­¦é¦†ï¼ˆæå‡æ­¦åŠ›ï¼‰\n2.å•†åº—ï¼ˆé…’ï¼Œç‰›è‚‰ï¼Œåˆ€ï¼Œæªï¼Œå¼“ç®­ï¼Œé²æ™ºæ·±çš„ç¦…æ–ï¼Œæ¨å¿—çš„æˆ’åˆ€ï¼‰\n3.ç å¤´ï¼ˆè¿è´§èµšé’±,é’±å¯ä»¥ç”¨æ¥è´­ä¹°å•†åº—ä¸­çš„æ­¦å™¨å’Œé˜²å…·ï¼‰\n4.è¥æˆ¿ï¼ˆæå‡ä½“åŠ›ï¼‰\n", 30);
         
     }
 }
@@ -318,18 +312,18 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      int f= ui.showmenu();
      int f_func = 0;
     
-     if (f == 1)//ÏÔÊ¾ÊôĞÔ
+     if (f == 1)//æ˜¾ç¤ºå±æ€§
      {
          ui.shuxing(lc);
          change2();
      }
-     if (f == 2)//ÏÔÊ¾±³°ü
+     if (f == 2)//æ˜¾ç¤ºèƒŒåŒ…
      {
          linchong.printWeapons();
          linchong.printArmors();
          change2();
      }
-     if (f == 3)//´æµµ
+     if (f == 3)//å­˜æ¡£
      {
          files.saveGame(linchong);
          change2();
@@ -339,12 +333,12 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
   }
  void shopset(Linchong& linchong) {
 
-     Weapon dajian("´ó½£", 50, 300, 0, 0.4, "Õ¶»÷");
-     Weapon tiegun("Ìú¹÷", 50, 200, 5, 0.6, "´ò»÷");
-     Weapon cijian("´Ì½£", 50, 110, 10, 1, "¹áÍ¨");
-     Armor bujia("²¼¼×", 50, 50, 100, "¹áÍ¨");
-     Armor tiejia("Ìú¼×", 100, 100, 200, "´ò»÷");
-     Armor linjia("ÁÛ¼×", 200, 200, 400, "Õ¶»÷");
+     Weapon dajian("å¤§å‰‘", 50, 300, 0, 0.4, "æ–©å‡»");
+     Weapon tiegun("é“æ£", 50, 200, 5, 0.6, "æ‰“å‡»");
+     Weapon cijian("åˆºå‰‘", 50, 110, 10, 1, "è´¯é€š");
+     Armor bujia("å¸ƒç”²", 50, 50, 100, "è´¯é€š");
+     Armor tiejia("é“ç”²", 100, 100, 200, "æ‰“å‡»");
+     Armor linjia("é³ç”²", 200, 200, 400, "æ–©å‡»");
 
 
      shop1.addItem(make_unique<Weapon>(dajian));
@@ -356,52 +350,52 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
 
      int n;
      int id;
-     plot.PrintWithDelay("ÀîĞ¡¶ş£º¡°×ßÒ»×ß£¬ÇÆÒ»ÇÆ£¡¶÷ÈËÄúÂòµãÊ²Ã´£¿¡±\n", 30);
-     cout << "0.ÍË³ö          1.ÎäÆ÷           2.·À¾ß" << endl;
+     plot.PrintWithDelay("æå°äºŒï¼šâ€œèµ°ä¸€èµ°ï¼Œç§ä¸€ç§ï¼æ©äººæ‚¨ä¹°ç‚¹ä»€ä¹ˆï¼Ÿâ€\n", 30);
+     cout << "0.é€€å‡º          1.æ­¦å™¨           2.é˜²å…·" << endl;
      while (cin >> n) {
-         if (n == 0) break;
+         if (n == 0) {
+             plot.PrintWithDelay("æå°äºŒï¼šâ€œå¥½å˜ï¼æ©äººæ…¢èµ°ï¼â€\n", 30);
+             break;
+         }
          if (n == 1) {
              shop1.listItems();
-             cout << "ÇëÑ¡ÔñÄãÒª¹ºÂòµÄÎäÆ÷ĞòºÅ,ÍË³öÑ¡Ôñ0" << endl;
+             cout << "è¯·é€‰æ‹©ä½ è¦è´­ä¹°çš„æ­¦å™¨åºå·,é€€å‡ºé€‰æ‹©0" << endl;
              while (cin >> id) {
-                 // ³¢ÊÔ¹ºÂòÎïÆ·  
+                 // å°è¯•è´­ä¹°ç‰©å“  
                  if (id == 0) {
-                     system("cls");
                      break;
                  }
-                 if (shop1.buyItem(linchong, id - 1)) { // ³¢ÊÔ¹ºÂòË÷ÒıÎª0µÄÎïÆ·£¨Sword£©  
-                     shop1.listItems(); // ÔÙ´ÎÁĞ³öÎïÆ·ÒÔ²é¿´±ä»¯  
+                 if (shop1.buyItem(linchong, id - 1)) { // å°è¯•è´­ä¹°ç´¢å¼•ä¸º0çš„ç‰©å“ï¼ˆSwordï¼‰  
+                     shop1.listItems(); // å†æ¬¡åˆ—å‡ºç‰©å“ä»¥æŸ¥çœ‹å˜åŒ–  
                  }
-                 cout << "ÇëÑ¡ÔñÄãÒª¹ºÂòµÄÎäÆ÷ĞòºÅ£¬ÍË³öÑ¡Ôñ0" << endl;
+                 cout << "è¯·é€‰æ‹©ä½ è¦è´­ä¹°çš„æ­¦å™¨åºå·ï¼Œé€€å‡ºé€‰æ‹©0" << endl;
              }
          }
          if (n == 2) {
              shop2.listItems();
-             cout << "ÇëÑ¡ÔñÄãÒª¹ºÂòµÄ·À¾ßĞòºÅ£¬ÍË³öÑ¡Ôñ0" << endl;
+             cout << "è¯·é€‰æ‹©ä½ è¦è´­ä¹°çš„é˜²å…·åºå·ï¼Œé€€å‡ºé€‰æ‹©0" << endl;
              while (cin >> id) {
-                 // ³¢ÊÔ¹ºÂòÎïÆ·  
+                 // å°è¯•è´­ä¹°ç‰©å“  
                  if (id == 0) {
-                     system("cls");
                      break;
                  }
-                 if (shop2.buyItem(linchong, id - 1)) { // ³¢ÊÔ¹ºÂòË÷ÒıÎª0µÄÎïÆ·£¨Sword£©  
-                     shop2.listItems(); // ÔÙ´ÎÁĞ³öÎïÆ·ÒÔ²é¿´±ä»¯  
+                 if (shop2.buyItem(linchong, id - 1)) { // å°è¯•è´­ä¹°ç´¢å¼•ä¸º0çš„ç‰©å“ï¼ˆSwordï¼‰  
+                     shop2.listItems(); // å†æ¬¡åˆ—å‡ºç‰©å“ä»¥æŸ¥çœ‹å˜åŒ–  
                  }
-                 cout << "ÇëÑ¡ÔñÄãÒª¹ºÂòµÄ·À¾ßĞòºÅ£¬ÍË³öÑ¡Ôñ0" << endl;
+                 cout << "è¯·é€‰æ‹©ä½ è¦è´­ä¹°çš„é˜²å…·åºå·ï¼Œé€€å‡ºé€‰æ‹©0" << endl;
              }
          }
-
-         cout << "0.ÍË³ö          1.ÎäÆ÷           2.·À¾ß" << endl;
+         cout << "0.é€€å‡º          1.æ­¦å™¨           2.é˜²å…·" << endl;
      }
 
  }
 
-// ÔËĞĞ³ÌĞò: Ctrl + F5 »òµ÷ÊÔ >¡°¿ªÊ¼Ö´ĞĞ(²»µ÷ÊÔ)¡±²Ëµ¥
-// µ÷ÊÔ³ÌĞò: F5 »òµ÷ÊÔ >¡°¿ªÊ¼µ÷ÊÔ¡±²Ëµ¥
-// ÈëÃÅÊ¹ÓÃ¼¼ÇÉ: 
-//   1. Ê¹ÓÃ½â¾ö·½°¸×ÊÔ´¹ÜÀíÆ÷´°¿ÚÌí¼Ó/¹ÜÀíÎÄ¼ş
-//   2. Ê¹ÓÃÍÅ¶Ó×ÊÔ´¹ÜÀíÆ÷´°¿ÚÁ¬½Óµ½Ô´´úÂë¹ÜÀí
-//   3. Ê¹ÓÃÊä³ö´°¿Ú²é¿´Éú³ÉÊä³öºÍÆäËûÏûÏ¢
-//   4. Ê¹ÓÃ´íÎóÁĞ±í´°¿Ú²é¿´´íÎó
-//   5. ×ªµ½¡°ÏîÄ¿¡±>¡°Ìí¼ÓĞÂÏî¡±ÒÔ´´½¨ĞÂµÄ´úÂëÎÄ¼ş£¬»ò×ªµ½¡°ÏîÄ¿¡±>¡°Ìí¼ÓÏÖÓĞÏî¡±ÒÔ½«ÏÖÓĞ´úÂëÎÄ¼şÌí¼Óµ½ÏîÄ¿
-//   6. ½«À´£¬ÈôÒªÔÙ´Î´ò¿ª´ËÏîÄ¿£¬Çë×ªµ½¡°ÎÄ¼ş¡±>¡°´ò¿ª¡±>¡°ÏîÄ¿¡±²¢Ñ¡Ôñ .sln ÎÄ¼ş
+// è¿è¡Œç¨‹åº: Ctrl + F5 æˆ–è°ƒè¯• >â€œå¼€å§‹æ‰§è¡Œ(ä¸è°ƒè¯•)â€èœå•
+// è°ƒè¯•ç¨‹åº: F5 æˆ–è°ƒè¯• >â€œå¼€å§‹è°ƒè¯•â€èœå•
+// å…¥é—¨ä½¿ç”¨æŠ€å·§: 
+//   1. ä½¿ç”¨è§£å†³æ–¹æ¡ˆèµ„æºç®¡ç†å™¨çª—å£æ·»åŠ /ç®¡ç†æ–‡ä»¶
+//   2. ä½¿ç”¨å›¢é˜Ÿèµ„æºç®¡ç†å™¨çª—å£è¿æ¥åˆ°æºä»£ç ç®¡ç†
+//   3. ä½¿ç”¨è¾“å‡ºçª—å£æŸ¥çœ‹ç”Ÿæˆè¾“å‡ºå’Œå…¶ä»–æ¶ˆæ¯
+//   4. ä½¿ç”¨é”™è¯¯åˆ—è¡¨çª—å£æŸ¥çœ‹é”™è¯¯
+//   5. è½¬åˆ°â€œé¡¹ç›®â€>â€œæ·»åŠ æ–°é¡¹â€ä»¥åˆ›å»ºæ–°çš„ä»£ç æ–‡ä»¶ï¼Œæˆ–è½¬åˆ°â€œé¡¹ç›®â€>â€œæ·»åŠ ç°æœ‰é¡¹â€ä»¥å°†ç°æœ‰ä»£ç æ–‡ä»¶æ·»åŠ åˆ°é¡¹ç›®
+//   6. å°†æ¥ï¼Œè‹¥è¦å†æ¬¡æ‰“å¼€æ­¤é¡¹ç›®ï¼Œè¯·è½¬åˆ°â€œæ–‡ä»¶â€>â€œæ‰“å¼€â€>â€œé¡¹ç›®â€å¹¶é€‰æ‹© .sln æ–‡ä»¶

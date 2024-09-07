@@ -10,7 +10,7 @@ void Shop1::listItems() const { // 只列出前三个物品
 	size_t count = 0;
 	for (const auto& equipment : inventory) {
 		if (count >= 3) break; // 只列出前三个  
-		cout << equipment->getName() << ": " << equipment->getDescription() << " Price: " << equipment->getPrice() << endl;
+		cout << equipment->getName() << ": " << equipment->getDescription() << " 价格: " << equipment->getPrice() << endl;
 		++count;
 	}
 }
@@ -35,7 +35,7 @@ void Shop2::listItems() const { // 只列出前三个物品
 	size_t count = 0;
 	for (const auto& equipment : inventory) {
 		if (count >= 3) break; // 只列出前三个  
-		cout << equipment->getName() << ": " << equipment->getDescription() << " Price: " << equipment->getPrice() << endl;
+		cout << equipment->getName() << ": " << equipment->getDescription() << " 价格: " << equipment->getPrice() << endl;
 		++count;
 	}
 }
