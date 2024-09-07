@@ -84,7 +84,7 @@ int main(){
     //测试战斗系统________________
     //pre_battle(enemies,  lc, character1,character2);
     int flag;
-    PlaySound(TEXT("2301442833.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    PlaySound(TEXT("309764634.wav"), NULL, SND_FILENAME | SND_ASYNC);
     ui.ready();
     flag=ui.showstart();//开始界面
     if (flag == 2)
