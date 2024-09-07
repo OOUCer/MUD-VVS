@@ -84,7 +84,13 @@ int main(){
     //测试战斗系统________________
     //pre_battle(enemies,  lc, character1,character2);
     int flag;
-    PlaySound(TEXT("309764634.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    //PlaySound(TEXT("309764634.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    PlaySound(TEXT("309764634.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+
+    // 这里可以添加你的主程序代码  
+    // 由于使用了SND_ASYNC，所以音乐会在后台播放  
+    // 如果你想让程序等待直到用户关闭，可以使用以下代码  
+
     ui.ready();
     flag=ui.showstart();//开始界面
     if (flag == 2)
@@ -135,7 +141,6 @@ int main(){
             break;
         case 7:
             plot.PrintScene(t.plottime);//7
-            
             change1(); 
             break;
         case 8:
@@ -155,6 +160,11 @@ int main(){
         }
     }
     cout << "游戏结束" << endl;
+    MSG msg;
+    while (GetMessage(&msg, NULL, 0, 0)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
     return 0;
 
 }
