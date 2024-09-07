@@ -82,40 +82,71 @@ int main(){
     //pre_battle(enemies,  lc, character1,character2);
 
 
-
+    int flag;
     ui.ready();
-    ui.showstart();//开始界面
-    plot.PrintPrompt();//按ctrl加速
-    plot.PrintPrologue();//前情提要
-    plot.PrintScene(t.plottime);//第一幕
-    change1();
-    plot.PrintScene(t.plottime);//第二幕
-    map1.showmap(1);
-    change1();
-    plot.PrintScene(t.plottime);//3
-    change1();
-    runDevelopmentSystem();//养成
-    plot.PrintScene(t.plottime);//4
-    change1();
-    plot.PrintScene(t.plottime);//5
-    change1();
-    plot.PrintScene(t.plottime);//6
-    map1.showmap(lc->getPlace());
-    lc->changePlace(t.plottime);
-    plot.PrintScene11();
-    change1();
-    plot.PrintScene(t.plottime);//7
-    pre_battle2(enemies, lc, smallen1, smallen2);
-    change1(); 
-    plot.PrintScene(t.plottime);//8
-    change1(); 
-    plot.PrintScene(t.plottime);//9
-    pre_battle1(enemies, lc, bigen1, bigen2, bigen3);
-    change1(); 
-    plot.PrintScene(t.plottime);//10
+    flag=ui.showstart();//开始界面
+    if (flag == 2)
+    {
+        cout << "正在加载" << endl;
+        files.loadGame(linchong);
+    }
+    while(t.plottime<=10)
+    {
+        switch (t.plottime)
+        {
+        case 1:
+            plot.PrintPrompt();//按ctrl加速
+            plot.PrintPrologue();//前情提要
+            plot.PrintScene(t.plottime);//第一幕
+            change1();
+            break;
+        case 2:
+            plot.PrintScene(t.plottime);//第二幕
+            
+            change1(); 
+            break;
+        case 3:
+            plot.PrintScene(t.plottime);//3
+            change1();
+            runDevelopmentSystem();//养成
+            break;
+        case 4:
+            plot.PrintScene(t.plottime);//4
+            change1(); 
+            break;
+        case 5:
+            plot.PrintScene(t.plottime);//5
+            change1(); 
+            break;
+        case 6:
+            plot.PrintScene(t.plottime);//6
+            map1.showmap(lc->getPlace());
+            lc->changePlace(t.plottime);
+            plot.PrintScene11();
+            change1(); 
+            break;
+        case 7:
+            plot.PrintScene(t.plottime);//7
+            pre_battle2(enemies, lc, smallen1, smallen2);
+            change1(); 
+            break;
+        case 8:
+            plot.PrintScene(t.plottime);//8
+            change1(); 
+            break;
+        case 9:
+            plot.PrintScene(t.plottime);//9
+            pre_battle1(enemies, lc, bigen1, bigen2, bigen3);
+            change1(); break;
+        case 10:
+            plot.PrintScene(t.plottime);//10
+            ++t.plottime;
+            break;
+        default:
+            break;
+        }
+    }
     cout << "游戏结束" << endl;
-    //plot.PrintScene(2);
-    ui.showstart();//主菜单
     return 0;
 
 }
@@ -136,7 +167,7 @@ int main(){
 void runDevelopmentSystem() {
     int day = 1;
     while (day <= 8) { // 修改为day <= 8，确保8天的养成系统
-        SetConsoleColor(1);
+        SetConsoleColor(7);
         cout << "现在是十一月";
         switch (day)
         {
@@ -204,25 +235,6 @@ void pre_battle1(vector<Character*>& enemies, Linchong* lc, Character* character
     enemies.push_back(character1);
     enemies.push_back(character2);
     enemies.push_back(character3);
-    //lc->addOffensiveSkill(&skill_1);
-    //lc->addOffensiveSkill(&skill_2);
-    //lc->addOffensiveSkill(&skill_3);
-    ////lc->addOffensiveSkill(&skill_4);
-    ////lc->addOffensiveSkill(&skill_5);
-    //lc->addOffensiveSkill(&skill_6);
-
-    //lc->addSupportSkill(&skill_7);
-    //lc->addSupportSkill(&skill_8);
-    //lc->addSupportSkill(&skill_9);
-    //lc->addSupportSkill(&skill_10);
-    //lc->addSupportSkill(&skill_11);
-    //lc->addSupportSkill(&skill_12);
-    //lc->addSupportSkill(&skill_13);
-    ////lc->addSupportSkill(&skill_14);
-    ////lc->addSupportSkill(&skill_15);
-    //lc->addSupportSkill(&skill_16);
-    //lc->addSupportSkill(&skill_17);
-
 
     character1->addWeapon(&weapon1);
     character1->addArmor(&armor1);
@@ -252,25 +264,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
 {
     enemies.push_back(character1);
     enemies.push_back(character2);
-    //lc->addOffensiveSkill(&skill_1);
-    //lc->addOffensiveSkill(&skill_2);
-    //lc->addOffensiveSkill(&skill_3);
-    ////lc->addOffensiveSkill(&skill_4);
-    ////lc->addOffensiveSkill(&skill_5);
-    //lc->addOffensiveSkill(&skill_6);
-
-    //lc->addSupportSkill(&skill_7);
-    //lc->addSupportSkill(&skill_8);
-    //lc->addSupportSkill(&skill_9);
-    //lc->addSupportSkill(&skill_10);
-    //lc->addSupportSkill(&skill_11);
-    //lc->addSupportSkill(&skill_12);
-    //lc->addSupportSkill(&skill_13);
-    ////lc->addSupportSkill(&skill_14);
-    ////lc->addSupportSkill(&skill_15);
-    //lc->addSupportSkill(&skill_16);
-    //lc->addSupportSkill(&skill_17);
-
+ 
 
     character1->addWeapon(&weapon1);
     character1->addArmor(&armor1);
@@ -345,7 +339,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
 
      int n;
      int id;
-     plot.PrintWithDelay("李小二：“走一走，瞧一瞧！恩人您买点什么？”", 30);
+     plot.PrintWithDelay("李小二：“走一走，瞧一瞧！恩人您买点什么？\n”", 30);
      cout << "0.退出          1.武器           2.防具" << endl;
      while (cin >> n) {
          if (n == 0) break;

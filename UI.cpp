@@ -121,6 +121,8 @@ int UI::showstart() {
     cout << "请注意，如果未保存游戏就退出，会导致游戏进度丢失" << endl;
     int flag;
     cin >> flag;
+    if (flag > 3 || flag < 1)
+        flag=showstart();
     return flag;
 }
 

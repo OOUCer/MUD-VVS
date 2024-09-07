@@ -100,7 +100,7 @@ public:
     Plot() = default;
 
     //打印过场
-    int Printchange(int);//返回0，进入下一幕，返回1，进入菜单。传入时间
+    int Printchange(int&);//返回0，进入下一幕，返回1，进入菜单。传入时间
 };
 
 #endif // PLOT_H

@@ -99,7 +99,7 @@ void Plot::PrintScene(int scene) {
     }
 }
 
-int Plot::Printchange(int t)//返回0，进入下一幕，返回1，进入菜单
+int Plot::Printchange(int& t)//返回0，进入下一幕，返回1，进入菜单
 {
     Sleep(500);
     string input;
@@ -164,14 +164,14 @@ void Plot::PrintScene2() {
     SetConsoleColor(7);
     PrintWithDelay("李小二道：", 30);
     SetConsoleColor(12);
-    PrintWithDelay("“只要提防他便了。恩人，这是这里的地图，还请收下。建议恩人去街上商店上买点防身用品。”\n", 30);
+    PrintWithDelay("“只要提防他便了。恩人，这是这里的地图，还请收下。”\n", 30);
     SetConsoleColor(6);
     Map map2;
     map2.showmap(1);
     SetConsoleColor(7);
     PrintWithDelay("李小二道：", 30);
     PrintWithDelay("“这地图上标红色的，便是恩人目前所在的地方。恩人来小人的茶酒馆来可以休息回复体力，买点东西。去武馆可以提升武力，学习技能。去码头可以赚钱。”\n", 30);
-    SetConsoleColor(6);
+    SetConsoleColor(7);
 }
 
 void Plot::PrintScene3() {
@@ -184,7 +184,7 @@ void Plot::PrintScene3() {
     cin >> flag;
     if (flag == 1)
     {
-        PrintWithDelay("老者摸了摸手骨，又看了看面像，大惊到：“这位小兄弟，你八天后会有血光之灾，到时向东而行，其灾必解。”\n", 30);
+        PrintWithDelay("老者摸了摸手骨，又看了看面像，大惊到：“这位小兄弟，你八天后,也便是十一月十四，会有血光之灾，到时向东而行，其灾必解。”\n", 30);
         cout << "盘缠 - 20" << endl;
         if (character) {
             int gold = character->getGold();
@@ -192,7 +192,7 @@ void Plot::PrintScene3() {
         }
     }
     else
-        PrintWithDelay("你没理会那位老者，但他却一把将其拉过，摸了摸手骨，又看了看面像，大惊到：“这位小兄弟，你八天后会有血光之灾，到时向东而行，其灾必解。”\n", 30);
+        PrintWithDelay("你没理会那位老者，但他却一把将其拉过，摸了摸手骨，又看了看面像，大惊到：“这位小兄弟，你八天后，也便是十一月十四，会有血光之灾，到时向东而行，其灾必解。”\n", 30);
     PrintWithDelay("你拜谢老者，却不必再提。只见你与李小二又交谈两句后，便离开了茶酒店\n", 30);
     /*placeflag = 5;
     PrintWithDelay("商店：", 30);
@@ -306,8 +306,43 @@ void Plot::PrintScene9() {
 }
 
 void Plot::PrintScene10() {
+    system("cls");
     SetConsoleColor(8); // 灰色
-    PrintWithDelay("第十幕：\n凛凛严凝雾气昏，空中祥瑞降纷纷。须臾四野难分路，顷刻千山不见痕。\n银世界，玉乾坤，望中隐隐接昆仑。若还下到三更后，彷佛填平玉帝门。", 30);
+    //PrintWithDelay("\n凛凛严凝雾气昏，空中祥瑞降纷纷。\n须臾四野难分路，顷刻千山不见痕。\n银世界，玉乾坤，望中隐隐接昆仑。\n若还下到三更后，彷佛填平玉帝门。", 30);
+    for (int i = 0; i < 29; i++)
+        cout << " ";
+    cout << "--------------------------------------------" << endl;;
+    for (int i = 0; i < 36; i++)
+        cout << " ";
+    PrintWithDelay("凛凛严凝雾气昏，空中祥瑞降纷纷。", 500);
+    //cout << "天理昭昭不可诬，莫将奸恶作良图。";
+    for (int i = 0; i < 36; i++)
+        cout << " ";
+    cout << endl;
+
+    for (int i = 0; i < 36; i++)
+        cout << " ";
+    PrintWithDelay("须臾四野难分路，顷刻千山不见痕。", 500);
+    //cout << "若非风雪沽村酒，定被焚烧化朽枯。";
+    for (int i = 0; i < 36; i++)
+        cout << " ";
+    cout << endl;
+
+    for (int i = 0; i < 36; i++)
+        cout << " ";
+    PrintWithDelay("银世界，玉乾坤，望中隐隐接昆仑。", 500);
+    //cout << "自谓冥中施计毒，谁知暗里有神扶。";
+    for (int i = 0; i < 36; i++)
+        cout << " ";
+    cout << endl;
+
+    for (int i = 0; i < 36; i++)
+        cout << " ";
+    PrintWithDelay("若还下到三更后，彷佛填平玉帝门。", 500);
+    //cout << "最怜万死逃生地，真是瑰奇伟丈夫。";
+    for (int i = 0; i < 36; i++)
+        cout << " ";
+    cout << endl;
     SetConsoleColor(7);
 }
 
