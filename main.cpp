@@ -354,14 +354,16 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      plot.PrintWithDelay("李小二：“走一走，瞧一瞧！恩人您买点什么？”\n", 30);
      cout << "0.退出          1.武器           2.防具" << endl;
      while (cin >> n) {
-         if (n == 0) break;
+         if (n == 0) {
+             plot.PrintWithDelay("李小二：“好嘞！恩人慢走！”\n", 30);
+             break;
+         }
          if (n == 1) {
              shop1.listItems();
              cout << "请选择你要购买的武器序号,退出选择0" << endl;
              while (cin >> id) {
                  // 尝试购买物品  
                  if (id == 0) {
-                     system("cls");
                      break;
                  }
                  if (shop1.buyItem(linchong, id - 1)) { // 尝试购买索引为0的物品（Sword）  
@@ -376,7 +378,6 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
              while (cin >> id) {
                  // 尝试购买物品  
                  if (id == 0) {
-                     system("cls");
                      break;
                  }
                  if (shop2.buyItem(linchong, id - 1)) { // 尝试购买索引为0的物品（Sword）  
@@ -385,7 +386,6 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
                  cout << "请选择你要购买的防具序号，退出选择0" << endl;
              }
          }
-
          cout << "0.退出          1.武器           2.防具" << endl;
      }
 
