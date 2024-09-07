@@ -84,7 +84,7 @@ void Plot::PrintPrompt() {
 
 void Plot::PrintPrologue() {
     SetConsoleColor(8);
-    PrintWithDelay("前情提要：壬寅年,你因恶了高太尉，被发配沧州牢城后。由于柴大官人的关系，你得以在城中活动。\n", 30);
+    PrintWithDelay("前情提要：壬寅年,你因恶了高太尉，被陆虞侯和高太尉联手陷害，发配沧州牢城。后由于柴大官人的关系，你得以在城中活动。\n", 30);
     SetConsoleColor(6);
 }
 int placeflag; //placeflag= 1 茶酒店 2 武馆 3 营房 4 草料场 5 市井 6 码头 7 古庙 
@@ -167,11 +167,21 @@ void Plot::PrintScene2() {
     PrintWithDelay("“只要提防他便了。恩人，这是这里的地图，还请收下。”\n", 30);
     SetConsoleColor(6);
     Map map2;
+    cout << endl;
+    cout << endl;
+    cout << endl;
+    Sleep(1000);
+    cout << endl;
+    cout << "输入“ENTER”打开地图"<<endl;
+    getchar();
+    cin.get();
     map2.showmap(1);
     SetConsoleColor(7);
     PrintWithDelay("李小二道：", 30);
-    PrintWithDelay("“这地图上标红色的，便是恩人目前所在的地方。恩人来小人的茶酒馆来可以休息回复体力，买点东西。去武馆可以提升武力，学习技能。去码头可以赚钱。”\n", 30);
+    SetConsoleColor(12);
+    PrintWithDelay("“这地图上标红色的，便是恩人目前所在的地方。”\n“恩人来小人的茶酒馆来可以休息回复体力，买点东西。去武馆可以提升武力，学习技能。去码头可以赚钱。”\n", 30);
     SetConsoleColor(7);
+
 }
 
 void Plot::PrintScene3() {
@@ -184,15 +194,26 @@ void Plot::PrintScene3() {
     cin >> flag;
     if (flag == 1)
     {
-        PrintWithDelay("老者摸了摸手骨，又看了看面像，大惊到：“这位小兄弟，你八天后,也便是十一月十四，会有血光之灾，到时向东而行，其灾必解。”\n", 30);
+        PrintWithDelay("老者摸了摸手骨，又看了看面像，大惊到：\n", 30);
+        SetConsoleColor(12);
+        PrintWithDelay("这位小兄弟，你八天后,也便是十一月十四，会有血光之灾，到时向东而行，其灾必解。”\n", 30);
+        SetConsoleColor(10);
         cout << "盘缠 - 20" << endl;
+        SetConsoleColor(7);
         if (character) {
             int gold = character->getGold();
             character->setGold(gold - 20);
         }
     }
     else
-        PrintWithDelay("你没理会那位老者，但他却一把将其拉过，摸了摸手骨，又看了看面像，大惊到：“这位小兄弟，你八天后，也便是十一月十四，会有血光之灾，到时向东而行，其灾必解。”\n", 30);
+    {
+        SetConsoleColor(7);
+        PrintWithDelay("你没理会那位老者，但他却一把将其拉过，摸了摸手骨，又看了看面像，大惊到：\n", 30);
+        SetConsoleColor(12);
+        PrintWithDelay("这位小兄弟，你八天后,也便是十一月十四，会有血光之灾，到时向东而行，其灾必解。”\n", 30);
+        SetConsoleColor(7);
+        //PrintWithDelay("你没理会那位老者，但他却一把将其拉过，摸了摸手骨，又看了看面像，大惊到：“这位小兄弟，你八天后，也便是十一月十四，会有血光之灾，到时向东而行，其灾必解。”\n", 30);
+    }
     PrintWithDelay("你拜谢老者，却不必再提。只见你与李小二又交谈两句后，便离开了茶酒店\n", 30);
     /*placeflag = 5;
     PrintWithDelay("商店：", 30);
@@ -447,10 +468,10 @@ int Plot::handleBarracks() {
             PrintWithDelay("请选择你想要的操作：\n", 30);
             SetConsoleColor(10); // 绿色
            // PrintWithDelay("1. 休息一下\n", 30);
-            PrintWithDelay("1. 查看菜单\n", 30);
-            cout << "            ";
+            PrintWithDelay("1. 查看菜单", 30);
+            cout << "        ";
             PrintWithDelay("2. 离开\n", 30);
-            //SetConsoleColor(6); // 黄色
+            SetConsoleColor(7); // 黄色
             //PrintWithDelay("请输入选项（1-3）：", 30);
 
             int choice;

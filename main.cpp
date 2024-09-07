@@ -11,6 +11,7 @@
 struct Time
 {
     int plottime = 1;
+    int day = 1;
 };
 
 
@@ -80,8 +81,6 @@ int change2();
 int main(){
     //测试战斗系统________________
     //pre_battle(enemies,  lc, character1,character2);
-
-
     int flag;
     ui.ready();
     flag=ui.showstart();//开始界面
@@ -89,6 +88,11 @@ int main(){
     {
         cout << "正在加载" << endl;
         files.loadGame(linchong);
+    }
+    else if (flag == 3)
+    {
+        cout << "正在退出" << endl;
+        exit(1);
     }
     while(t.plottime<=10)
     {
@@ -165,11 +169,10 @@ int main(){
 
 
 void runDevelopmentSystem() {
-    int day = 1;
-    while (day <= 8) { // 修改为day <= 8，确保8天的养成系统
+    while (t.day <= 8) { // 修改为day <= 8，确保8天的养成系统
         SetConsoleColor(7);
         cout << "现在是十一月";
-        switch (day)
+        switch (t.day)
         {
         case 1:cout << "初六" << endl; break;
         case 2:cout << "初七" << endl; break;
@@ -187,11 +190,11 @@ void runDevelopmentSystem() {
         switch (lc->getPlace())//1茶酒店，2武馆，3营房4草料场5市井，6码头，7古庙
         {
         case 1:
-            shopset(linchong); ++day; break;
+            shopset(linchong); ++t.day; break;
         case 2:
             if (plot.handleTraining())
             {
-                switch (day)
+                switch (t.day)
                 {
                 case 1:
                     lc->addOffensiveSkill(&skill_1); break;
@@ -213,7 +216,7 @@ void runDevelopmentSystem() {
                     break;
                 }
             }
-            ; ++day; break;
+            ; ++t.day; break;
         case 3:
             if (plot.handleBarracks() == 1)
             {
@@ -221,7 +224,7 @@ void runDevelopmentSystem() {
             }
             break;
         case 6:
-            plot.handleDock(); ++day; break;
+            plot.handleDock(); ++t.day; break;
         default:
             break;
         }
@@ -339,7 +342,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
 
      int n;
      int id;
-     plot.PrintWithDelay("李小二：“走一走，瞧一瞧！恩人您买点什么？\n”", 30);
+     plot.PrintWithDelay("李小二：“走一走，瞧一瞧！恩人您买点什么？”\n", 30);
      cout << "0.退出          1.武器           2.防具" << endl;
      while (cin >> n) {
          if (n == 0) break;

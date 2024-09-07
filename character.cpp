@@ -318,6 +318,7 @@ void Linchong::changePlace(int t)
         }
         else
         {
+            cout << endl;
             cout << "你来到了";
             place = placeflag;
             switch (place)
@@ -344,11 +345,13 @@ void Linchong::changePlace(int t)
                 cout << "古庙";
                 break;
             }
+            cout << endl;
         }
     
     }
     else
     {
+        cout << endl;
         cout << "你来到了";
         place = placeflag;
         switch (place)
@@ -375,6 +378,7 @@ void Linchong::changePlace(int t)
             cout << "古庙";
             break;
         }
+        cout << endl;
     }
    // Implement the logic to change the place of the character.
 }

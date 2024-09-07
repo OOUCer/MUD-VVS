@@ -28,7 +28,7 @@ void Map::showmap(int placeflag)//´«ÈëµØÖ·±êÖ¾intĞÍ£¬ÈËÎïÔÚÄÄ£¬ÄÄ¸öµØµã¾ÍÏÔÊ¾Îªº
     if (placeflag == 3)
     {
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED);
-        cout << "3.ÀÎ·¿";
+        cout << "3.Óª·¿";
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
     }
     else
