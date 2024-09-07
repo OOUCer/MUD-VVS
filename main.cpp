@@ -7,7 +7,9 @@
 #include"UI.h"
 #include"Filestore.h"
 #include"shop.h"
-
+#include <windows.h>  
+#include <mmsystem.h>  
+#pragma comment(lib, "winmm.lib")  // 链接到winmm.lib
 struct Time
 {
     int plottime = 1;
@@ -82,6 +84,7 @@ int main(){
     //测试战斗系统________________
     //pre_battle(enemies,  lc, character1,character2);
     int flag;
+    PlaySound(TEXT("2301442833.wav"), NULL, SND_FILENAME | SND_ASYNC);
     ui.ready();
     flag=ui.showstart();//开始界面
     if (flag == 2)
@@ -382,6 +385,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      }
 
  }
+
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单
 // 入门使用技巧: 
