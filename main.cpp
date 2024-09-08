@@ -10,11 +10,11 @@
 #include <windows.h>  
 #include <mmsystem.h>  
 #pragma comment(lib, "winmm.lib")  // 链接到winmm.lib
-struct Time
-{
-    int plottime = 1;
-    int day = 1;
-};
+//struct Time
+//{
+//    int plottime = 1;
+//    int day = 1;
+//};
 
 
 void SetConsoleColor(int);
@@ -90,7 +90,7 @@ int main(){
     if (flag == 2)
     {
         cout << "正在加载" << endl;
-        files.loadGame(linchong);
+        files.loadGame(linchong,t);
     }
     else if (flag == 3)
     {
@@ -321,7 +321,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      }
      if (f == 3)//存档
      {
-         files.saveGame(linchong);
+         files.saveGame(linchong,t);
          change2();
      }
      if (f == 4)

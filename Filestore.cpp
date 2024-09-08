@@ -8,15 +8,18 @@
 using namespace std;
 
 // 保存游戏进度
-void Filestore::saveGame(Linchong& character) {
+void Filestore::saveGame(Linchong& character, const Time& time) {
     ofstream file("savegame.dat", ios::binary);
     if (file.is_open()) {
-        // 保存角色基本属性
+        // 保存角色数据
         file.write((char*)&character, sizeof(Linchong));
 
-        // 保存武器、护甲、技能
+        // 保存武器、护甲和技能
         saveEquipment(*character.getWeapons(), *character.getArmors(), file);
         saveSkills(*character.getoSkills(), *character.getsSkills(), file);
+
+        // 保存 Time 结构体
+        file.write((char*)&time, sizeof(Time));
 
         file.close();
         cout << "游戏已成功存档！" << endl;
@@ -26,16 +29,28 @@ void Filestore::saveGame(Linchong& character) {
     }
 }
 
+
 // 加载游戏进度
-bool Filestore::loadGame(Linchong& character) {
+bool Filestore::loadGame(Linchong& character, Time& time) {
     ifstream file("savegame.dat", ios::binary);
     if (file.is_open()) {
-        // 读取角色基本属性
+        // 读取角色数据
         file.read((char*)&character, sizeof(Linchong));
+        if (file.fail()) {
+            cerr << "读取角色数据失败！" << endl;
+            return false;
+        }
 
-        // 加载武器、护甲、技能
+        // 加载武器、护甲和技能
         loadEquipment(*character.getWeapons(), *character.getArmors(), file);
         loadSkills(*character.getoSkills(), *character.getsSkills(), file);
+
+        // 读取 Time 结构体
+        file.read((char*)&time, sizeof(Time));
+        if (file.fail()) {
+            cerr << "读取 Time 结构体失败！" << endl;
+            return false;
+        }
 
         file.close();
         cout << "游戏已成功加载！" << endl;
@@ -47,43 +62,75 @@ bool Filestore::loadGame(Linchong& character) {
     }
 }
 
-// 保存武器和护甲数据
+// 保存武器和护甲数据  
 void Filestore::saveEquipment(const vector<Weapon*>& weapons, const vector<Armor*>& armors, ofstream& file) {
-    // 保存武器
+    // 保存武器  
     size_t weaponSize = weapons.size();
-    file.write((char*)&weaponSize, sizeof(weaponSize));
+    file.write((char*)&weaponSize, sizeof(weaponSize)); // 写入武器数量
     for (const auto& weapon : weapons) {
-        weapon->saveToFile(file);  // 使用 Weapon 类的 saveToFile 方法保存数据
+        weapon->saveToFile(file);  // 使用 Weapon 类的 saveToFile 方法保存数据  
     }
 
-    // 保存护甲
+    // 保存护甲  
     size_t armorSize = armors.size();
-    file.write((char*)&armorSize, sizeof(armorSize));
+    file.write((char*)&armorSize, sizeof(armorSize)); // 写入护甲数量
     for (const auto& armor : armors) {
-        armor->saveToFile(file);  // 使用 Armor 类的 saveToFile 方法保存数据
+        armor->saveToFile(file);  // 使用 Armor 类的 saveToFile 方法保存数据  
     }
 }
 
-// 加载武器和护甲数据
+// 加载武器和护甲数据  
 void Filestore::loadEquipment(vector<Weapon*>& weapons, vector<Armor*>& armors, ifstream& file) {
+    // 清空现有的武器并释放内存
+    for (auto weapon : weapons) {
+        delete weapon; // 释放每一个 Weapon 对象
+    }
+    weapons.clear(); // 清空向量
+
+    // 清空现有的护甲并释放内存
+    for (auto armor : armors) {
+        delete armor; // 释放每一个 Armor 对象
+    }
+    armors.clear(); // 清空向量
+
     // 加载武器
     size_t weaponSize;
-    file.read((char*)&weaponSize, sizeof(weaponSize));
-    weapons.resize(weaponSize);
+    file.read((char*)&weaponSize, sizeof(weaponSize)); // 读取武器数量
+    if (file.fail()) {
+        cerr << "读取武器数量失败！" << endl;
+        return;
+    }
     for (size_t i = 0; i < weaponSize; ++i) {
-        weapons[i] = new Weapon();
-        weapons[i]->loadFromFile(file);  // 使用 Weapon 类的 loadFromFile 方法加载数据
+        Weapon* weapon = new Weapon(); // 动态分配内存
+        weapon->loadFromFile(file); // 从文件中读取武器数据
+        if (file.fail()) {
+            cerr << "读取武器数据失败！" << endl;
+            delete weapon; // 如果失败，释放已分配的内存
+            return;
+        }
+        weapons.push_back(weapon); // 将武器添加到向量中
     }
 
     // 加载护甲
     size_t armorSize;
-    file.read((char*)&armorSize, sizeof(armorSize));
-    armors.resize(armorSize);
+    file.read((char*)&armorSize, sizeof(armorSize)); // 读取护甲数量
+    if (file.fail()) {
+        cerr << "读取护甲数量失败！" << endl;
+        return;
+    }
     for (size_t i = 0; i < armorSize; ++i) {
-        armors[i] = new Armor();
-        armors[i]->loadFromFile(file);  // 使用 Armor 类的 loadFromFile 方法加载数据
+        Armor* armor = new Armor(); // 动态分配内存
+        armor->loadFromFile(file); // 从文件中读取护甲数据
+        if (file.fail()) {
+            cerr << "读取护甲数据失败！" << endl;
+            delete armor; // 如果失败，释放已分配的内存
+            return;
+        }
+        armors.push_back(armor); // 将护甲添加到向量中
     }
 }
+
+
 
 // 保存技能数据
 void Filestore::saveSkills(const vector<offensiveSkill*>& oSkills, const vector<supportSkill*>& sSkills, ofstream& file) {

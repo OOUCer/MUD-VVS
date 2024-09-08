@@ -64,29 +64,45 @@ void Weapon::describe() const {
 
 void Weapon::saveToFile(ofstream& file) const {
     Equipment::saveToFile(file);  // 保存基类的属性
+
+    // 保存武器的属性
     file.write((char*)&attack, sizeof(attack));  // 写入攻击力
     file.write((char*)&speed, sizeof(speed));  // 写入速度
     file.write((char*)&hitRate, sizeof(hitRate));  // 写入命中率
 
+    // 保存攻击类型 (std::string)
     size_t attackTypeLength = attackType.size();
     file.write((char*)&attackTypeLength, sizeof(attackTypeLength));  // 写入攻击类型长度
-    file.write(attackType.c_str(), attackTypeLength);  // 写入攻击类型
+    file.write(attackType.data(), attackTypeLength);  // 写入攻击类型字符串内容
 }
+
 
 void Weapon::loadFromFile(ifstream& file) {
     Equipment::loadFromFile(file);  // 读取基类的属性
+
+    // 读取武器的属性
     file.read((char*)&attack, sizeof(attack));  // 读取攻击力
     file.read((char*)&speed, sizeof(speed));  // 读取速度
     file.read((char*)&hitRate, sizeof(hitRate));  // 读取命中率
 
+    // 读取攻击类型 (std::string)
     size_t attackTypeLength;
     file.read((char*)&attackTypeLength, sizeof(attackTypeLength));  // 读取攻击类型长度
-    char* attackTypeBuffer = new char[attackTypeLength + 1];
-    file.read(attackTypeBuffer, attackTypeLength);
-    attackTypeBuffer[attackTypeLength] = '\0';
-    attackType = string(attackTypeBuffer);
-    delete[] attackTypeBuffer;
+
+    if (file.fail()) {
+        cerr << "读取攻击类型长度失败！" << endl;
+        return;
+    }
+
+    attackType.resize(attackTypeLength);  // 调整字符串大小
+    file.read(&attackType[0], attackTypeLength);  // 读取字符串内容
+
+    if (file.fail()) {
+        cerr << "读取攻击类型失败！" << endl;
+        return;
+    }
 }
+
 
 Armor::Armor() : defense(0), HP(0), weakness(" ") {}
 

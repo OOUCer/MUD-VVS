@@ -9,7 +9,11 @@
 #include "character.h" // 包含 Character 类的声明
 
 using namespace std;
-
+struct Time
+{
+    int plottime = 1;
+    int day = 1;
+};
 class Plot {
 private:
     bool isCtrlPressed = false;
