@@ -35,11 +35,11 @@ int change2();
     Shop1 shop1;
     Shop2 shop2;
     vector<Character*> enemies;
-    Character* smallen1 = new Character("ÍÁ·Ë1", 40, 800, 1000, 40, 90, 0.8, 0.05, 100, false);
-    Character* smallen2 = new Character("ÍÁ·Ë2", 40, 800, 1000, 40, 30, 0.8, 0.05, 100, false);
-    Character* bigen1 = new Character("¹ÜÓª", 40, 1000, 1200, 40, 40, 0.9, 0.1, 0, false);
-    Character* bigen2 = new Character("²î²¦", 50, 1000, 1200, 40, 60, 0.85, 0.1, 0, false);
-    Character* bigen3 = new Character("Â½ÓÝºî", 60, 1000, 1200, 40, 100, 0.85, 0.15, 0, false);
+    Character* smallen1 = new Character("ÍÁ·Ë1", 40, 700, 700, 30, 90, 0.8, 0.05, 100, false);
+    Character* smallen2 = new Character("ÍÁ·Ë2", 40, 700, 700, 30, 30, 0.8, 0.05, 100, false);
+    Character* bigen1 = new Character("¹ÜÓª", 40, 900, 900, 20, 40, 0.9, 0.1, 0, false);
+    Character* bigen2 = new Character("²î²¦", 40, 900, 1000, 30, 60, 0.85, 0.1, 0, false);
+    Character* bigen3 = new Character("Â½ÓÝºî", 60, 1000, 1000, 40, 100, 0.85, 0.15, 0, false);
 
     Weapon weapon1("½£", 20, 30, 10, 0.1, "Õ¶»÷");
     Weapon weapon2("µ¶", 20, 34, 8, 0.11, "Õ¶»÷");
