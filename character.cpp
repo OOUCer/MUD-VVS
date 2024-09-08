@@ -446,3 +446,15 @@ bool Linchong::buyItem2(Armor* equipment)
         return false;
     }
 }
+
+bool Linchong::buyItem11(Weapon* equipment)
+{
+    weapons.push_back(equipment);
+    return true;
+}
+
+bool Linchong::buyItem22(Armor* equipment)
+{
+    armors.push_back(equipment);
+    return true;
+}

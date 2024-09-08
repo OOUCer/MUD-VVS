@@ -12,7 +12,7 @@
 #pragma comment(lib, "winmm.lib")  // 链接到winmm.lib
 struct Time
 {
-    int plottime = 1;
+    int plottime = 6;
     int day = 1;
 };
 
@@ -80,7 +80,8 @@ int main(){
     int flag;  
     //PlaySound(TEXT("309764634.wav"), NULL, SND_FILENAME | SND_ASYNC);
     PlaySound(TEXT("309764634.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
-
+    lc->buyItem11(&weapon_default);
+    lc->buyItem22(&armor_default);
     // 这里可以添加你的主程序代码  
     // 由于使用了SND_ASYNC，所以音乐会在后台播放  
     // 如果你想让程序等待直到用户关闭，可以使用以下代码  
@@ -129,12 +130,14 @@ int main(){
             plot.PrintScene(t.plottime);//6
             map1.showmap(lc->getPlace());
             lc->changePlace(t.plottime);
-            pre_battle2(enemies, lc, smallen1, smallen2);
-            plot.PrintScene11();
+
             change1(); 
             break;
         case 7:
-            plot.PrintScene(t.plottime);//7
+            plot.PrintScene(t.plottime);
+            pre_battle2(enemies, lc, smallen1, smallen2);
+            plot.PrintScene11();
+            lc->setHP(lc->getMaxHP());
             change1(); 
             break;
         case 8:

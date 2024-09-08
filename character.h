@@ -201,6 +201,9 @@ public:
 
     // 尝试购买一套护甲（具体实现依赖于游戏逻辑，如金币是否足够等）  
     bool buyItem2(Armor* equipment);
+
+    bool buyItem11(Weapon* equipment);
+    bool buyItem22(Armor* equipment);
 };
 
 
