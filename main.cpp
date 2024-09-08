@@ -80,10 +80,10 @@ int main(){
     int flag;  
     //PlaySound(TEXT("309764634.wav"), NULL, SND_FILENAME | SND_ASYNC);
     PlaySound(TEXT("309764634.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
-    lc->buyItem11(&weapon_default);
-    lc->buyItem22(&armor_default);
+    //lc->buyItem11(&weapon_default);
+    //lc->buyItem22(&armor_default);
     // 这里可以添加你的主程序代码  
-    // 由于使用了SND_ASYNC，所以音乐会在后台播放  
+    //由于使用了SND_ASYNC，所以音乐会在后台播放  
     // 如果你想让程序等待直到用户关闭，可以使用以下代码  
 
     ui.ready();
@@ -137,7 +137,6 @@ int main(){
             plot.PrintScene(t.plottime);//6
             map1.showmap(lc->getPlace());
             lc->changePlace(t.plottime);
-
             change1(); 
             break;
         case 7:
