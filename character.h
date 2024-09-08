@@ -157,7 +157,7 @@ public:
 
     // 给角色添加一个技能  
     void addSkill(Skill* skill);
-    void addOffensiveSkill(offensiveSkill* skill);
+    void addOffensiveSkill(offensiveSkill* skill,bool flag);//flag用于判断是否提示
     void addSupportSkill(supportSkill* skill);
 
     // 获取角色当前的所有效果状态  

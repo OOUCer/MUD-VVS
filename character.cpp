@@ -21,7 +21,7 @@ int Character::getAttack() const
     return currentAttack;
 }
 
-void Character::setAttack(int newAttack) { attack = newAttack; }
+void Character::setAttack(int newAttack) { attack += newAttack; }
 
 int Character::getHP()
 {
@@ -236,9 +236,10 @@ void Character::addSkill(Skill* skill)
     }
 }
 
-void Character::addOffensiveSkill(offensiveSkill* skill)
+void Character::addOffensiveSkill(offensiveSkill* skill,bool flag)
 {
-    cout << "你学会了：" << skill->getName() << endl;
+    if(flag) 
+        cout << "你学会了：" << skill->getName() << endl;
     if (skill != nullptr)
     {
         oSkills.push_back(skill);
