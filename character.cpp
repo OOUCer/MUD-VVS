@@ -466,3 +466,47 @@ bool Linchong::buyItem22(Armor* equipment)
     armors.push_back(equipment);
     return true;
 }
+void Linchong::saveToFile(const string& filename) const {
+    ofstream outFile(filename);
+    if (outFile.is_open()) {
+        outFile << getName() << "\n";
+        outFile << getAttack() << "\n";
+        outFile << HP << "\n";
+        outFile << getMaxHP() << "\n";
+        outFile << getDefense() << "\n";
+        outFile << getSpeed() << "\n";
+        outFile << getHitRate() << "\n";
+        outFile << getEvasionRate() << "\n";
+        outFile << getGold() << "\n";
+        //outFile << getIsPlayer() << "\n";
+        outFile << getPlace() << "\n";
+    }
+
+    outFile.close();
+}
+
+Linchong Linchong::loadFromFile(const string& filename) {
+    ifstream inFile(filename);
+    string name;
+    int attack, HP, maxHP, defense, speed, gold, place;
+    float hitRate, evasionRate;
+    bool isPlayer;
+
+    if (inFile.is_open()) {
+        getline(inFile, name);
+        inFile >> attack;
+        inFile >> HP;
+        inFile >> maxHP;
+        inFile >> defense;
+        inFile >> speed;
+        inFile >> hitRate;
+        inFile >> evasionRate;
+        inFile >> gold;
+        //inFile >> isPlayer;
+        inFile >> place;
+    }
+    inFile.close();
+
+    // Return a new Linchong object with the loaded values
+    return Linchong(name, attack, HP, maxHP, defense, speed, hitRate, evasionRate, gold, 1, place);
+}

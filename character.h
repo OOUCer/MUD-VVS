@@ -204,6 +204,8 @@ public:
 
     bool buyItem11(Weapon* equipment);
     bool buyItem22(Armor* equipment);
+    void saveToFile(const string& filename) const;
+    Linchong loadFromFile(const string& filename);
 };
 
 

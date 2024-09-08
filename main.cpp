@@ -113,7 +113,7 @@ int main(){
         ar_read(lcar);
         os_read(lcofsk);
         su_read(lcsusk);
-        files.loadGame(linchong,t);
+        lc->saveToFile("linchong.txt");
     }
     else if (flag == 3)
     {
@@ -405,7 +405,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
          ar_save(lcar);
          os_save(lcofsk);
          su_save(lcsusk);
-         files.saveGame(linchong,t);
+         lc->loadFromFile("linchong.txt");
          change2();
      }
      if (f == 4)
