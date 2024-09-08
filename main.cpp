@@ -420,7 +420,8 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      }
 
      // 写入数组到文件  
-     outfile.write(reinterpret_cast<char*>(a->get_ifget()), 5 * sizeof(int));
+     for(int i=0;i<5;i++)
+        outfile.write(reinterpret_cast<char*>(a[i].get_ifget()), sizeof(int));
 
      // 关闭文件  
      outfile.close();
@@ -463,7 +464,8 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      }
 
      // 写入数组到文件  
-     outfile.write(reinterpret_cast<char*>(b->get_ifget()), 3 * sizeof(int));
+     for (int i = 0; i < 3; i++)
+     outfile.write(reinterpret_cast<char*>(b[i].get_ifget()),   sizeof(int));
 
      // 关闭文件  
      outfile.close();
@@ -507,7 +509,8 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      }
 
      // 写入数组到文件  
-     outfile.write(reinterpret_cast<char*>(c->get_ifget()), 6 * sizeof(int));
+     for (int i = 0; i < 6; i++)
+     outfile.write(reinterpret_cast<char*>(c[i].get_ifget()),  sizeof(int));
 
      // 关闭文件  
      outfile.close();
@@ -551,12 +554,13 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      }
 
      // 写入数组到文件  
-     outfile.write(reinterpret_cast<char*>(d->get_ifget()), 10 * sizeof(int));
+     for (int i = 0; i < 10; i++)
+     outfile.write(reinterpret_cast<char*>(d[i].get_ifget()),  sizeof(int));
 
      // 关闭文件  
      outfile.close();
 
-     std::cout << "攻击技能已保存到文件。" << std::endl;
+     std::cout << "防御技能已保存到文件。" << std::endl;
  }
  void su_read(supportSkill d[10])
  {
