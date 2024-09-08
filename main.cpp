@@ -272,6 +272,7 @@ void pre_battle1(vector<Character*>& enemies, Linchong* lc, Character* character
 
 void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, Character*character2)
 {
+    enemies.clear();
     enemies.push_back(character1);
     enemies.push_back(character2);
  
