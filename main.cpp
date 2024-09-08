@@ -27,7 +27,7 @@ int change2();
 
     UI ui;
     Map map1;
-    Linchong linchong("林冲", 80, 800, 800, 10, 80, 0.8, 0.1, 100, true, 100);
+    Linchong linchong("林冲", 80, 1000, 800, 10, 80, 0.8, 0.1, 100, true, 100);
     Linchong* lc = &linchong;
     Plot plot(lc);
     Time t;
@@ -170,19 +170,6 @@ int main(){
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 void runDevelopmentSystem() {
     while (t.day <= 8) { // 修改为day <= 8，确保8天的养成系统
         SetConsoleColor(7);
@@ -281,9 +268,6 @@ void pre_battle1(vector<Character*>& enemies, Linchong* lc, Character* character
     delete character3;
 }
 
-
-
-
 void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, Character*character2)
 {
     enemies.push_back(character1);
@@ -292,7 +276,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
 
     character1->addWeapon(&weapon1);
     character1->addArmor(&armor3);
-    character1->addOffensiveSkill(&skill_5,false);
+    character1->addOffensiveSkill(&skill_4,false);
     character1->addSupportSkill(&skill_8,false);
     character1->addSupportSkill(&skill_12,false);
 
@@ -305,6 +289,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
     delete character1;
     delete character2;
 }
+
  void change1() {
     int f = plot.Printchange(t.plottime);
     int f_func = 0;
@@ -345,6 +330,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      if (f == 4)
         return f;
   }
+
  void shopset(Linchong& linchong) {
 
      Weapon dajian("大剑", 50, 40, 5, 0.1, "斩击");

@@ -5,7 +5,7 @@ Battle::Battle() : gen(rd()), dis(0.0, 1.0) {}
 void SetConsoleColor(int);//1深蓝色 2绿色 3浅蓝 4红色 5紫色 6橙黄 7白色 8灰色 11蓝绿 12浅红 13紫红 14明黄
 
 void Battle::startBattle(Linchong* player, vector<Character*>* enemies){
-	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+	std::this_thread::sleep_for(std::chrono::milliseconds(1500));
 	system("cls");
 	player->setSkillPoint(3);
 	showStartInformation(player, enemies);
@@ -202,7 +202,7 @@ void Battle::enemyTurn(Character* enemy, Character* player){
 	uniform_int_distribution<> dis2(1, enemy->getSkills()->size());
 	float randomValue = dis(gen);
 	int index = dis2(gen);
-	if (randomValue < 0.55)
+	if (randomValue < 0.45)
 		normalAttack(player, enemy);
 	else
 		userSkill_enemy(player, enemy, index - 1);
@@ -354,6 +354,7 @@ void Battle::weaponSwitch(Character* character){
 	}
 }
 
+
 void Battle::useSkill(Character* user, vector<Character*>* enemies, int skillIndex){
 	user->setActionAvailability(false);
 	user->setSkillPoint(user->getSkillPoint() - 1);
@@ -364,8 +365,10 @@ void Battle::useSkill(Character* user, vector<Character*>* enemies, int skillInd
 			cout << user->getName() << "使用了招式:" << theSkill->getName() << endl;std::this_thread::sleep_for(std::chrono::milliseconds(500));
 			for (Character* enemy : *enemies){
 				int damage = getDamage(user, enemy, theSkill->getDamageMultiplier());
-				if (theSkill->getAttackFrequency() == 1)
+				if (theSkill->getAttackFrequency() == 1){
+					cout << "对" << enemy->getName() << "的攻击:";
 					singleDamagePerform(user, enemy, damage);
+				}
 				else{
 					int totalDamage = 0;
 					for (int i = 0; i < theSkill->getAttackFrequency(); i++)
@@ -910,3 +913,5 @@ void Battle::prepareSkill(Character* character){
 			skills->push_back(it);
 		}
 }
+
+
