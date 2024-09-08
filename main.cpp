@@ -23,8 +23,17 @@ void runDevelopmentSystem();//养成系统
 void pre_battle1(vector<Character*>& enemies, Linchong* lc, Character* character1, Character* character2,Character* character3);
 void pre_battle2(vector<Character*>&enemies, Linchong* lc, Character* character1, Character* character2);//战斗系统准备
 void change1();//幕与幕之间衔接
+void ready_save(Weapon *a, Armor *b, offensiveSkill *c, supportSkill *d);
 int change2();
 
+void we_save(Weapon a[5]);
+void we_read(Weapon a[5]);
+void ar_save(Armor[3]);
+void ar_read(Armor[3]);
+void os_save(offensiveSkill[6]);
+void os_read(offensiveSkill[6]);
+void su_save(supportSkill[11]);
+void su_read(supportSkill[11]);
 
 UI ui;
 Map map1;
@@ -47,11 +56,13 @@ Weapon weapon3("棍", 20, 32, 10, 0.12, "打击");
 Weapon weapon4("矛", 20, 30, 11, 0.14, "贯通");
 Weapon weapon5("花枪", 20, 28, 12, 0.15, "贯通");
 Weapon weapon_default("林冲的花枪", 20, 30, 10, 0.1, "贯通");
+Weapon lcwe[5];
 
 Armor armor1("皮甲", 20, 25, 100, "斩击");
 Armor armor2("锁子甲", 20, 30, 100, "贯通");
 Armor armor3("板甲", 20, 35, 120, "打击");
 Armor armor_default("林冲的布甲", 15, 20, 100, "斩击");
+Armor lcar[3];
 
 offensiveSkill skill_1("天上天下天地无双斩", "疯狂连击6次，自己防御下降", false, true, true, 0.7, "斩击", 6, selfDefenseBoost, 0.8, 3);
 offensiveSkill skill_2("枪出如龙", "单体攻击5次，自己攻击下降", false, true, true, 0.8, "贯通", 5, selfAttackBoost, 0.8, 3);
@@ -59,6 +70,7 @@ offensiveSkill skill_3("登锋陷阵", "巨额全体攻击，损耗自己生命", true, true, tru
 offensiveSkill skill_4("刀刃之云", "全体攻击3次", true, true, true, 0.7, "斩击", 3, none, 0, 0);
 offensiveSkill skill_5("粉碎打击", "粉碎单体防御", false, true, false, 2.2, "打击", 1, giveDefenseWeaken, 0.8, 3);
 offensiveSkill skill_6("横扫千军", "全体攻击2次", true, true, true, 1.2, "贯通", 2, none, 0, 0);
+offensiveSkill lcofsk[6];
 
 supportSkill skill_7("休养生息", "恢复体力，自身陷入昏迷状态", false, false, true, selfComatose, 1, 3);
 supportSkill skill_8("以逸待劳", "下回合伤害猛增", false, false, true, selfCharge, 1, 1);
@@ -71,7 +83,7 @@ supportSkill skill_14("威吓", "敌人攻击力下降", true, false, false, giveAttackWe
 supportSkill skill_15("泼沙", "敌人命中率下降", true, false, false, giveHitRateWeaken, 0.8, 3);
 supportSkill skill_16("纵兵劫掠", "可能时敌人昏迷", true, false, false, giveComatose, 0.75, 3);
 supportSkill skill_17("破阵曲", "使敌人回避率下降", true, false, false, giveEvationWeaken, 0.7, 3);
-
+supportSkill lcsusk[11];
 
 
 int main(){
@@ -96,6 +108,11 @@ int main(){
     if (flag == 2)
     {
         cout << "正在加载" << endl;
+        ready_save(lcwe, lcar, lcofsk, lcsusk);
+        we_read(lcwe);
+        ar_read(lcar);
+        os_read(lcofsk);
+        su_read(lcsusk);
         files.loadGame(linchong,t);
     }
     else if (flag == 3)
@@ -310,6 +327,61 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
         return;
 }
 
+ void ready_save(Weapon* a, Armor* b, offensiveSkill* c, supportSkill* d)
+ {
+     *a = weapon1;
+     ++a;
+     *a = weapon2;
+     ++a;
+     *a = weapon3;
+     ++a;
+     *a = weapon4;
+     ++a;
+     *a = weapon5;
+
+     *b = armor1;
+     ++b;
+     *b = armor2;
+     ++b;
+     *b = armor3;
+
+     *c = skill_1;
+     ++c;
+     *c = skill_2;
+     ++c;
+     *c = skill_3;
+     ++c;
+     *c = skill_4;
+     ++c;
+     *c = skill_5;
+     ++c;
+     *c = skill_6;
+
+     *d = skill_7;
+     ++d;
+     *d = skill_8;
+     ++d;
+     *d = skill_9;
+     ++d;
+     *d = skill_10;
+     ++d;
+     *d = skill_11;
+     ++d;
+     *d = skill_12;
+     ++d;
+     *d = skill_13;
+     ++d;
+     *d = skill_14;
+     ++d;
+     *d = skill_15;
+     ++d;
+     *d = skill_16;
+     ++d;
+     *d = skill_17;
+ }
+
+ 
+
  int change2()
  {
      int f= ui.showmenu();
@@ -328,12 +400,191 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      }
      if (f == 3)//存档
      {
+         ready_save(lcwe, lcar, lcofsk, lcsusk);
+         we_save(lcwe);
+         ar_save(lcar);
+         os_save(lcofsk);
+         su_save(lcsusk);
          files.saveGame(linchong,t);
          change2();
      }
      if (f == 4)
         return f;
   }
+ void we_save(Weapon a[5])
+ {
+     std::ofstream outfile("weapon.txt", std::ios::out | std::ios::binary);
+     if (!outfile) {
+         std::cerr << "无法打开文件！" << std::endl;
+         return ;
+     }
+
+     // 写入数组到文件  
+     outfile.write(reinterpret_cast<char*>(a->get_ifget()), 5 * sizeof(int));
+
+     // 关闭文件  
+     outfile.close();
+
+     std::cout << "武器已保存到文件。" << std::endl;
+ }
+ void we_read(Weapon a[5])
+ {
+     int size = 5;
+
+     // 使用vector来存储读取的数据，因为静态数组大小在编译时确定  
+     std::vector<int> readArray(size);
+
+     // 打开文件用于读取  
+     std::ifstream infile("weapon.txt", std::ios::in | std::ios::binary);
+     if (!infile) {
+         std::cerr << "无法打开文件！" << std::endl;
+         return ;
+     }
+
+     // 读取数据到vector  
+     infile.read(reinterpret_cast<char*>(readArray.data()), size * sizeof(int));
+
+     // 关闭文件  
+     infile.close();
+     int i = 0;
+     for (i = 0; i < size; i++)
+     {
+         if (readArray[i])
+             lc->addWeapon(&a[i]);
+     }
+     
+ }
+ void ar_save(Armor b[3])
+ {
+     std::ofstream outfile("Armor.txt", std::ios::out | std::ios::binary);
+     if (!outfile) {
+         std::cerr << "无法打开文件！" << std::endl;
+         return;
+     }
+
+     // 写入数组到文件  
+     outfile.write(reinterpret_cast<char*>(b->get_ifget()), 3 * sizeof(int));
+
+     // 关闭文件  
+     outfile.close();
+
+     std::cout << "护甲已保存到文件。" << std::endl;
+ }
+ void ar_read(Armor b[3])
+ {
+     int size = 3;
+
+     // 使用vector来存储读取的数据，因为静态数组大小在编译时确定  
+     std::vector<int> readArray(size);
+
+     // 打开文件用于读取  
+     std::ifstream infile("Armor.txt", std::ios::in | std::ios::binary);
+     if (!infile) {
+         std::cerr << "无法打开文件！" << std::endl;
+         return;
+     }
+
+     // 读取数据到vector  
+     infile.read(reinterpret_cast<char*>(readArray.data()), size * sizeof(int));
+
+     // 关闭文件  
+     infile.close();
+     int i = 0;
+     for (i = 0; i < size; i++)
+     {
+         if (readArray[i])
+             lc->addArmor(&b[i]);
+     }
+
+ }
+
+ void os_save(offensiveSkill c[6])
+ {
+     std::ofstream outfile("offensiveSkill.txt", std::ios::out | std::ios::binary);
+     if (!outfile) {
+         std::cerr << "无法打开文件！" << std::endl;
+         return;
+     }
+
+     // 写入数组到文件  
+     outfile.write(reinterpret_cast<char*>(c->get_ifget()), 6 * sizeof(int));
+
+     // 关闭文件  
+     outfile.close();
+
+     std::cout << "攻击技能已保存到文件。" << std::endl;
+ }
+ void os_read(offensiveSkill c[6])
+ {
+     int size = 6;
+
+     // 使用vector来存储读取的数据，因为静态数组大小在编译时确定  
+     std::vector<int> readArray(size);
+
+     // 打开文件用于读取  
+     std::ifstream infile("Armor.txt", std::ios::in | std::ios::binary);
+     if (!infile) {
+         std::cerr << "无法打开文件！" << std::endl;
+         return;
+     }
+
+     // 读取数据到vector  
+     infile.read(reinterpret_cast<char*>(readArray.data()), size * sizeof(int));
+
+     // 关闭文件  
+     infile.close();
+     int i = 0;
+     for (i = 0; i < size; i++)
+     {
+         if (readArray[i])
+             lc->addOffensiveSkill(&c[i],true);
+     }
+
+ }
+
+ void su_save(supportSkill d[10])
+ {
+     std::ofstream outfile("supportSkill.txt", std::ios::out | std::ios::binary);
+     if (!outfile) {
+         std::cerr << "无法打开文件！" << std::endl;
+         return;
+     }
+
+     // 写入数组到文件  
+     outfile.write(reinterpret_cast<char*>(d->get_ifget()), 10 * sizeof(int));
+
+     // 关闭文件  
+     outfile.close();
+
+     std::cout << "攻击技能已保存到文件。" << std::endl;
+ }
+ void su_read(supportSkill d[10])
+ {
+     int size = 10;
+
+     // 使用vector来存储读取的数据，因为静态数组大小在编译时确定  
+     std::vector<int> readArray(size);
+
+     // 打开文件用于读取  
+     std::ifstream infile("supportSkill.txt", std::ios::in | std::ios::binary);
+     if (!infile) {
+         std::cerr << "无法打开文件！" << std::endl;
+         return;
+     }
+
+     // 读取数据到vector  
+     infile.read(reinterpret_cast<char*>(readArray.data()), size * sizeof(int));
+
+     // 关闭文件  
+     infile.close();
+     int i = 0;
+     for (i = 0; i < size; i++)
+     {
+         if (readArray[i])
+             lc->addSupportSkill(&d[i],true);
+     }
+
+ }
 
  void shopset(Linchong& linchong) {
 
