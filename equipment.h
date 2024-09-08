@@ -12,14 +12,15 @@ class Equipment {
 protected:
     string name;
     int price;
-
+    int ifget = 0;
 public:
     Equipment();
     Equipment(string name, int price);
 
     string getName() const;
     int getPrice() const;
-
+    void be_get();
+    int get_ifget();
     virtual void saveToFile(ofstream& file) const;
     virtual void loadFromFile(ifstream& file);
 };
@@ -42,7 +43,7 @@ public:
 
     string getDescription() const;
     void describe() const;
-
+    
     void saveToFile(ofstream& file) const override;
     void loadFromFile(ifstream& file) override;
 };

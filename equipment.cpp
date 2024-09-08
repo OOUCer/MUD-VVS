@@ -14,6 +14,16 @@ int Equipment::getPrice() const {
     return price;
 }
 
+void Equipment::be_get()
+{
+    ifget = 1;
+}
+
+int Equipment::get_ifget()
+{
+    return ifget;
+}
+
 void Equipment::saveToFile(ofstream& file) const {
     size_t nameLength = name.size();
     file.write((char*)&nameLength, sizeof(nameLength));  // 写入名称长度

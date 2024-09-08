@@ -11,6 +11,16 @@ bool Skill::getIsOffensive() const { return isOffensive; }
 string Skill::getDescription() const { return description; }
 bool Skill::getIsSelf() const { return isSelf; }
 
+void Skill::be_get()
+{
+    ifget = 1;
+}
+
+int Skill::get_ifget()
+{
+    return ifget;
+}
+
 void Skill::saveToFile(ofstream& file) const {
     size_t nameLength = name.size();
     file.write((char*)&nameLength, sizeof(nameLength));  // 写入名称长度

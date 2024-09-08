@@ -217,6 +217,7 @@ void Character::addWeapon(Weapon* weapon)
     if (weapon != nullptr)
     {
         weapons.push_back(weapon);
+        weapon->be_get();
     }
 }
 
@@ -225,6 +226,7 @@ void Character::addArmor(Armor* armor)
     if (armor != nullptr)
     {
         armors.push_back(armor);
+        armor->be_get();
     }
 }
 
@@ -243,6 +245,7 @@ void Character::addOffensiveSkill(offensiveSkill* skill,bool flag)
     if (skill != nullptr)
     {
         oSkills.push_back(skill);
+        skill->be_get();
     }
 }
 
@@ -252,6 +255,7 @@ void Character::addSupportSkill(supportSkill* skill,bool flag){
     if (skill != nullptr)
     {
         sSkills.push_back(skill);
+        skill->be_get();
     }
 }
 
@@ -416,6 +420,7 @@ bool Linchong::buyItem1(Weapon* equipment)
         gold -= equipment->getPrice();
         cout << "购买成功！你现在还有 " << gold << " 块钱" << endl;
         weapons.push_back(equipment);
+        equipment->be_get();
         return true;
     }
     else
@@ -440,6 +445,7 @@ bool Linchong::buyItem2(Armor* equipment)
         gold -= equipment->getPrice();
         cout << "购买成功！你现在还有 " << gold << " 块钱" << endl;
         armors.push_back(equipment);
+        equipment->be_get();
         return true;
     }
     else
@@ -451,7 +457,7 @@ bool Linchong::buyItem2(Armor* equipment)
 
 bool Linchong::buyItem11(Weapon* equipment)
 {
-    weapons.push_back(equipment);
+    weapons.push_back(equipment); 
     return true;
 }
 

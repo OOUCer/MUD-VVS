@@ -16,7 +16,7 @@ protected:
     bool isOffensive; // 是否是进攻类招式
     string description;//招式描述
     bool isSelf;//是否作用自己
-
+    int ifget=0;
 public:
     Skill();
     Skill(string name, string description, bool isAOE, bool isOffensive, bool isSelf);
@@ -26,7 +26,8 @@ public:
     bool getIsOffensive() const;
     string getDescription() const;
     bool getIsSelf() const;
-
+    void be_get();
+    int get_ifget();
     virtual float getDamageMultiplier() const = 0;
     virtual string getAttackType() const = 0;
     virtual int getAttackFrequency() const = 0;

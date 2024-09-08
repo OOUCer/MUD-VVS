@@ -85,6 +85,11 @@ int main(){
     // 这里可以添加你的主程序代码  
     //由于使用了SND_ASYNC，所以音乐会在后台播放  
     // 如果你想让程序等待直到用户关闭，可以使用以下代码  
+    lc->addWeapon(&weapon_default);
+    lc->addArmor(&armor_default);
+    lc->addOffensiveSkill(&skill_4, false);
+    lc->addOffensiveSkill(&skill_5, false);
+    lc->addOffensiveSkill(&skill_6, false);
 
     ui.ready();
     flag=ui.showstart();//开始界面
@@ -99,11 +104,6 @@ int main(){
         exit(1);
     }
     //开启新游戏，则为林冲设置默认武器护具招式
-    lc->addWeapon(&weapon_default);
-    lc->addArmor(&armor_default);
-    lc->addOffensiveSkill(&skill_4, false);
-    lc->addOffensiveSkill(&skill_5, false);
-    lc->addOffensiveSkill(&skill_6, false);
 
     while(t.plottime<=10)
     {
