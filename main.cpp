@@ -25,28 +25,28 @@ void pre_battle2(vector<Character*>&enemies, Linchong* lc, Character* character1
 void change1();//幕与幕之间衔接
 int change2();
 
-    UI ui;
-    Map map1;
-    Linchong linchong("林冲", 80, 1000, 800, 10, 80, 0.8, 0.1, 100, true, 100);
-    Linchong* lc = &linchong;
-    Plot plot(lc);
-    Time t;
-    Filestore files;
-    Shop1 shop1;
-    Shop2 shop2;
-    vector<Character*> enemies;
-    Character* smallen1 = new Character("土匪1", 40, 700, 700, 30, 90, 0.8, 0.05, 100, false);
-    Character* smallen2 = new Character("土匪2", 40, 700, 700, 30, 30, 0.8, 0.05, 100, false);
-    Character* bigen1 = new Character("管营", 40, 900, 900, 20, 40, 0.9, 0.1, 0, false);
-    Character* bigen2 = new Character("差拨", 40, 900, 1000, 30, 60, 0.85, 0.1, 0, false);
-    Character* bigen3 = new Character("陆虞侯", 60, 1000, 1000, 40, 100, 0.85, 0.15, 0, false);
 
-    Weapon weapon1("剑", 20, 30, 10, 0.1, "斩击");
-    Weapon weapon2("刀", 20, 34, 8, 0.11, "斩击");
-    Weapon weapon3("棍", 20, 32, 10, 0.12, "打击");
-    Weapon weapon4("矛", 20, 30, 11, 0.14, "贯通");
-    Weapon weapon5("花枪", 20, 28, 12, 0.15, "贯通");
-    Weapon weapon_default("林冲的花枪", 20, 30, 10, 0.1, "贯通");
+UI ui;
+Map map1;
+Linchong linchong("林冲", 80, 1000, 800, 10, 80, 0.8, 0.1, 100, true, 100);
+Linchong* lc = &linchong;
+Plot plot(lc);
+Time t;
+Filestore files;
+Shop1 shop1;
+Shop2 shop2;
+vector<Character*> enemies;
+Character* smallen1 = new Character("土匪1", 40, 700, 700, 30, 90, 0.8, 0.05, 100, false);
+Character* smallen2 = new Character("土匪2", 40, 700, 700, 30, 30, 0.8, 0.05, 100, false);
+Character* bigen1 = new Character("管营", 40, 900, 900, 20, 40, 0.9, 0.1, 0, false);
+Character* bigen2 = new Character("差拨", 40, 900, 1000, 30, 60, 0.85, 0.1, 0, false);
+Character* bigen3 = new Character("陆虞侯", 60, 1000, 1000, 40, 100, 0.85, 0.15, 0, false);
+Weapon weapon1("剑", 20, 30, 10, 0.1, "斩击");
+Weapon weapon2("刀", 20, 34, 8, 0.11, "斩击");
+Weapon weapon3("棍", 20, 32, 10, 0.12, "打击");
+Weapon weapon4("矛", 20, 30, 11, 0.14, "贯通");
+Weapon weapon5("花枪", 20, 28, 12, 0.15, "贯通");
+Weapon weapon_default("林冲的花枪", 20, 30, 10, 0.1, "贯通");
 
     Armor armor1("皮甲", 20, 25, 100, "斩击");
     Armor armor2("锁子甲", 20, 30, 100, "贯通");
