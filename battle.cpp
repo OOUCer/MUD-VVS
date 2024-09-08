@@ -5,6 +5,8 @@ Battle::Battle() : gen(rd()), dis(0.0, 1.0) {}
 void SetConsoleColor(int);//1深蓝色 2绿色 3浅蓝 4红色 5紫色 6橙黄 7白色 8灰色 11蓝绿 12浅红 13紫红 14明黄
 
 void Battle::startBattle(Linchong* player, vector<Character*>* enemies){
+	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+	system("cls");
 	player->setSkillPoint(3);
 	showStartInformation(player, enemies);
 	vector<pair<int, Character*>> sortedCharacters;

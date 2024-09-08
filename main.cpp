@@ -189,14 +189,14 @@ void runDevelopmentSystem() {
         cout << "现在是十一月";
         switch (t.day)
         {
-        case 1:cout << "初六" << endl; break;
-        case 2:cout << "初七" << endl; break;
-        case 3:cout << "初八" << endl; break;
-        case 4:cout << "初九" << endl; break;
-        case 5:cout << "十日" << endl; break;
-        case 6:cout << "十一" << endl; break;
-        case 7:cout << "十二" << endl; break;
-        case 8:cout << "十三" << endl; break;
+        case 1:cout << "初六 (今日武馆招式:" <<skill_1.getName()<< ")" << endl<<endl; break;
+        case 2:cout << "初七 (今日武馆招式:" << skill_2.getName() << " "<<skill_8.getName()<<")"<<endl<<endl; break;
+        case 3:cout << "初八 (今日武馆招式:" << skill_3.getName() << " " << skill_10.getName() << ")" << endl<<endl; break;
+        case 4:cout << "初九 (今日武馆招式:" << skill_13.getName() << " " << skill_15.getName() << ")" << endl<<endl; break;
+        case 5:cout << "十日 (今日武馆招式:" << skill_7.getName() << " " << skill_16.getName() << ")" << endl<<endl; break;
+        case 6:cout << "十一 (今日武馆招式:" << skill_11.getName() << " " << skill_17.getName() << ")" << endl<<endl; break;
+        case 7:cout << "十二 (今日武馆招式:" << skill_9.getName() << " " << skill_14.getName() << ")" << endl<<endl; break;
+        case 8:cout << "十三 (今日武馆招式:" << skill_12.getName()  << ")" << endl<<endl; break;
         default:
             break;
         }
@@ -214,19 +214,19 @@ void runDevelopmentSystem() {
                 case 1:
                     lc->addOffensiveSkill(&skill_1, true); break;
                 case 2:
-                    lc->addOffensiveSkill(&skill_2, true); lc->addSupportSkill(&skill_8); break;
+                    lc->addOffensiveSkill(&skill_2, true); lc->addSupportSkill(&skill_8,true); break;
                 case 3:
-                    lc->addOffensiveSkill(&skill_3, true); lc->addSupportSkill(&skill_10); break;
+                    lc->addOffensiveSkill(&skill_3, true); lc->addSupportSkill(&skill_10,true); break;
                 case 4:
-                    lc->addSupportSkill(&skill_13); lc->addSupportSkill(&skill_15);break;
+                    lc->addSupportSkill(&skill_13,true); lc->addSupportSkill(&skill_15,true);break;
                 case 5:
-                    lc->addSupportSkill(&skill_7); lc->addSupportSkill(&skill_16); break;
+                    lc->addSupportSkill(&skill_7,true); lc->addSupportSkill(&skill_16,true); break;
                 case 6:
-                    lc->addSupportSkill(&skill_11);lc->addSupportSkill(&skill_17); break;
+                    lc->addSupportSkill(&skill_11,true);lc->addSupportSkill(&skill_17,true); break;
                 case 7:
-                    lc->addSupportSkill(&skill_9); lc->addSupportSkill(&skill_14);break;
+                    lc->addSupportSkill(&skill_9,true); lc->addSupportSkill(&skill_14,true);break;
                 case 8:
-                    ;lc->addSupportSkill(&skill_12);break;
+                    lc->addSupportSkill(&skill_12,true);break;
                 default:
                     break;
                 }
@@ -258,22 +258,22 @@ void pre_battle1(vector<Character*>& enemies, Linchong* lc, Character* character
     character1->addArmor(&armor2);//贯通
     character1->addOffensiveSkill(&skill_1,false);
     character1->addOffensiveSkill(&skill_4, false);
-    character1->addSupportSkill(&skill_11);
-    character1->addSupportSkill(&skill_8);
+    character1->addSupportSkill(&skill_11,false);
+    character1->addSupportSkill(&skill_8,false);
 
     character2->addWeapon(&weapon5);//贯通
     character2->addArmor(&armor3);//打击
     character2->addOffensiveSkill(&skill_6,false);
     character2->addOffensiveSkill(&skill_2, false);
-    character2->addSupportSkill(&skill_10);
-    character2->addSupportSkill(&skill_17);
+    character2->addSupportSkill(&skill_10,false);
+    character2->addSupportSkill(&skill_17,false);
 
     character3->addWeapon(&weapon3);//打击
     character3->addArmor(&armor1);//斩击
     character3->addOffensiveSkill(&skill_3,false);
     character3->addOffensiveSkill(&skill_5, false);
-    character3->addSupportSkill(&skill_9);
-    character3->addSupportSkill(&skill_7);
+    character3->addSupportSkill(&skill_9,false);
+    character3->addSupportSkill(&skill_7,false);
     Battle battle_1;
     battle_1.startBattle(lc, &enemies);
     delete character1;
@@ -293,13 +293,13 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
     character1->addWeapon(&weapon1);
     character1->addArmor(&armor3);
     character1->addOffensiveSkill(&skill_5,false);
-    character1->addSupportSkill(&skill_8);
-    character1->addSupportSkill(&skill_12);
+    character1->addSupportSkill(&skill_8,false);
+    character1->addSupportSkill(&skill_12,false);
 
     character2->addWeapon(&weapon5);
     character2->addArmor(&armor1);
     character2->addOffensiveSkill(&skill_6,false);
-    character2->addSupportSkill(&skill_10);
+    character2->addSupportSkill(&skill_10,false);
     Battle battle_1;
     battle_1.startBattle(lc, &enemies);
     delete character1;

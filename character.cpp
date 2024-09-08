@@ -246,8 +246,9 @@ void Character::addOffensiveSkill(offensiveSkill* skill,bool flag)
     }
 }
 
-void Character::addSupportSkill(supportSkill* skill){
-    cout << "你学会了：" << skill->getName() << endl;
+void Character::addSupportSkill(supportSkill* skill,bool flag){
+    if(flag)
+        cout << "你学会了：" << skill->getName() << endl;
     if (skill != nullptr)
     {
         sSkills.push_back(skill);
