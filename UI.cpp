@@ -69,7 +69,7 @@ int UI::ready()
     if (hConsole == INVALID_HANDLE_VALUE) {
         std::cerr << "无法获取控制台句柄！" << std::endl;
     }
-    ClearConsoleLines(hConsole, 2, 5);
+    ClearConsoleLines(hConsole, 1, 5);
     for (int i = 0; i < 44; i++)
         cout << " ";
     plot.PrintWithDelay("林教头风雪山神庙", 40);

@@ -271,7 +271,7 @@ void Plot::PrintScene7() {
     SetConsoleColor(8); // 灰色
     placeflag = 7;
     PrintWithDelay("第七幕：\n行不上半里多路，看见一所古庙。\n进入庙中，发现几名土匪正在里面，周围的烛光映照出他们阴险的面孔。\n你心里一紧，准备进入战斗。\n", 30);
-    //SetConsoleColor(6);
+    SetConsoleColor(7);
     //PrintWithDelay("【恭喜你解锁古庙：避难场所，但也可能遇到危险从而引起战斗。】\n", 30);
     //SetConsoleColor(7); // 白色
     //placeflag = 5;
@@ -412,7 +412,7 @@ int Plot::handleTraining() {
             else
             {
                 PrintWithDelay("你在馆内接受了强化训练，感觉自己的能力得到了显著提升。\n", 30);
-                character->setAttack(5);
+                character->setAttack(1);//修改5->1。5太多了。
                 return 1;
             }
         }

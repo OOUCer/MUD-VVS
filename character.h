@@ -157,8 +157,8 @@ public:
 
     // 给角色添加一个技能  
     void addSkill(Skill* skill);
-    void addOffensiveSkill(offensiveSkill* skill);
-    void addSupportSkill(supportSkill* skill);
+    void addOffensiveSkill(offensiveSkill* skill,bool flag);//flag用于判断是否提示
+    void addSupportSkill(supportSkill* skill,bool flag);
 
     // 获取角色当前的所有效果状态  
     map<skillEffectType, pair<float, int>>* getEffectStatus();
@@ -201,6 +201,9 @@ public:
 
     // 尝试购买一套护甲（具体实现依赖于游戏逻辑，如金币是否足够等）  
     bool buyItem2(Armor* equipment);
+
+    bool buyItem11(Weapon* equipment);
+    bool buyItem22(Armor* equipment);
 };
 
 
