@@ -421,6 +421,8 @@ bool Linchong::buyItem1(Weapon* equipment)
         cout << "购买成功！你现在还有 " << gold << " 块钱" << endl;
         weapons.push_back(equipment);
         equipment->be_get();
+        cout << endl;
+        cout << "ifget:" << equipment->get_ifget() << endl;
         return true;
     }
     else
@@ -446,6 +448,7 @@ bool Linchong::buyItem2(Armor* equipment)
         cout << "购买成功！你现在还有 " << gold << " 块钱" << endl;
         armors.push_back(equipment);
         equipment->be_get();
+        
         return true;
     }
     else

@@ -207,6 +207,7 @@ void runDevelopmentSystem() {
     while (t.day <= 8) { // 修改为day <= 8，确保8天的养成系统
         SetConsoleColor(7);
         cout << "现在是十一月";
+ 
         switch (t.day)
         {
         case 1:cout << "初六 (今日武馆招式:" <<skill_1.getName()<< ")" << endl<<endl; break;
@@ -412,6 +413,18 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      }
      if (f == 3)//存档
      {
+         for (const auto& armor : *linchong.getArmors())
+         {
+             if (armor->getName() == "布甲") {
+                 bujia.be_get();
+             }
+             if(armor->getName() == "")
+            
+         }
+         for (const auto& weapon : *linchong.getWeapons())
+         {
+             weapon->be_get();
+         }
          ready_save();
          we_save();
          ar_save();
@@ -441,10 +454,16 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
          x[i] = lcwe[i].get_ifget();
          // 关闭文件  
      }
-     outfile.write(reinterpret_cast<char*>(x), 5 * sizeof(int));
+     outfile.write(reinterpret_cast<char*>(x), 3 * sizeof(int));
      outfile.close();
 
      std::cout << "武器已保存到文件。" << std::endl;
+     for (int i = 0; i < 3; i++)
+     {
+         //lcwe[i].get_ifget();
+         cout << x[i];
+         // 关闭文件  //000
+     }
  }
  void we_read()
  {
@@ -468,6 +487,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      int i = 0;
      for (i = 0; i < size; i++)
      {
+         cout << readArray[i];
          if (readArray[i])
          {
              lc->addWeapon(&lcwe[i]); lcwe[i].be_get();
@@ -630,12 +650,12 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
 
  void shopset(Linchong& linchong) {
 
-     Weapon dajian("大剑", 50, 40, 5, 0.1, "斩击");
-     Weapon tiegun("铁棍", 50, 35, 10, 0.15, "打击");
-     Weapon cijian("刺剑", 50, 30, 15, 0.2, "贯通");
-     Armor bujia("布甲", 50, 25, 100, "贯通");
-     Armor tiejia("铁甲", 100, 30, 120, "打击");
-     Armor linjia("鳞甲", 200, 35, 150, "斩击");
+     //Weapon dajian("大剑", 50, 40, 5, 0.1, "斩击");
+     //Weapon tiegun("铁棍", 50, 35, 10, 0.15, "打击");
+     //Weapon cijian("刺剑", 50, 30, 15, 0.2, "贯通");
+     //Armor bujia("布甲", 50, 25, 100, "贯通");
+     //Armor tiejia("铁甲", 100, 30, 120, "打击");
+     //Armor linjia("鳞甲", 200, 35, 150, "斩击");
 
 
      shop1.addItem(make_unique<Weapon>(dajian));
@@ -684,7 +704,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
          }
          cout << "0.退出          1.武器           2.防具" << endl;
      }
-
+     cout << dajian.get_ifget();
  }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
