@@ -418,12 +418,24 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
              if (armor->getName() == "布甲") {
                  bujia.be_get();
              }
-             if(armor->getName() == "")
-            
+             if (armor->getName() == "铁甲") {
+                 tiejia.be_get();
+             }
+             if (armor->getName() == "鳞甲") {
+                 tiejia.be_get();
+             }
          }
          for (const auto& weapon : *linchong.getWeapons())
          {
-             weapon->be_get();
+             if (weapon->getName() == "铁棍") {
+                 tiegun.be_get();
+             }
+             if (weapon->getName() == "刺剑") {
+                 cijian.be_get();
+             }
+             if (weapon->getName() == "大剑") {
+                 dajian.be_get();
+             }
          }
          ready_save();
          we_save();
@@ -458,12 +470,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      outfile.close();
 
      std::cout << "武器已保存到文件。" << std::endl;
-     for (int i = 0; i < 3; i++)
-     {
-         //lcwe[i].get_ifget();
-         cout << x[i];
-         // 关闭文件  //000
-     }
+
  }
  void we_read()
  {
@@ -487,7 +494,6 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      int i = 0;
      for (i = 0; i < size; i++)
      {
-         cout << readArray[i];
          if (readArray[i])
          {
              lc->addWeapon(&lcwe[i]); lcwe[i].be_get();
@@ -704,7 +710,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
          }
          cout << "0.退出          1.武器           2.防具" << endl;
      }
-     cout << dajian.get_ifget();
+
  }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
