@@ -139,8 +139,10 @@ int main(){
             change1(); 
             break;
         case 3:
-            plot.PrintScene(t.plottime);//3
-            
+            if (t.day == 0)
+            {
+                plot.PrintScene(t.plottime);//3
+            }
             runDevelopmentSystem();//Ñø³É
             change1();
             break;
