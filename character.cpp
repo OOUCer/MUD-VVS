@@ -485,28 +485,38 @@ void Linchong::saveToFile(const string& filename) const {
     outFile.close();
 }
 
-Linchong Linchong::loadFromFile(const string& filename) {
+void Linchong::loadFromFile(const string& filename,Linchong *lc) {
     ifstream inFile(filename);
     string name;
-    int attack, HP, maxHP, defense, speed, gold, place;
-    float hitRate, evasionRate;
+    int attack1, HP1, maxHP1, defense1, speed1, gold1, place1;
+    float hitRate1, evasionRate1;
     bool isPlayer;
 
     if (inFile.is_open()) {
         getline(inFile, name);
-        inFile >> attack;
-        inFile >> HP;
-        inFile >> maxHP;
-        inFile >> defense;
-        inFile >> speed;
-        inFile >> hitRate;
-        inFile >> evasionRate;
-        inFile >> gold;
+        inFile >> attack1;
+        inFile >> HP1;
+        inFile >> maxHP1;
+        inFile >> defense1;
+        inFile >> speed1;
+        inFile >> hitRate1;
+        inFile >> evasionRate1;
+        inFile >> gold1;
         //inFile >> isPlayer;
-        inFile >> place;
+        inFile >> place1;
     }
     inFile.close();
-
+    lc->setAttack(attack1);
+    lc->setGold(gold1);
+    lc->setHP(HP1);
+    lc->setMaxHP(maxHP1);
+    lc->setplace(place1);
     // Return a new Linchong object with the loaded values
-    return Linchong(name, attack, HP, maxHP, defense, speed, hitRate, evasionRate, gold, 1, place);
+    
+}
+
+void Linchong::setplace(int a)
+{
+    place = a;
+    return ;
 }

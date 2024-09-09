@@ -23,7 +23,7 @@ void runDevelopmentSystem();//养成系统
 void pre_battle1(vector<Character*>& enemies, Linchong* lc, Character* character1, Character* character2,Character* character3);
 void pre_battle2(vector<Character*>&enemies, Linchong* lc, Character* character1, Character* character2);//战斗系统准备
 void change1();//幕与幕之间衔接
-void ready_save(Weapon *a, Armor *b, offensiveSkill *c, supportSkill *d);
+void ready_save();
 int change2();
 
 void we_save(Weapon a[5]);
@@ -108,12 +108,12 @@ int main(){
     if (flag == 2)
     {
         cout << "正在加载" << endl;
-        ready_save(lcwe, lcar, lcofsk, lcsusk);
+        ready_save();
         we_read(lcwe);
         ar_read(lcar);
         os_read(lcofsk);
         su_read(lcsusk);
-        lc->saveToFile("linchong.txt");
+        lc->loadFromFile("linchong.txt", lc);
     }
     else if (flag == 3)
     {
@@ -327,57 +327,57 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
         return;
 }
 
- void ready_save(Weapon* a, Armor* b, offensiveSkill* c, supportSkill* d)
+ void ready_save()
  {
-     *a = weapon1;
-     ++a;
-     *a = weapon2;
-     ++a;
-     *a = weapon3;
-     ++a;
-     *a = weapon4;
-     ++a;
-     *a = weapon5;
+     lcwe[0] = weapon1;
+     
+     lcwe[1] = weapon2;
+     
+     lcwe[2] = weapon3;
+     
+     lcwe[3] = weapon4;
+     
+     lcwe[4] = weapon5;
 
-     *b = armor1;
-     ++b;
-     *b = armor2;
-     ++b;
-     *b = armor3;
+     lcar[0] = armor1;
+     
+     lcar[1] = armor2;
+     
+     lcar[2] = armor3;
 
-     *c = skill_1;
-     ++c;
-     *c = skill_2;
-     ++c;
-     *c = skill_3;
-     ++c;
-     *c = skill_4;
-     ++c;
-     *c = skill_5;
-     ++c;
-     *c = skill_6;
+     lcofsk[0] = skill_1;
+     
+     lcofsk[1] = skill_2;
+     
+     lcofsk[2] = skill_3;
+     
+     lcofsk[3] = skill_4;
+     
+     lcofsk[4] = skill_5;
+     
+     lcofsk[5] = skill_6;
 
-     *d = skill_7;
-     ++d;
-     *d = skill_8;
-     ++d;
-     *d = skill_9;
-     ++d;
-     *d = skill_10;
-     ++d;
-     *d = skill_11;
-     ++d;
-     *d = skill_12;
-     ++d;
-     *d = skill_13;
-     ++d;
-     *d = skill_14;
-     ++d;
-     *d = skill_15;
-     ++d;
-     *d = skill_16;
-     ++d;
-     *d = skill_17;
+     lcsusk[0] = skill_7;
+     
+     lcsusk[1] = skill_8;
+     
+     lcsusk[2] = skill_9;
+     
+     lcsusk[3] = skill_10;
+     
+     lcsusk[4] = skill_11;
+     
+     lcsusk[5] = skill_12;
+     
+     lcsusk[6] = skill_13;
+     
+     lcsusk[7] = skill_14;
+     
+     lcsusk[8] = skill_15;
+     
+     lcsusk[9] = skill_16;
+     
+     lcsusk[10] = skill_17;
  }
 
  
@@ -400,12 +400,13 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      }
      if (f == 3)//存档
      {
-         ready_save(lcwe, lcar, lcofsk, lcsusk);
+         ready_save();
          we_save(lcwe);
          ar_save(lcar);
          os_save(lcofsk);
          su_save(lcsusk);
-         lc->loadFromFile("linchong.txt");
+         //lc->loadFromFile("linchong.txt",lc);
+         lc->saveToFile("linchong.txt");
          change2();
      }
      if (f == 4)
@@ -418,12 +419,16 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
          std::cerr << "无法打开文件！" << std::endl;
          return ;
      }
-
+     //cout << a[0].get_ifget();
      // 写入数组到文件  
-     for(int i=0;i<5;i++)
-        outfile.write(reinterpret_cast<char*>(a[i].get_ifget()), sizeof(int));
+     int x[5];
 
-     // 关闭文件  
+     for (int i = 0; i < 5; i++)
+     {
+         x[i] = a[i].get_ifget();
+         // 关闭文件  
+     }
+     outfile.write(reinterpret_cast<char*>(x), 5 * sizeof(int));
      outfile.close();
 
      std::cout << "武器已保存到文件。" << std::endl;
@@ -463,9 +468,15 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
          return;
      }
 
-     // 写入数组到文件  
+     // 写入数组到文件  int x[5];
+     int x[3];
      for (int i = 0; i < 3; i++)
-     outfile.write(reinterpret_cast<char*>(b[i].get_ifget()),   sizeof(int));
+     {
+         x[i] = b[i].get_ifget();
+         // 关闭文件  
+     }
+     outfile.write(reinterpret_cast<char*>(x), 3 * sizeof(int));
+     
 
      // 关闭文件  
      outfile.close();
@@ -509,8 +520,15 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      }
 
      // 写入数组到文件  
+     int x[6];
+
      for (int i = 0; i < 6; i++)
-     outfile.write(reinterpret_cast<char*>(c[i].get_ifget()),  sizeof(int));
+     {
+         x[i] = c[i].get_ifget();
+         // 关闭文件  
+     }
+     outfile.write(reinterpret_cast<char*>(x), 6 * sizeof(int));
+     
 
      // 关闭文件  
      outfile.close();
@@ -554,8 +572,14 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      }
 
      // 写入数组到文件  
+     int x[10];
+
      for (int i = 0; i < 10; i++)
-     outfile.write(reinterpret_cast<char*>(d[i].get_ifget()),  sizeof(int));
+     {
+         x[i] = d[i].get_ifget();
+         // 关闭文件  
+     }
+     outfile.write(reinterpret_cast<char*>(x), 10 * sizeof(int));
 
      // 关闭文件  
      outfile.close();
