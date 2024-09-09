@@ -26,9 +26,9 @@ void change1();//幕与幕之间衔接
 void ready_save();
 int change2();
 
-void we_save(Weapon a[5]);
+void we_save();
 void we_read();
-void ar_save(Armor[3]);
+void ar_save();
 void ar_read();
 void os_save(offensiveSkill[6]);
 void os_read();
@@ -55,13 +55,23 @@ Weapon weapon2("刀", 20, 34, 8, 0.11, "斩击");
 Weapon weapon3("棍", 20, 32, 10, 0.12, "打击");
 Weapon weapon4("矛", 20, 30, 11, 0.14, "贯通");
 Weapon weapon5("花枪", 20, 28, 12, 0.15, "贯通");
+//
+Weapon dajian("大剑", 50, 40, 5, 0.1, "斩击");
+Weapon tiegun("铁棍", 50, 35, 10, 0.15, "打击");
+Weapon cijian("刺剑", 50, 30, 15, 0.2, "贯通");
+
 Weapon weapon_default("林冲的花枪", 20, 30, 10, 0.1, "贯通");
-Weapon lcwe[5];
+Weapon lcwe[3];
 
 Armor armor1("皮甲", 20, 25, 100, "斩击");
 Armor armor2("锁子甲", 20, 30, 100, "贯通");
 Armor armor3("板甲", 20, 35, 120, "打击");
 Armor armor_default("林冲的布甲", 15, 20, 100, "斩击");
+
+Armor bujia("布甲", 50, 25, 100, "贯通");
+Armor tiejia("铁甲", 100, 30, 120, "打击");
+Armor linjia("鳞甲", 200, 35, 150, "斩击");
+
 Armor lcar[3];
 
 offensiveSkill skill_1("天上天下天地无双斩", "疯狂连击6次，自己防御下降", false, true, true, 0.7, "斩击", 6, selfDefenseBoost, 0.8, 3);
@@ -333,21 +343,19 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
 
  void ready_save()
  {
-     lcwe[0] = weapon1;
+     lcwe[0] = dajian;
      
-     lcwe[1] = weapon2;
+     lcwe[1] = tiegun;
      
-     lcwe[2] = weapon3;
+     lcwe[2] = cijian;
      
-     lcwe[3] = weapon4;
      
-     lcwe[4] = weapon5;
 
-     lcar[0] = armor1;
+     lcar[0] = bujia;
      
-     lcar[1] = armor2;
+     lcar[1] = tiejia;
      
-     lcar[2] = armor3;
+     lcar[2] = linjia;
 
      lcofsk[0] = skill_1;
      
@@ -405,8 +413,8 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      if (f == 3)//存档
      {
          ready_save();
-         we_save(lcwe);
-         ar_save(lcar);
+         we_save();
+         ar_save();
          os_save(lcofsk);
          su_save(lcsusk);
          //lc->loadFromFile("linchong.txt",lc);
@@ -417,7 +425,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      if (f == 4)
         return f;
   }
- void we_save(Weapon a[5])
+ void we_save()
  {
      std::ofstream outfile("weapon.txt", std::ios::out | std::ios::binary);
      if (!outfile) {
@@ -426,11 +434,11 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      }
      //cout << a[0].get_ifget();
      // 写入数组到文件  
-     int x[5];
+     int x[3];
 
-     for (int i = 0; i < 5; i++)
+     for (int i = 0; i < 3; i++)
      {
-         x[i] = a[i].get_ifget();
+         x[i] = lcwe[i].get_ifget();
          // 关闭文件  
      }
      outfile.write(reinterpret_cast<char*>(x), 5 * sizeof(int));
@@ -440,7 +448,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
  }
  void we_read()
  {
-     int size = 5;
+     int size = 3;
 
      // 使用vector来存储读取的数据，因为静态数组大小在编译时确定  
      std::vector<int> readArray(size);
@@ -461,12 +469,13 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      for (i = 0; i < size; i++)
      {
          if (readArray[i])
+         {
              lc->addWeapon(&lcwe[i]); lcwe[i].be_get();
-         
+         }
      }
      
  }
- void ar_save(Armor b[3])
+ void ar_save()
  {
      std::ofstream outfile("Armor.txt", std::ios::out | std::ios::binary);
      if (!outfile) {
@@ -478,7 +487,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      int x[3];
      for (int i = 0; i < 3; i++)
      {
-         x[i] = b[i].get_ifget();
+         x[i] = lcar[i].get_ifget();
          // 关闭文件  
      }
      outfile.write(reinterpret_cast<char*>(x), 3 * sizeof(int));
