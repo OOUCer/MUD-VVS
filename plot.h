@@ -88,6 +88,10 @@ public:
     // 处理在营房的休息操作
     int handleBarracks();
 
+    void saveTimeToFile(const string& filename, const Time& time);
+
+    Time loadTimeFromFile(const string& filename);
+
     // 打印带延迟的文本
     void PrintWithDelay(const string& text, int delayMs);
 

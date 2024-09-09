@@ -524,3 +524,23 @@ int Plot::handleBarracks() {
         }
     }
 }
+void Plot::saveTimeToFile(const string& filename, const Time& time) {
+    ofstream outFile(filename);
+    if (outFile.is_open()) {
+        outFile << time.plottime << "\n";
+        outFile << time.day << "\n";
+    }
+    outFile.close();
+    cout << "½ø¶ÈÒÑ´¢´æ" << endl;
+}
+Time Plot::loadTimeFromFile(const string& filename) {
+    ifstream inFile(filename);
+    Time time;
+    if (inFile.is_open()) {
+        inFile >> time.plottime;
+        inFile >> time.day;
+    }
+    inFile.close();
+
+    return time;
+}

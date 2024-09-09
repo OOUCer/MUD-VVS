@@ -27,13 +27,13 @@ void ready_save();
 int change2();
 
 void we_save(Weapon a[5]);
-void we_read(Weapon a[5]);
+void we_read();
 void ar_save(Armor[3]);
-void ar_read(Armor[3]);
+void ar_read();
 void os_save(offensiveSkill[6]);
-void os_read(offensiveSkill[6]);
+void os_read();
 void su_save(supportSkill[11]);
-void su_read(supportSkill[11]);
+void su_read();
 
 UI ui;
 Map map1;
@@ -109,11 +109,12 @@ int main(){
     {
         cout << "正在加载" << endl;
         ready_save();
-        we_read(lcwe);
-        ar_read(lcar);
-        os_read(lcofsk);
-        su_read(lcsusk);
+        we_read();
+        ar_read();
+        os_read();
+        su_read();
         lc->loadFromFile("linchong.txt", lc);
+        t=plot.loadTimeFromFile("time1.txt");
     }
     else if (flag == 3)
     {
@@ -139,8 +140,9 @@ int main(){
             break;
         case 3:
             plot.PrintScene(t.plottime);//3
-            change1();
+            
             runDevelopmentSystem();//养成
+            change1();
             break;
         case 4:
             plot.PrintScene(t.plottime);//4
@@ -180,11 +182,11 @@ int main(){
         }
     }
     cout << "游戏结束" << endl;
-    MSG msg;
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
+    //MSG msg;
+    //while (GetMessage(&msg, NULL, 0, 0)) {
+    //    TranslateMessage(&msg);
+    //    DispatchMessage(&msg);
+    //}
     return 0;
 
 }
@@ -407,6 +409,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
          su_save(lcsusk);
          //lc->loadFromFile("linchong.txt",lc);
          lc->saveToFile("linchong.txt");
+         plot.saveTimeToFile("time1.txt", t);
          change2();
      }
      if (f == 4)
@@ -433,7 +436,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
 
      std::cout << "武器已保存到文件。" << std::endl;
  }
- void we_read(Weapon a[5])
+ void we_read()
  {
      int size = 5;
 
@@ -456,7 +459,8 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      for (i = 0; i < size; i++)
      {
          if (readArray[i])
-             lc->addWeapon(&a[i]);
+             lc->addWeapon(&lcwe[i]); lcwe[i].be_get();
+         
      }
      
  }
@@ -483,7 +487,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
 
      std::cout << "护甲已保存到文件。" << std::endl;
  }
- void ar_read(Armor b[3])
+ void ar_read()
  {
      int size = 3;
 
@@ -506,7 +510,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      for (i = 0; i < size; i++)
      {
          if (readArray[i])
-             lc->addArmor(&b[i]);
+             lc->addArmor(&lcar[i]);
      }
 
  }
@@ -535,7 +539,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
 
      std::cout << "攻击技能已保存到文件。" << std::endl;
  }
- void os_read(offensiveSkill c[6])
+ void os_read()
  {
      int size = 6;
 
@@ -558,7 +562,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      for (i = 0; i < size; i++)
      {
          if (readArray[i])
-             lc->addOffensiveSkill(&c[i],true);
+             lc->addOffensiveSkill(&lcofsk[i],true);
      }
 
  }
@@ -586,7 +590,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
 
      std::cout << "防御技能已保存到文件。" << std::endl;
  }
- void su_read(supportSkill d[10])
+ void su_read()
  {
      int size = 10;
 
@@ -609,7 +613,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      for (i = 0; i < size; i++)
      {
          if (readArray[i])
-             lc->addSupportSkill(&d[i],true);
+             lc->addSupportSkill(&lcsusk[i],true);
      }
 
  }

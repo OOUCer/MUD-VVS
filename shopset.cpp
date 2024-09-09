@@ -7,10 +7,10 @@ void Shop1::addItem(unique_ptr<Weapon> equipment) {
 	inventory.push_back(move(equipment));
 }
 void Shop1::listItems() const { // 只列出前三个物品  
-	size_t count = 0;
+	size_t count = 1;
 	for (const auto& equipment : inventory) {
-		if (count >= 3) break; // 只列出前三个  
-		cout << equipment->getName() << ": " << equipment->getDescription() << " 价格: " << equipment->getPrice() << endl;
+		if (count >= 4) break; // 只列出前三个  
+		cout <<"序号："<<count<<" "<< equipment->getName() << ": " << equipment->getDescription() << " 价格: " << equipment->getPrice() << endl;
 		++count;
 	}
 }
@@ -32,10 +32,10 @@ void Shop2::addItem(unique_ptr<Armor> equipment) {
 	inventory.push_back(move(equipment));
 }
 void Shop2::listItems() const { // 只列出前三个物品  
-	size_t count = 0;
+	size_t count = 1;
 	for (const auto& equipment : inventory) {
-		if (count >= 3) break; // 只列出前三个  
-		cout << equipment->getName() << ": " << equipment->getDescription() << " 价格: " << equipment->getPrice() << endl;
+		if (count >= 4) break; // 只列出前三个  
+		cout << "序号：" <<count << " " << equipment->getName() << ": " << equipment->getDescription() << " 价格: " << equipment->getPrice() << endl;
 		++count;
 	}
 }
