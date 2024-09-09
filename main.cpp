@@ -484,7 +484,6 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
 
      // 关闭文件  
      outfile.close();
-
      std::cout << "护甲已保存到文件。" << std::endl;
  }
  void ar_read()
@@ -547,7 +546,7 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      std::vector<int> readArray(size);
 
      // 打开文件用于读取  
-     std::ifstream infile("Armor.txt", std::ios::in | std::ios::binary);
+     std::ifstream infile("offensiveSkill.txt", std::ios::in | std::ios::binary);
      if (!infile) {
          std::cerr << "无法打开文件！" << std::endl;
          return;
