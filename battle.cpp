@@ -8,6 +8,9 @@ void Battle::startBattle(Linchong* player, vector<Character*>* enemies){
 	std::this_thread::sleep_for(std::chrono::milliseconds(1500));
 	system("cls");
 	player->setSkillPoint(3);
+	player->setAnticipateStatus(false);
+	player->setChargeStatus(false);
+	player->getEffectStatus()->clear();
 	showStartInformation(player, enemies);
 	vector<pair<int, Character*>> sortedCharacters;
 	sortBySpeed(&sortedCharacters, player, enemies);

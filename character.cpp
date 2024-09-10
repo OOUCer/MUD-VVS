@@ -21,7 +21,7 @@ int Character::getAttack() const
     return currentAttack;
 }
 
-void Character::setAttack(int newAttack) { attack += newAttack; }
+void Character::setAttack(int newAttack) { attack = newAttack; }
 
 int Character::getHP()
 {

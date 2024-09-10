@@ -422,7 +422,6 @@ int Plot::handleTraining() {
             else
             {
                 PrintWithDelay("你在馆内接受了强化训练，感觉自己的能力得到了显著提升。\n", 30);
-                character->setAttack(1);//修改5->1。5太多了。
                 return 1;
             }
         }

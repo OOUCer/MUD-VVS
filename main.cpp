@@ -44,7 +44,7 @@ Time t;
 Filestore files;
 Shop1 shop1;
 Shop2 shop2;
-vector<Character*> enemies;
+vector<Character *> enemies;
 Character* smallen1 = new Character("土匪1", 40, 700, 700, 30, 90, 0.8, 0.05, 100, false);
 Character* smallen2 = new Character("土匪2", 40, 700, 700, 30, 30, 0.8, 0.05, 100, false);
 Character* bigen1 = new Character("管营", 40, 900, 900, 20, 40, 0.9, 0.1, 0, false);
@@ -364,11 +364,6 @@ void pre_battle2(vector<Character*>&enemies, Linchong*lc, Character*character1, 
      
      lcofsk[2] = skill_3;
      
-     lcofsk[3] = skill_4;
-     
-     lcofsk[4] = skill_5;
-     
-     lcofsk[5] = skill_6;
 
      lcsusk[0] = skill_7;
      
