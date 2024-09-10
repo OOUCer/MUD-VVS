@@ -328,7 +328,7 @@ void Plot::PrintScene9() {
 
 void Plot::PrintScene10() {
     system("cls");
-    SetConsoleColor(8); // 灰色
+    SetConsoleColor(7); // 灰色
     //PrintWithDelay("\n凛凛严凝雾气昏，空中祥瑞降纷纷。\n须臾四野难分路，顷刻千山不见痕。\n银世界，玉乾坤，望中隐隐接昆仑。\n若还下到三更后，彷佛填平玉帝门。", 30);
     for (int i = 0; i < 29; i++)
         cout << " ";
