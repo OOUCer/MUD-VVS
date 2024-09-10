@@ -399,9 +399,19 @@ int Plot::handleTraining() {
         //PrintWithDelay("“请注意，训练会消耗你的体力。如果你的体力不足，将无法继续训练。训练后的体力会恢复到最大体力的一部分。”\n\n", 30);
         SetConsoleColor(7);
         PrintWithDelay("是否花费10盘缠进行训练\n", 30);
+        SetConsoleColor(10);
         cout << "1.是           2.否" << endl;
+        SetConsoleColor(7);
         int flag;
         cin >> flag;
+        while (flag != 1 && flag != 2)
+        {
+            cout << "输入错误，请重新输入" << endl;
+            SetConsoleColor(10);
+            cout << "1.是              2.否" << endl;
+            SetConsoleColor(7);
+            cin >> flag;
+        }
         if (flag == 1)
         {
             if (gold < 10)
@@ -416,8 +426,9 @@ int Plot::handleTraining() {
                 return 1;
             }
         }
-        else
+        else if(flag==2)
         {
+            PrintWithDelay("你离开了武馆。\n", 30);
             return 0;
         }
     }
@@ -446,12 +457,32 @@ void Plot::handleDock() {
     PrintWithDelay("码头工人：", 30);
     SetConsoleColor(12); // 红色
     PrintWithDelay("“客官，有没有兴趣帮忙运货？帮忙的话可以赚些钱。”\n", 30);
-    SetConsoleColor(7); // 白色
-    PrintWithDelay("你同意了，加入了运货的行列。\n", 30);
-    SetConsoleColor(10); // 绿色
-    PrintWithDelay("钱包+50\n", 30);
-    character->setGold(gold + 50);
+    SetConsoleColor(10); // 白色
+    cout << "1.是              2.否" << endl;
     SetConsoleColor(7);
+    int f=0;
+    cin >> f;
+    while (f != 1 && f != 2)
+    {
+        cout << "输入错误，请重新输入" << endl;
+        SetConsoleColor(10);
+        cout << "1.是              2.否" << endl;
+        SetConsoleColor(7);
+        cin >> f;
+    }
+    if (f == 1)
+    {
+        PrintWithDelay("你同意了，加入了运货的行列。\n", 30);
+        SetConsoleColor(10); // 绿色
+        PrintWithDelay("钱包+50\n", 30);
+        character->setGold(gold + 50);
+        SetConsoleColor(7);
+    }
+    else if (f == 2)
+    {
+        PrintWithDelay("你离开了码头。\n", 30);
+        return;
+    }
 }
 
 int Plot::handleBarracks() {
