@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Battle">
+    <Position X="22.75" Y="8.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>wADASEAMACAAQAgQgAAASAAwAREACACAQQRAAYAAABA=</HashCode>
+      <FileName>battle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Character">
+    <Position X="2.25" Y="0.5" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>YBCgAxUDQR5BAEYEyAEQBAAQQBAFRbSFwAIkENAJHCY=</HashCode>
+      <FileName>character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Linchong">
+    <Position X="8" Y="6.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAEIAAAAEBAAACgAAAAUAAAACAQAAAAAAA=</HashCode>
+      <FileName>character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Equipment">
+    <Position X="22.25" Y="0.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAABAEBQgAAAEAAAAAAAUAgAAAAA=</HashCode>
+      <FileName>equipment.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon">
+    <Position X="24.75" Y="4.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>IAAgAAAACAogCAAAAAAAAAAgAAAAAQiBAAAQAAAAAAA=</HashCode>
+      <FileName>equipment.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Armor">
+    <Position X="19.5" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAgAAAACAAAAAAgQAAgAAAAEAAQAEAAAAo=</HashCode>
+      <FileName>equipment.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Filestore">
+    <Position X="15" Y="5.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AQAAAQAAAQAAAAAAEAAAAAAAAAABAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Filestore.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Map">
+    <Position X="7.25" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>map11.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Plot">
+    <Position X="11" Y="0.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AASpAhAhAAEAQQAAAAAAQBABgAAAAC0FgAAGAIICAA4=</HashCode>
+      <FileName>plot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shop1">
+    <Position X="14.75" Y="3.25" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAACAAAACAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>shop.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shop2">
+    <Position X="15" Y="0.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAACAAAACAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>shop.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skill">
+    <Position X="15" Y="8.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>EACAAABAAQokIAAAIABAEBAgABAEAACAAAgUAkAAAAA=</HashCode>
+      <FileName>skill.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="offensiveSkill">
+    <Position X="19.5" Y="9.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACCoAKAAIAAAAAAIgQBAAAACAAAAQAEAAIAA=</HashCode>
+      <FileName>skill.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="supportSkill">
+    <Position X="11" Y="9.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAACAIAAAoAIAAAAAAAAAAgABAQAACAAAAQAGAAAAA=</HashCode>
+      <FileName>skill.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI">
+    <Position X="7.25" Y="4" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAgAAEIAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>UI.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Time">
+    <Position X="7.25" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>plot.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="skillEffectType">
+    <Position X="19.25" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AQpAAAAAIAAAACAAACgACAAAAAAABAAAAIAAAgAAIAA=</HashCode>
+      <FileName>skillEffectType.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
