@@ -504,10 +504,10 @@ void Linchong::loadFromFile(const string& filename,Linchong *lc) {
         inFile >> place1;
     }
     inFile.close();
-    lc->setAttack(attack1);
+    //lc->setAttack(80);
     lc->setGold(gold1);
-    lc->setHP(HP1);
-    lc->setMaxHP(maxHP1);
+    //lc->setHP(HP1);
+    //lc->setMaxHP(maxHP1);
     lc->setplace(place1);
     // Return a new Linchong object with the loaded values
     

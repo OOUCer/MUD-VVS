@@ -131,6 +131,9 @@ bool Battle::evaluateBattleStatus(vector<pair<int, Character*>>& theCharacters, 
 		if (it->second->getHP() <= 0) {
 			if (it->second->isPlayerControlled()) {
 				cout << "林冲被击败，战斗结束！" << endl;std::this_thread::sleep_for(std::chrono::milliseconds(500));
+				it->second->setAnticipateStatus(false);
+				it->second->setChargeStatus(false);
+				it->second->getEffectStatus()->clear();
 				return true; // 玩家阵亡，退出战斗
 			}
 			else {
