@@ -134,7 +134,7 @@ void Plot::PrintScene1() {
     SetConsoleColor(7);
     PrintWithDelay("李小二请你到家里面坐定，叫妻子出来拜了恩人。\n两口儿欢喜道：", 30);
     SetConsoleColor(12);
-    PrintWithDelay("“夫妻二人正没个亲眷，今日得恩人到来，便是从天降下。”\n", 30);
+    PrintWithDelay("“夫妻二人正没个亲眷，今日得恩人到来，便是从天降下。这些盘缠恩人且收下，聊表心意”\n", 30);
     SetConsoleColor(10);
     PrintWithDelay("盘缠+100。\n", 30);
     if (character) {
@@ -395,8 +395,8 @@ int Plot::handleTraining() {
         SetConsoleColor(7);
         PrintWithDelay("馆主：", 30);
         SetConsoleColor(12);
-        PrintWithDelay("“欢迎来到武馆！在这里，你可以通过训练获得强大的技能，提升你的战斗能力。我们的训练包括增加攻击力、防御力、以及一些特殊技能。”\n", 30);
-        PrintWithDelay("“请注意，训练会消耗你的体力。如果你的体力不足，将无法继续训练。训练后的体力会恢复到最大体力的一部分。”\n\n", 30);
+        PrintWithDelay("“欢迎来到武馆！在这里，你可以通过训练提升攻击力，获得技能，提升战斗能力。”\n", 30);
+        //PrintWithDelay("“请注意，训练会消耗你的体力。如果你的体力不足，将无法继续训练。训练后的体力会恢复到最大体力的一部分。”\n\n", 30);
         SetConsoleColor(7);
         PrintWithDelay("是否花费10盘缠进行训练\n", 30);
         cout << "1.是           2.否" << endl;

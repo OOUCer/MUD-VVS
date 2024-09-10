@@ -148,7 +148,7 @@ int UI::shuxing(Linchong* lc)
     cout << "名称： " << lc->getName();
     for (int i = 0; i < 15; i++)
         cout << " ";
-    cout << "财富： " << lc->getGold() << endl;
+    cout << "盘缠： " << lc->getGold() << endl;
 
 
     cout << "最大生命： " << lc->getMaxHP();

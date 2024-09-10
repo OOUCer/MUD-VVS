@@ -418,13 +418,13 @@ bool Linchong::buyItem1(Weapon* equipment)
     if (equipment->getPrice() <= gold)
     {
         gold -= equipment->getPrice();
-        cout << "购买成功！你现在还有 " << gold << " 块钱" << endl;
+        cout << "购买成功！你现在还有 " << gold << " 盘缠。" << endl;
         weapons.push_back(equipment);
         return true;
     }
     else
     {
-        cout << "钱不够！你需要" << equipment->getPrice() << "块钱，但是你只有" << gold << "块钱." << endl;
+        cout << "盘缠不足！你需要" << equipment->getPrice() << " ，但是你只有" << gold << "盘缠。" << endl;
         return false;
     }
 }
@@ -442,13 +442,13 @@ bool Linchong::buyItem2(Armor* equipment)
     if (equipment->getPrice() <= gold)
     {
         gold -= equipment->getPrice();
-        cout << "购买成功！你现在还有 " << gold << " 块钱" << endl;
+        cout << "购买成功！你现在还有 " << gold << " 盘缠。" << endl;
         armors.push_back(equipment);
         return true;
     }
     else
     {
-        cout << "钱不够！你需要" << equipment->getPrice() << "块钱，但是你只有" << gold << "块钱." << endl;
+        cout << "盘缠不足！你需要" << equipment->getPrice() << " ，但是你只有" << gold << "盘缠。" << endl;
         return false;
     }
 }
