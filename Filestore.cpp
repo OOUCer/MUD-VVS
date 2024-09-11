@@ -15,10 +15,6 @@ void Filestore::saveGame(Linchong& character, const Time& time) {
         // 保存角色数据
         file.write((char*)&character, sizeof(Linchong));
 
-        // 保存武器、护甲和技能
-        // saveEquipment(*character.getWeapons(), *character.getArmors(), file);
-        // saveSkills(*character.getoSkills(), *character.getsSkills(), file);
-
         // 保存 Time 结构体
         file.write((char*)&time, sizeof(Time));
 
@@ -42,10 +38,6 @@ bool Filestore::loadGame(Linchong& character, Time& time) {
             cerr << "读取角色数据失败！" << endl;
             return false;
         }
-
-        // 加载武器、护甲和技能
-        // loadEquipment(*character.getWeapons(), *character.getArmors(), file);
-        // loadSkills(*character.getoSkills(), *character.getsSkills(), file);
 
         // 读取 Time 结构体
         file.read((char*)&time, sizeof(Time));
