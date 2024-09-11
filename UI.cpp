@@ -72,7 +72,7 @@ int UI::ready()
 
     cout << "为保证游戏体验，请设置上面的星号在同一行。" << endl;
     cout << "游戏过程中，请勿改变窗口大小，避免影响体验。" << endl;
-    cout << "输入“ENTER”继续游戏" << endl;
+    cout << "按“ENTER”继续游戏" << endl;
     cin.get();
 
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); // 获取控制台句柄
