@@ -9,12 +9,13 @@
 
 using namespace std;
 
+// 初始化商店设置  
 void shopset();
 
 // 武器商店类  
 class Shop1 {
 private:
-    vector<unique_ptr<Weapon>> inventory; // 使用unique_ptr智能指针管理Weapon对象的内存，确保资源自动释放  
+    vector<unique_ptr<Weapon>> inventory; // 使用 unique_ptr 智能指针管理 Weapon 对象的内存，确保资源自动释放  
 
 public:
     // 向商店添加武器  
@@ -24,7 +25,7 @@ public:
     void listItems() const;
 
     // 尝试从商店购买指定索引的武器  
-    // 返回true表示购买成功，false表示失败（如索引无效或角色无法装备）  
+    // 返回 true 表示购买成功，false 表示失败（如索引无效或角色无法装备）  
     bool buyItem(Linchong& character, size_t index);
     // 注意：购买后，该武器会从商店的库存中移除，因此索引可能会改变  
 };
@@ -32,7 +33,7 @@ public:
 // 防具商店类  
 class Shop2 {
 private:
-    vector<unique_ptr<Armor>> inventory; // 使用unique_ptr智能指针管理Armor对象的内存，确保资源自动释放  
+    vector<unique_ptr<Armor>> inventory; // 使用 unique_ptr 智能指针管理 Armor 对象的内存，确保资源自动释放  
 
 public:
     // 向商店添加防具  
@@ -42,7 +43,7 @@ public:
     void listItems() const;
 
     // 尝试从商店购买指定索引的防具  
-    // 返回true表示购买成功，false表示失败（如索引无效或角色无法装备）  
+    // 返回 true 表示购买成功，false 表示失败（如索引无效或角色无法装备）  
     bool buyItem(Linchong& character, size_t index);
     // 注意：购买后，该防具会从商店的库存中移除，因此索引可能会改变  
 };

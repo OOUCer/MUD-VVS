@@ -5,11 +5,11 @@
 #include <fstream>
 #include "equipment.h"
 #include "skill.h"
-#include"plot.h"
+#include "plot.h"
 
 using namespace std;
 
-class Linchong; // Forward declaration of Linchong class
+class Linchong; // 角色类的前置声明
 
 class Filestore {
 public:
@@ -18,7 +18,6 @@ public:
 
     // 加载游戏进度
     bool loadGame(Linchong& character, Time& time);
-
 
 private:
     // 保存武器和护甲数据

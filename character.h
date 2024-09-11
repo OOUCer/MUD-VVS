@@ -6,12 +6,12 @@
 #include <iostream>
 #include <map>
 
-
 #include "equipment.h"
 #include "skill.h"
 
 using namespace std;
-class Character{
+
+class Character {
 protected:
     string name;
     int attack;
@@ -27,7 +27,7 @@ protected:
     bool hitWeakness = false;
     bool isPlayer;
 
-    pair<bool, int> isComatose{ false,0 };
+    pair<bool, int> isComatose{ false, 0 };
     bool isCharged = false;
     bool isAnticipating = false;
     int skillPoint = 3;
@@ -37,8 +37,8 @@ protected:
     vector<Armor*> armors;
     vector<supportSkill*> sSkills;
     vector<offensiveSkill*> oSkills;
-    vector<Skill*> skills;//无用，测试用，勿删除
-    map<skillEffectType, pair<float, int>> effectStatus;//自动初始化为空
+    vector<Skill*> skills; // 无用，测试用，勿删除
+    map<skillEffectType, pair<float, int>> effectStatus; // 自动初始化为空
 
 public:
     // 构造函数，用于初始化角色的基础属性  
@@ -57,7 +57,6 @@ public:
 
     // 修改角色的生命值  
     void modifyHP(int modifyAmount);
-
 
     void setHP(int newHP);
 
@@ -157,8 +156,9 @@ public:
 
     // 给角色添加一个技能  
     void addSkill(Skill* skill);
-    void addOffensiveSkill(offensiveSkill* skill,bool flag);//flag用于判断是否提示
-    void addSupportSkill(supportSkill* skill,bool flag);
+
+    void addOffensiveSkill(offensiveSkill* skill, bool flag); // flag用于判断是否提示
+    void addSupportSkill(supportSkill* skill, bool flag);
 
     // 获取角色当前的所有效果状态  
     map<skillEffectType, pair<float, int>>* getEffectStatus();
@@ -169,14 +169,13 @@ public:
     // 获取角色的所有护甲（以指针向量的形式）  
     vector<Armor*>* getArmors();
 
-    // 获取角色的所有技能（以指针向量的形式） 
-    vector<Skill*> *getSkills();
+    // 获取角色的所有技能（以指针向量的形式）  
+    vector<Skill*>* getSkills();
     vector<offensiveSkill*>* getoSkills();
     vector<supportSkill*>* getsSkills();
 };
 
-class Linchong : public Character
-{
+class Linchong : public Character {
 protected:
     int place;
 
@@ -204,10 +203,12 @@ public:
 
     bool buyItem11(Weapon* equipment);
     bool buyItem22(Armor* equipment);
-    void saveToFile(const string& filename) const;
-   void loadFromFile(const string& filename,Linchong *lc);
-   void setplace(int);
-};
 
+    void saveToFile(const string& filename) const;
+
+    void loadFromFile(const string& filename, Linchong* lc);
+
+    void setplace(int place);
+};
 
 #endif // CHARACTER_H
